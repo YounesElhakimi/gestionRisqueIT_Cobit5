@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:insert="fragments/head.html :: head" ></head>  
+
+<body id="page-top">
+    
+    <main class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase"><strong>Please specify the name of the organization where to implement an IT risk management : </strong></h2>
+                    <hr>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+            
+                <form action="" method="post" >
+                    <div class="form-group">
+                        <label for="organization"> Name of the organization</label>
+                        <input type="text" class="form-control" id="organization" name="organization" placeholder="">
+                      </div>             
+                      <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger">OK</button>
+               
+                </form>
+                </div>
+        </div>
+    </main>
+
+
+
+
+
+
+
+    
+</body>
+
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+
+
+</html>
