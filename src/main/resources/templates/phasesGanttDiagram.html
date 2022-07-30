@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+    <head th:insert="fragments/head.html :: head" ></head>  
+
+
+<body id="page-top">
+    
+    <main class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Please specify the time limit of each phase:
+                        </strong>
+                    </h2>
+                    <hr>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+            
+                
+                    <div class="form-group">
+                       
+                      <button onclick="next()" type="" class="btn btn-primary btn-xl js-scroll-trigger">next </button>
+               
+                </div>
+        </div>
+
+    </main>
+
+    <hr>
+
+    <script>
+        function next() {
+            confirm('go next ');
+        window.location.href = '/Projectscopingnote';
+
+
+        }
+    </script>
+
+</html>

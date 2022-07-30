@@ -1,0 +1,23 @@
+Compétences requises
+Maitrise des architectures Java Enterprise (JMS, WEB SERVICE (REST/SOAP), SPRING, JPA, SPRING BATCH, DESIGN PATTERNE, MAVEN, INTEGRTION CONTINUE (JENKINS), JTA)
+Frontend (Angular/ZK, CSS, JS, jQuery)
+Workflow (JBPM/DROOLS)
+Serveur application (JBoss, Tomcat)
+Projets de références en développement JAVA/J2EE ;
+
+
+
+//    https://www.linkedin.com/jobs/view/3160833809/?eBP=JOB_SEARCH_ORGANIC&recommendedFlavor=IN_NETWORK&refId=6QSdPelhX3UIQ0fkCNVBsg%3D%3D&trackingId=rLbIttRy5CDrvLuCEN5RLQ%3D%3D&trk=flagship3_search_srp_jobs
+ aplyed
+
+Qualifications
+
+Baccalauréat ou expérience équivalente en informatique ou dans un domaine connexe
+Expérience de développement avec des langages de programmation , Oracle; Unix; Java (8 et plus), Web Service REST et SOAP, SPRING, MAVEN, GIT, SOAPUI, PL/SQL, Kubernetes
+
+Unix, Oracle, PL/SQL Exploitation fonctionnelle et technique
+Compétences en base de données SQL ou en base de données relationnelle
+
+
+
+https://www.linkedin.com/jobs/view/3154545018/?eBP=JOB_SEARCH_ORGANIC&refId=6QSdPelhX3UIQ0fkCNVBsg%3D%3D&trackingId=4Li%2FXF9krd5don01RmIbug%3D%3D
