@@ -1,11 +1,12 @@
 package ma.ehtp.gestionrisqueit.services;
 
 import ma.ehtp.gestionrisqueit.modelles.Description;
+import ma.ehtp.gestionrisqueit.modelles.TeamProjectMember;
 
 import java.util.List;
 
-public interface DescriptionService {
-    public Description save(Description des);
-    public List<Description> findAll();
-    public List<Description> saveAll(List<Description> descriptions);
+public interface TeamProjectMemberService {
+    public TeamProjectMember save(TeamProjectMember des);
+    public List<TeamProjectMember> findAll();
+    public List<TeamProjectMember> saveAll(List<TeamProjectMember> teamProjectMembers);
 }

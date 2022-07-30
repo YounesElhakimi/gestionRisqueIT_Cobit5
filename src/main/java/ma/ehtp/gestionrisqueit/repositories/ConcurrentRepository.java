@@ -1,2 +1,10 @@
-package ma.ehtp.gestionrisqueit.repositories;public interface ConcurrentRepository {
+package ma.ehtp.gestionrisqueit.repositories;
+
+import ma.ehtp.gestionrisqueit.modelles.Concurrent;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface ConcurrentRepository extends JpaRepository<Concurrent, Long> {
 }

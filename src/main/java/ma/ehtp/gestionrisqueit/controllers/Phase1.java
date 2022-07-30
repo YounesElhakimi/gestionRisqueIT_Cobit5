@@ -1,22 +1,17 @@
 package ma.ehtp.gestionrisqueit.controllers;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import ma.ehtp.gestionrisqueit.modelles.DescTypes;
-import ma.ehtp.gestionrisqueit.modelles.Description;
-import ma.ehtp.gestionrisqueit.modelles.Organization;
+import ma.ehtp.gestionrisqueit.messages.ResponseMessage;
+import ma.ehtp.gestionrisqueit.modelles.*;
 import ma.ehtp.gestionrisqueit.services.DescriptionService;
 import ma.ehtp.gestionrisqueit.services.OrganizationService;
+import ma.ehtp.gestionrisqueit.services.StakeholdersService;
+import ma.ehtp.gestionrisqueit.services.TeamProjectMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -29,6 +24,15 @@ public class Phase1 {
 
     @Autowired
     DescriptionService descriptionService;
+
+    @Autowired
+    TeamProjectMemberService teamProjectMemberService;
+
+
+    @Autowired
+    StakeholdersService stakeholdersService;
+
+    Organization organization = null;
 
     @GetMapping("")
     public String index(){
@@ -47,8 +51,8 @@ public class Phase1 {
     @PostMapping("/newOrg")
     public RedirectView createNewOrg(@RequestBody String orgName){
         Organization org = new Organization(null , orgName);
-        Organization o = organizationService.save(org);
-        if (o == null ){
+        organization = organizationService.save(org);
+        if (organization == null ){
 
             System.out.println("============================================");
             System.out.println("null");
@@ -56,7 +60,7 @@ public class Phase1 {
 
         }else {
             System.out.println("============================================");
-            System.out.println(o);
+            System.out.println(organization);
             System.out.println("============================================");
 
         }
@@ -65,13 +69,7 @@ public class Phase1 {
 
     @GetMapping("/allsteps")
     public String allsteps(){
-        System.out.println("============================================");
-        organizationService.save(new Organization(null , "test1"));
-        organizationService.save(new Organization(null , "test2"));
-
-        organizationService.findAll().forEach(organization -> System.out.println(organization));
-        System.out.println("============================================");
-
+        //organizationService.findAll().forEach(organization -> System.out.println(organization));
         return "allsteps";
     }
 
@@ -94,6 +92,7 @@ public class Phase1 {
         soList.forEach(description -> {
             description.setPhase(1);
             description.setType(DescTypes.STRATEGIC_ORIENTATIONS);
+            description.setOrganization(organization);
         });
 
         descriptionService.saveAll(soList);
@@ -124,6 +123,7 @@ public class Phase1 {
         soList.forEach(description -> {
             description.setPhase(1);
             description.setType(DescTypes.MAJOR_RISKS);
+            description.setOrganization(organization);
         });
 
         descriptionService.saveAll(soList);
@@ -143,25 +143,115 @@ public class Phase1 {
 
     @PostMapping("/description")
     public String saveDescription(@RequestBody String description){
-        Description desc = new Description(null , 1 , DescTypes.DESCRIPTION , "description de phase 1" , description);
+        Description desc = new Description(null , 1 , DescTypes.DESCRIPTION , "description de phase 1" , description , organization);
         descriptionService.save(desc);
         return "allsteps";
     }
 
-    @GetMapping("/uploadfiles/documents")
-    public String uploadfilesDocs(Model model){
-        String title = "Please specify the different documents needed for the implementation of the roadmap:";
-       model.addAttribute("title" , title);
-        return "uploadfiles" ;
+    @GetMapping("/team_project")
+    public String teamProject(){
+
+        return "teamProject";
     }
 
-    @PostMapping("/uploadfiles/documents")
-    public String saveUploadfilesDocs(){
-        System.out.println("===============================");
-        System.out.println("  Post ");
-        System.out.println("===============================");
-        return "ok";
+
+    @PostMapping(value={"/team_project" })
+    public ResponseEntity<ResponseMessage> SaveteamProject(@RequestBody List<TeamProjectMember> tpmList) {
+        String message = "";
+        //storageService.setSousFolder("newOrg2");
+        try {
+            tpmList.forEach(teamProjectMember -> {
+                teamProjectMember.setOrganization(organization);
+            });
+
+            teamProjectMemberService.saveAll(tpmList);
+            System.out.println("==========================================");
+            teamProjectMemberService.findAll().forEach(teamProjectMember -> System.out.println(teamProjectMember));
+            System.out.println("==========================================");
+
+
+            message = "save Team Project Members uccessfully: " ;
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        } catch (Exception e) {
+            message = "Fail tosave Team Project Members !";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+        }
     }
+
+
+    @GetMapping("/stakeholders")
+    public String stakeholders(){
+
+        return "stakeholders";
+    }
+
+
+    @PostMapping(value={"/stakeholders" })
+    public ResponseEntity<ResponseMessage> saveStakeholders(@RequestBody List<Stakeholders> stakeholdersList) {
+        String message = "";
+        //storageService.setSousFolder("newOrg2");
+        try {
+            stakeholdersList.forEach(teamProjectMember -> {
+                teamProjectMember.setOrganization(organization);
+            });
+
+            stakeholdersService.saveAll(stakeholdersList);
+
+
+            message = "save the stakeholders successfully: " ;
+
+            System.out.println("==========================================");
+            stakeholdersService.findAll().forEach(stakeholders -> System.out.println(stakeholders));
+            System.out.println("==========================================");
+
+
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        } catch (Exception e) {
+            message = "Fail to save the stakeholders!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+        }
+    }
+
+    @GetMapping("/phasesGanttDiagram")
+    public String phasesGanttDiagram(){
+
+        return  "phasesGanttDiagram";
+    }
+
+    @GetMapping("/Projectscopingnote")
+    public String projectScopingNote(){
+
+        return "Projectscopingnote";
+    }
+
+    @GetMapping("/levelofdetails")
+    public String levelOfDetails(){
+
+        return "levelofdetails";
+    }
+
+   @PostMapping("/levelofdetails/saved")
+    public String saveLevelOfDetails(@RequestBody String levelofdetails){
+
+        return "levelofdetailsSaved";
+    }
+
+    @GetMapping("/levelofdetails/saved")
+    public String savedLevelOfDetails(){
+
+        return "levelofdetailsSaved";
+    }
+
+    @GetMapping("/methodologicalReference")
+    public String methodologicalReference(){
+
+        return  "methodologicalReference";
+    }
+
+
+
+
+
 
 
 

@@ -109,13 +109,13 @@
     function save(){
         data = Object.getOwnPropertyNames(oslist).map(function(e) {return  oslist[e];});
         console.log(data);
-        fetch("majorrisks", {
+        fetch("team_project", {
         method: "POST",
         headers: {'Content-Type': 'application/json'}, 
         body: JSON.stringify(data)
         }).then(res => {
         console.log("Request complete! response:", res);
-        window.location.href = 'description'
+        window.location.href = '/stakeholders'
 
         });
     }

@@ -1,8 +1,6 @@
 package ma.ehtp.gestionrisqueit.controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import ma.ehtp.gestionrisqueit.messages.ResponseMessage;
@@ -31,26 +29,66 @@ public class FilesController {
     @Autowired
     FilesStorageService storageService;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("==============================");
-        System.out.println("init Controller Filecon");
-        System.out.println("==============================");
-        storageService.setSousFolder("newOrg2");
 
-    }
+    @GetMapping("/uploads/{phase}")
+    public String uploadfilesDocs(Model model , @PathVariable("phase") String phase){
+        /*
+        String docsEtapes[] = { "DOC_PHASE1_ITAPE1",
+                                "DOC_PHASE1_ITAPE2",
+                                "DOC_PHASE1_ITAPE3",
+                                "DOC_PHASE2_ITAPE1",
+                                "DOC_PHASE3_ITAPE1",
+                                "DOC_PHASE3_ITAPE2",
+                                "DOC_PHASE4_ITAPE1",
+                                "DOC_PHASE4_ITAPE2",
+                                "DOC_PHASE4_AUDITS_CONTROLS",
+                                "DOC_PHASE5_ITAPE1",
+                                "DOC_PHASE5_ITAPE"};
 
 
-    @GetMapping("/uploads")
-    public String uploadfilesDocs(Model model){
-        String title = "Please specify the different documents needed for the implementation of the roadmap:";
+         */
+        String title = "Not found ";
+        Map<String , String> nextDocsUp = new HashMap<>();
+        nextDocsUp.put("DOC_PHASE1_ITAPE1", "/strategicOrientations");
+        nextDocsUp.put("DOC_PHASE1_ITAPE2", "/team_project");
+        nextDocsUp.put("DOC_PHASE1_ITAPE3", "/levelofdetails ");
+        nextDocsUp.put("DOC_PHASE2_ITAPE1", "/methodologyToHandleRisk");
+        nextDocsUp.put("DOC_PHASE3_ITAPE1", "");
+        nextDocsUp.put("DOC_PHASE3_ITAPE2", "");
+        nextDocsUp.put("DOC_PHASE4_ITAPE1", "");
+        nextDocsUp.put("DOC_PHASE4_ITAPE2", "");
+        nextDocsUp.put("DOC_PHASE4_AUDITS_CONTROLS", "");
+        nextDocsUp.put("DOC_PHASE5_ITAPE1", "");
+        nextDocsUp.put("DOC_PHASE5_ITAP", "");
+
+        String docsEtapes[] = nextDocsUp.keySet().toArray(new String[nextDocsUp.keySet().size()]);
+
+        System.out.println(docsEtapes.toString());
+
+        if (Arrays.toString(docsEtapes).toLowerCase().contains(phase.toLowerCase())) {
+            if (phase.equalsIgnoreCase("DOC_PHASE4_AUDITS_CONTROLS")){
+                title = "Please upload reports of evaluations, audits and controls:";
+
+            }else {
+                title = "Please specify the different documents needed for the implementation of the roadmap:";
+
+            }
+
+            model.addAttribute("next" , nextDocsUp.get(phase.toUpperCase()));
+
+        }
+
         model.addAttribute("title" , title);
+
         return "uploadfiles" ;
     }
 
-    @PostMapping("/upload")
+
+
+    @PostMapping(value={"/upload" , "uploads/upload"})
     public ResponseEntity<ResponseMessage> uploadFiles(@RequestParam("files") MultipartFile[] files) {
         String message = "";
+        //storageService.setSousFolder("newOrg2");
         try {
             List<String> fileNames = new ArrayList<>();
             Arrays.asList(files).stream().forEach(file -> {

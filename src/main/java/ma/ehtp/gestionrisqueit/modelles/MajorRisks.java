@@ -8,20 +8,19 @@ import lombok.ToString;
 import javax.persistence.*;
 
 
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
-public class StrategicOrientations {
+public class MajorRisks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Long id;
 
     private String title;
-    private  String description;
+    private  String Concurrent;
 
     @ManyToOne
     @JoinColumn(name = "organization_id")

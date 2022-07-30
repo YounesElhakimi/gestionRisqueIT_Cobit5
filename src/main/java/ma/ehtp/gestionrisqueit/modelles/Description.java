@@ -24,6 +24,10 @@ public class Description {
     private String title;
     private  String description;
 
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
 
 
 }
