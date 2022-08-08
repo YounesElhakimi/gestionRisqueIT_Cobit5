@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+    <head th:insert="fragments/head.html :: head" ></head>  
+
+
+<body id="page-top">
+    
+    <header class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Please specify IT risks related to the company (risk scenario, causes, consequences, controls, probability, impact, residual risk, cost-benefit of potential risk response, optimal risk response, requirements for projects or programmes that will implement the selected risk responses…):
+
+                    </strong></h2>
+                    <hr>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <hr>
+
+    <main id="main">
+        <table id ="table_0" border="2px" cellspacing="0" cellpadding="">
+            <tr id="table_0_tr_0">
+                <td>Source</td>  
+                <td> Evénement à risque  </td>
+                <td>Catégorie</td>
+                <td>Facteur / cause de risque</td>
+                <td>Fréquence</td>
+                <td>Impact</td>
+            </tr>
+
+            <tr id="table_0_tr_1"> 
+                <td>  <input type="text"  value="Incidents or  potential risks" id="table_0_tr_1_s"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_1_e"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_1_c"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_1_cr"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_1_f"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_1_i"> </td>
+            </tr>
+            <tr id="table_0_tr_2"> 
+                <td>  <input type="text"  value="Benchmark" id="table_0_tr_2_s"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_2_e"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_2_c"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_2_cr"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_2_f"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_2_i"> </td>
+            </tr>
+
+            <tr id="table_0_tr_3"> 
+                <td>  <input type="text"  value="Internal environment" id="table_0_tr_3_s"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_3_e"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_3_c"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_3_cr"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_3_f"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_3_i"> </td>
+            </tr>
+
+            <tr id="table_0_tr_4"> 
+                <td>  <input type="text"  value="External environment" id="table_0_tr_4_s"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_4_e"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_4_c"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_4_cr"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_4_f"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_4_i"> </td>
+            </tr>
+
+            
+            </table>
+            <button onclick="addligne('table_0')" type="" class="btn btn-primary">add Ligne</button>
+
+
+            
+    </main>
+
+
+    <hr>
+    <button onclick="collect()" type="" class="btn btn-primary btn-xl js-scroll-trigger">Generate forms</button>
+
+
+
+
+
+
+
+
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+
+
+
+
+<script>
+  
+
+    
+    
+</script>
+
+
+<script>
+    var nbrL = 4
+    function addligne(table_id){
+        var id =parseInt( table_id.split('_')[1]);
+        console.log(id);
+        nbrL = nbrL + 1;
+
+        var table = document.getElementById(table_id);
+        var html = `
+        <tr id="table_0_tr_${nbrL}"> 
+                <td>  <input type="text"  value="" id="table_0_tr_${nbrL}_s"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_${nbrL}_e"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_${nbrL}_c"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_${nbrL}_cr"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_${nbrL}_f"> </td>
+                <td>  <input type="text" value=" " id="table_0_tr_${nbrL}_i"> </td>
+            </tr>
+             `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+        
+    }
+    function collect(){
+      
+            
+            var data = new Array();
+            for (let idtr = 1; idtr <= nbrL  ; idtr++) {
+                 source = document.getElementById(`table_0_tr_${idtr}_s`).value
+                 evenement = document.getElementById(`table_0_tr_${idtr}_e`).value
+                 categorie = document.getElementById(`table_0_tr_${idtr}_c`).value
+                 facteur =  document.getElementById(`table_0_tr_${idtr}_cr`).value
+                 frequence = document.getElementById(`table_0_tr_${idtr}_f`).value
+                 impact = document.getElementById(`table_0_tr_${idtr}_i`).value
+               
+
+                data.push({
+                 "source" :  source,
+                 "evenement" :  evenement,
+                 "categorie" :  categorie,
+                 "frequence" :  frequence,
+                 "facteur" :      facteur,
+                 "impact" :      impact
+                
+                }
+                 );
+                
+                
+            }
+
+          
+
+        fetch("", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+
+
+        confirm("next");
+        console.log(JSON.stringify(data));
+
+        
+         window.location.href =   'RiskMapping';
+
+        });
+
+
+    }
+</script>
+
+
+</html>
+
+
