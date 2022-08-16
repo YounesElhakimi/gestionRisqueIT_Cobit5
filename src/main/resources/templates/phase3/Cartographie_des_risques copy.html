@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top">
+
+    <header class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Please specify the major incidents or potential risks of the company:
+
+                        </strong>
+                    </h2>
+                    <hr>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <table id="table_0" border="2px" cellspacing="0" cellpadding="">
+
+        <th>
+        <td> macroProcessus </td>
+        <td> processus </td>
+        <td> category </td>
+        <td> risque </td>
+        <td> kRI </td>
+        <td> facteur </td>
+        <td> consequences </td>
+        <td> controlActivities </td>
+        <td> efficacite </td>
+        <td> nbIncidents </td>
+        <td> frequence </td>
+        <td> impact </td>
+        <td> exposition </td>
+        <td> criticalityLevel </td>
+
+        <td> options </td>
+        <td> couts </td>
+
+        <td> benefices </td>
+
+        <td> optionOptimale </td>
+        <td> besoins </td>
+        <td> avacncement </td>
+        </th>
+
+        <tr>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_macroProcessus" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_processus" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_category" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_risque" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_kRI" cols="30" rows="10"></textarea>
+            </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_facteur" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_consequences" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_controlActivities" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_efficacite" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_nbIncidents" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_frequence" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_impact" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_exposition" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_criticalityLevel;" cols="30"
+                    rows="10"></textarea> </td>
+
+            <td> Accept </td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_optionAcceptCout" cols="30" rows="10"></textarea></td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_beneficeAcceptCout" cols="30" rows="10"></textarea>
+            </td>
+
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_optionOptimale" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_besoins" cols="30"
+                    rows="10"></textarea> </td>
+            <td rowspan="4" id=""> <textarea name="" class="txtar" id="table_0_tr_0_avacncement" cols="30"
+                    rows="10"></textarea> </td>
+        </tr>
+
+
+        <tr>
+            <td> Avoid </td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_optionAvoidCout" cols="30" rows="10"></textarea></td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_beneficeAvoidCout" cols="30" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <td> Mitigate </td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_optionMitigateCout" cols="30" rows="10"></textarea>
+            </td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_beneficeMitigateCout" cols="30" rows="10"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td> Transfer </td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_optionTransferCout" cols="30" rows="10"></textarea>
+            </td>
+            <td><textarea name="" class="txtar" id="table_0_tr_0_beneficeTransferCout" cols="30" rows="10"></textarea>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+    <button onclick="addligne('table_0')" type="" class="btn btn-primary">add Ligne</button>
+    <br>
+    <button onclick="collect()" type="" class="btn btn-primary btn-xl js-scroll-trigger">Generate forms</button>
+
+</body>
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+<script>
+    var nbrL = 1
+    function addligne(table_id) {
+        var id = parseInt(table_id.split('_')[1]);
+        console.log(id);
+        nbrL = nbrL + 1;
+
+        var table = document.getElementById(table_id);
+        var html = `
+          <tr>
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_macroProcessus" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_processus" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_category" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_risque" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_kRI" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_facteur" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_consequences" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_controlActivities" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_efficacite" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_nbIncidents" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_frequence" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_impact" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_exposition" cols="30" rows="10"></textarea>   </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_criticalityLevel;" cols="30" rows="10"></textarea>   </td> 
+      
+        <td> Accept </td> 
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_optionAcceptCout" cols="30" rows="10"></textarea></td>
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_beneficeAcceptCout" cols="30" rows="10"></textarea></td>
+    
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_optionOptimale" cols="30" rows="10"></textarea> </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_besoins" cols="30" rows="10"></textarea> </td> 
+        <td rowspan="4" id="" > <textarea name="" class="txtar" id="table_0_tr_${nbrL}_avacncement" cols="30" rows="10"></textarea> </td> 
+    </tr>
+  
+    
+    <tr>
+        <td  > Avoid </td> 
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_optionAvoidCout" cols="30" rows="10"></textarea></td>
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_beneficeAvoidCout" cols="30" rows="10"></textarea></td>
+    </tr>
+    <tr>
+        <td  > Mitigate </td> 
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_optionMitigateCout" cols="30" rows="10"></textarea></td>
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_beneficeMitigateCout" cols="30" rows="10"></textarea></td>
+    </tr>
+    <tr>
+        <td  > Transfer </td> 
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_optionTransferCout" cols="30" rows="10"></textarea></td>
+        <td><textarea name="" class="txtar" id="table_0_tr_${nbrL}_beneficeTransferCout" cols="30" rows="10"></textarea></td>
+    </tr>
+
+
+
+             `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+
+    }
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 1; idtr <= nbrL; idtr++) {
+
+            macroProcessus = document.getElementById(`table_0_tr_${idtr}_ macroProcessus`).value.trim();
+            processus = document.getElementById(`table_0_tr_${idtr}_processus`).value.trim();
+            category = document.getElementById(`table_0_tr_${idtr}_category`).value.trim();
+            risque = document.getElementById(`table_0_tr_${idtr}_risque`).value.trim();
+            kRI = document.getElementById(`table_0_tr_${idtr}_kRI`).value.trim();
+            facteur = document.getElementById(`table_0_tr_${idtr}_facteur`).value.trim();
+            consequences = document.getElementById(`table_0_tr_${idtr}_consequences`).value.trim();
+            controlActivities = document.getElementById(`table_0_tr_${idtr}_controlActivities`).value.trim();
+            efficacite = document.getElementById(`table_0_tr_${idtr}_efficacite`).value.trim();
+            nbIncidents = document.getElementById(`table_0_tr_${idtr}_nbIncidents`).value.trim();
+            frequence = document.getElementById(`table_0_tr_${idtr}_frequence`).value.trim();
+            impact = document.getElementById(`table_0_tr_${idtr}_impact`).value.trim();
+            exposition = document.getElementById(`table_0_tr_${idtr}_exposition`).value.trim();
+            criticalityLevel = document.getElementById(`table_0_tr_${idtr}_criticalityLevel`).value.trim();
+            optionAcceptCout = document.getElementById(`table_0_tr_${idtr}_optionAcceptCout`).value.trim();
+            optionAvoidCout = document.getElementById(`table_0_tr_${idtr}_optionAvoidCout`).value.trim();
+            optionMitigateCout = document.getElementById(`table_0_tr_${idtr}_optionMitigateCout`).value.trim();
+            optionTransferCout = document.getElementById(`table_0_tr_${idtr}_optionTransferCout`).value.trim();
+            beneficeAcceptCout = document.getElementById(`table_0_tr_${idtr}_beneficeAcceptCout`).value.trim();
+            beneficeAvoidCout = document.getElementById(`table_0_tr_${idtr}_beneficeAvoidCout`).value.trim();
+            beneficeMitigateCout = document.getElementById(`table_0_tr_${idtr}_beneficeMitigateCout`).value.trim();
+            beneficeTransferCout = document.getElementById(`table_0_tr_${idtr}_beneficeTransferCout`).value.trim();
+            optionOptimale = document.getElementById(`table_0_tr_${idtr}_optionOptimale`).value.trim();
+            besoins = document.getElementById(`table_0_tr_${idtr}_besoins`).value.trim();
+            avacncement = document.getElementById(`table_0_tr_${idtr}_avacncement`).value.trim();
+            macroProcessus;
+
+            data.push({
+                "macroProcessus": macroProcessus,
+                "processus": processus,
+                "category": category,
+                "risque": risque,
+                "kRI": kRI,
+                "facteur": facteur,
+                "consequences": consequences,
+                "controlActivities": controlActivities,
+                "efficacite": efficacite,
+                "nbIncidents": nbIncidents,
+                "frequence": frequence,
+                "impact": impact,
+                "exposition": exposition,
+                "criticalityLevel": criticalityLevel,
+                "optionAcceptCout": optionAcceptCout,
+                "optionAvoidCout": optionAvoidCout,
+                "optionMitigateCout": optionMitigateCout,
+                "optionTransferCout": optionTransferCout,
+                "beneficeAcceptCout": beneficeAcceptCout,
+                "beneficeAvoidCout": beneficeAvoidCout,
+                "beneficeMitigateCout": beneficeMitigateCout,
+                "beneficeTransferCout": beneficeTransferCout,
+                "optionOptimale": optionOptimale,
+                "besoins": besoins,
+                "avacncem": avacncement
+
+            }
+            );
+
+
+        }
+
+
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+
+            confirm("next");
+            console.log(JSON.stringify(data));
+
+
+            window.location.href = 'RiskMapping';
+
+        });
+
+
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+    <head th:insert="fragments/head.html :: head" ></head>  
+
+
+<body id="page-top">
+    
+    <header class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Please specify the major risks of the concurrents:
+
+                    </strong></h2>
+                    <hr>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+            
+                
+                    <div class="form-group">
+                        <label for="nbr"> 
+                            Liste déroulante de chiffres de 1 à 
+                        </label>
+                        <input type="text" class="form-control" id="nbr">
+                      </div>    
+                   
+                    <button onclick="Generate()" type="" class="btn btn-primary btn-xl js-scroll-trigger">Generate forms</button>
+               
+                </div>
+        </div>
+
+    </header>
+
+    <hr>
+
+    <main id="main">
+
+    </main>
+
+
+    <hr>
+    <button onclick="collect()" type="" class="btn btn-primary btn-xl js-scroll-trigger">Generate forms</button>
+
+
+
+
+
+
+
+
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+
+
+
+
+<script>
+    var concurretsList = new Array();
+    function Generate(){
+        var nbr = parseInt(document.getElementById("nbr").value);
+        console.log(nbr);
+        var main = document.getElementById("main");
+
+        for (var i = 0; i <nbr; i++){
+            concurretsList.push(3);
+
+            var table_id = "table_"+i;
+            console.log(table_id);
+
+            var table = `
+                <table id ="${table_id}" border="2px" cellspacing="0" cellpadding="">
+                <tr id="${table_id}_tr_0"><td>Risk</td>  <td> Mitigation plans </td></tr>
+                <tr id="${table_id}_tr_1"> <td> <input type="text" name=" " id="${table_id}_tr_1_r"> </td>  <td> <input type="text" name=" " id="${table_id}_tr_1_mp"> </td></tr>
+                <tr id="${table_id}_tr_2"> <td> <input type="text" name=" " id="${table_id}_tr_2_r"> </td>  <td> <input type="text" name=" " id="${table_id}_tr_2_mp"> </td></tr>
+                <tr id="${table_id}_tr_3"> <td> <input type="text" name=" " id="${table_id}_tr_3_r"> </td>  <td> <input type="text" name=" " id="${table_id}_tr_3_mp">  </td></tr>
+
+
+                
+
+                </table>
+                <button onclick="addligne('${table_id}')" type="" class="btn btn-primary">add Ligne</button>
+                `
+            console.log(table);
+
+            main.innerHTML = main.innerHTML + table +"</br>";
+        }
+    }
+
+
+
+    function addligne(table_id){
+        var id =parseInt( table_id.split('_')[1]);
+        console.log(id);
+        concurretsList[id] = concurretsList[id] + 1;
+        var newIdTR = concurretsList[id];
+
+        console.log(concurretsList);
+        var table = document.getElementById(table_id);
+        var html = `
+                     <tr id="${table_id}_tr_4"> <td> <input type="text" name=" " id="${table_id}_tr_${newIdTR}_r"> </td>  <td> <input type="text" name=" " id="${table_id}_tr_${newIdTR}_mp">  </td></tr>
+                   `
+        table.innerHTML = table.innerHTML +  html;
+    }
+</script>
+
+
+<script>
+    function collect(){
+        var data = new Array();   
+        for (let i = 0; i < concurretsList.length; i++) {
+            const nbrTr = concurretsList[i];
+            
+            var risks = new Array();
+            for (let idtr = 1; idtr <= nbrTr  ; idtr++) {
+                risk = document.getElementById(`table_${i}_tr_${idtr}_r`).value
+                mitigationPlans = document.getElementById(`table_${i}_tr_${idtr}_mp`).value
+
+                if (risk == "") {
+                    
+                }else{
+                risks.push({
+                    'risk' : risk,
+                    'mitigationPlans':mitigationPlans
+                });
+                
+                }
+            }
+
+            data.push({
+                'name' : "concurrent_"+i,
+                'concurrentList' : risks
+            });
+
+        }
+
+        console.log(data);
+        return data;
+
+    }
+</script>
+
+
+</html>
