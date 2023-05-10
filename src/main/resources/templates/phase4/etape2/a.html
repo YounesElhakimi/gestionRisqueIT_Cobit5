@@ -1,0 +1,222 @@
+
+
+        <style>
+            .tdrbc {
+                width: 38pt;height: 14.5pt;text-align: center;
+                
+            }
+            .td0{
+                background-color: transparent; text-align: center;border: none;
+            }
+        </style>
+
+        <div th:if="'4' == ${level}">
+            <style>
+                .c5 {
+                    display: none;
+                }
+
+                .c6 {
+                    display: none;
+                }
+
+                .td11{ background-color: green;}
+                .td12{ background-color: green;}
+                .td21{ background-color:green;}
+
+                .td22{ background-color: yellow;}
+                .td13{ background-color: yellow;}
+                .td14{ background-color: yellow;}
+                .td31{ background-color: yellow;}
+                .td41{ background-color: yellow;}
+
+                .td23{ background-color: orange;}
+                .td24{ background-color: orange;}
+                .td32{ background-color: orange;}
+                .td33{ background-color: orange;}
+                .td42{ background-color: orange;}
+
+
+                .td43{ background-color: red;}
+                .td44{ background-color: red;}
+                .td34{ background-color: red;}
+
+
+            </style>
+        </div>
+
+        <div th:if="'5' == ${level}">
+            <style>
+                    .c6 {
+                        display: none;
+                    }
+
+                .td11{ background-color: green;}
+                .td12{ background-color: green;}
+                .td21{ background-color: green;}
+
+                .td22{ background-color: yellow;}
+                .td23{ background-color: yellow;}
+                .td13{ background-color: yellow;}
+                .td14{ background-color: yellow;}
+                .td15{ background-color: yellow;}
+                .td31{ background-color: yellow;}
+                .td32{ background-color: yellow;}
+                .td41{ background-color: yellow;}
+                .td51{ background-color: yellow;}
+
+                .td24{ background-color: orange;}
+                .td25{ background-color: orange;}
+                .td33{ background-color: orange;}
+                .td34{ background-color: orange;}
+                .td42{ background-color: orange;}
+                .td43{ background-color: orange;}
+                .td52{ background-color: orange;}
+
+
+                .td53{ background-color: red;}
+                .td54{ background-color: red;}
+                .td55{ background-color: red;}
+                .td44{ background-color: red;}
+                .td45{ background-color: red;}
+                .td35{ background-color: red;}
+
+
+            </style>
+
+        </div>
+
+        <div th:if="'6' == ${level}">
+            <style>
+                .td11{ background-color: green;}
+                .td12{ background-color: green;}
+                .td13{ background-color: green;}
+                .td14{ background-color: green;}
+                .td15{ background-color: green;}
+                .td21{ background-color: green;}
+                .td22{ background-color: green;}
+                .td31{ background-color: green;}
+                .td41{ background-color: green;}
+                .td51{ background-color: green;}
+
+                .td16{ background-color: yellow;}
+                .td23{ background-color: yellow;}
+                .td24{ background-color: yellow;}
+                .td25{ background-color: yellow;}
+                .td26{ background-color: yellow;}    
+                .td32{ background-color: yellow;}
+                .td33{ background-color: yellow;}
+                .td34{ background-color: yellow;}
+                .td42{ background-color: yellow;}
+                .td43{ background-color: yellow;}
+                .td52{ background-color: yellow;}
+                .td61{ background-color: yellow;}
+                .td62{ background-color: yellow;}
+
+                .td35{ background-color: orange;}
+                .td36{ background-color: orange;}
+                .td44{ background-color: orange;}
+                .td45{ background-color: orange;}
+                .td53{ background-color: orange;}
+                .td54{ background-color: orange;}
+                .td63{ background-color: orange;}
+
+                .td46{ background-color: red;}
+                .td55{ background-color: red;}
+                .td56{ background-color: red;}
+                .td64{ background-color: red;}
+                .td65{ background-color: red;}
+                .td66{ background-color: red;}
+
+
+
+            </style>
+
+        </div>
+
+
+        <table  border="2px" cellspacing="0" cellpadding="">
+            <tbody>
+                <tr>
+                    <td  class="td0 td70"  colspan="2" id="70">Likelihood</td>
+                    <td class="td0 td72" id="72"></td>
+                    <td class="td0 td73" id="73"></td>
+                    <td class="td0 td74" id="74"></td>
+                    <td class="td0 c5 td75" id="75"></td>
+                    <td class="td0 c6 td76" id="76"></td>
+
+                </tr>
+
+                <tr>
+                    <td class="td0 td60 c6" id="60">6</td>
+                    <td class="tdrbc c6 td61" id="61"></td>
+                    <td class="tdrbc c6 td62" id="62"></td>
+                    <td class="tdrbc c6 td63" id="63"></td>
+                    <td class="tdrbc c6 td64" id="64"></td>
+                    <td class="tdrbc c6 c5 td65" id="65"></td>
+                    <td class="tdrbc c6 td66" id="66"></td>
+                </tr>
+
+                <tr>
+                    <td class="td0 td50 c5" id="50">5</td>
+                    <td class="tdrbc c5 td51" id="51"></td>
+                    <td class="tdrbc c5 td52" id="52"></td>
+                    <td class="tdrbc c5 td53" id="53"></td>
+                    <td class="tdrbc c5 td54" id="54"></td>
+                    <td class="tdrbc c5 td55" id="55"></td>
+                    <td class="tdrbc c5 c6 td56" id="56"></td>
+                </tr>
+
+                <tr>
+                    <td class="td0 td40" id="40">4</td>
+                    <td class="tdrbc td41" id="41"></td>
+                    <td class="tdrbc td42" id="42"></td>
+                    <td class="tdrbc td43" id="43"></td>
+                    <td class="tdrbc td44" id="44"></td>
+                    <td class="tdrbc c5 td45" id="45"></td>
+                    <td class="tdrbc c6 td46" id="46"></td>
+                </tr>
+
+                <tr>
+                    <td class="td0 td30" id="30">3</td>
+                    <td class="tdrbc td31" id="31"></td>
+                    <td class="tdrbc td32" id="32"></td>
+                    <td class="tdrbc td33" id="33"></td>
+                    <td class="tdrbc td34" id="34"></td>
+                    <td class="tdrbc c5 td35" id="35"></td>
+                    <td class="tdrbc c6 td36" id="36"></td>
+                </tr>
+
+                <tr>
+                    <td class="td0 td20" id="20">2</td>
+                    <td class="tdrbc td21" id="21"></td>
+                    <td class="tdrbc td22" id="22"></td>
+                    <td class="tdrbc td23" id="23"></td>
+                    <td class="tdrbc td24" id="24"></td>
+                    <td class="tdrbc c5 td25" id="25"></td>
+                    <td class="tdrbc c6 td26" id="26"></td>
+                </tr>
+
+                <tr>
+                    <td class="td0 td10" id="10">1</td>
+                    <td class="tdrbc td11" id="11"></td>
+                    <td class="tdrbc td12" id="12"></td>
+                    <td class="tdrbc td13" id="13"></td>
+                    <td class="tdrbc td14" id="14"></td>
+                    <td class="tdrbc c5 td15" id="15"></td>
+                    <td class="tdrbc c6 td16" id="16"></td>
+                </tr>
+
+                <tr>
+                    <td class="td0 td00" id="00"></td>
+                    <td class="td0 td01" id="01">1</td>
+                    <td class="td0 td02" id="02">2</td>
+                    <td class="td0 td03" id="03">3</td>
+                    <td class="td0 td04" id="04">4</td>
+                    <td class="td0 c5 td05" id="05">5</td>
+                    <td class="td0 c6 td06" id="06">6</td>
+                    <td class="td0 td07" id="07">Impact</td>
+
+                </tr>
+            </tbody>
+        </table>

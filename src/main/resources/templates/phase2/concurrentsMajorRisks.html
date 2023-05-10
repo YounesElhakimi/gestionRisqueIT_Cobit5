@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<style>
+ 
+
+    td , th {
+        text-align: center;
+    }
+
+    
+</style>
+
+<body id="page-top">
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <style>
+        table{
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        
+      th{
+        text-align: center;
+      }
+      
+    </style>
+
+<div class="container my-auto">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h2 class="text-uppercase"><strong>
+                Please specify the major risks of the concurrents:
+                </strong></h2>
+
+        </div>
+
+    </div>
+</div>
+
+    <div class="container my-auto">
+     
+<br>
+        <div class="col-lg-8 mx-auto">
+
+
+            <div class="input-group">
+          
+             
+                <input type="number" min="0" value="1" class="form-control" id="nbr" placeholder="Please specify the number of concurrents to benchmark: " > 
+                <div class="input-group-append">
+                    <button onclick="Generate()"  class="btn btn-yh" type="button">Generate forms</button>
+                </div>
+            
+            </div>
+
+           
+
+            <br>
+            <main id="main">
+
+            </main>
+
+            <br>
+         
+        </div>
+    </div>
+
+
+
+
+
+
+
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${ConcurrentList}]]*/ 'default';
+
+    console.log(entries);
+    console.log(JSON.stringify(entries));
+</script>
+
+
+<script>
+    var concurretsList = new Array();
+    function initConcurrets() {
+        let nbr = entries.length;
+        if (nbr == 0) {
+            return null;
+        }
+        var main = document.getElementById("main");
+
+        for (var i = 0; i < nbr; i++) {
+            concurretsList.push(entries[i]['concurrentRiskList'].length);
+
+            var table_id = "table_" + i;
+            console.log(table_id);
+
+            var table = `
+            <div class="divtable" deleteTr="false"  id ="div_${table_id}">
+
+            <p> concurrent name : <input type="text"  value = "${entries[i]['name']}" name=" " id="${table_id}_name"> </p>
+                <table class="table table-striped" id ="${table_id}" border="2px" cellspacing="0" cellpadding="" >
+                    <tr id="${table_id}_tr_0"><th>Risk</th>  <th> Mitigation plans </th> <th  style="min-width:50px ; width: 50px;"> <i class="fas fa-trash-alt"></i></th></tr>
+
+            `;
+
+            var cl = entries[i]['concurrentRiskList'];
+            for (let i = 1; i <= cl.length; i++) {
+                const e = cl[i - 1];
+                table += `
+                <tr id="${table_id}_tr_${i}" deleteTr="false"> 
+                    <td> <input type="text" value="${e['risk']}" name=" " id="${table_id}_tr_${i}_r"> </td>  
+                    <td> <textarea name=""  cols="20" rows="2" id="${table_id}_tr_${i}_mp">${e['mitigationPlans']}</textarea> </td>
+                    <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_${i}')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                    </tr>
+                `
+            }
+
+
+
+            table += `
+                </table>
+                <div class="row">
+                    <div class="col">
+                    <div class="float-right">
+                        <button onclick="addligne('${table_id}')"  class="btn btn-info add-new" style="font-size:15px;" ><i class="fa fa-plus"></i>Add Row</button>
+                         <button  onclick="deleteTr('div_${table_id}')" class="btn btn-info delete-btn" title="Delete" s ><i class="fas fa-trash-alt"></i> Remove Table</button>  </div>
+                    </div>
+                </div>
+             </div>
+                </br>
+                `
+            console.log(table);
+
+            main.insertAdjacentHTML("beforeend", table);
+        }
+    }
+
+    initConcurrets();
+
+
+    function Generate() {
+        let nbr = parseInt(document.getElementById("nbr").value);
+
+        var main = document.getElementById("main");
+
+        bg = concurretsList.length
+        end = concurretsList.length + nbr
+
+        console.log("the bg : " + bg);
+        console.log("the end : " + end);
+
+        for (let i = bg; i < end; i++) {
+            concurretsList.push(3);
+
+            var table_id = "table_" + i;
+            console.log(table_id);
+
+            var table = `
+                <div class="divtable" deleteTr="false" id ="div_${table_id}">
+                <p> concurrent name : <input type="text" name=" " id="${table_id}_name"> </p>
+                <table class="table table-striped" id ="${table_id}" border="2px" cellspacing="0" cellpadding="" >
+                <tr id="${table_id}_tr_0"  ><th>Risk</th>  <th> Mitigation plans </th> <th  style="min-width:50px ; width: 50px;"> <i class="fas fa-trash-alt"></i></th></tr>
+                <tr id="${table_id}_tr_1" deleteTr="false" > <td> <input type="text" name=" " id="${table_id}_tr_1_r"> </td>  <td> <textarea name="" id="${table_id}_tr_1_mp" cols="20" rows="2"></textarea> </td> <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_1')"><i class="fas fa-trash-alt"></i> </Button> </td> </tr>
+                <tr id="${table_id}_tr_2" deleteTr="false" > <td> <input type="text" name=" " id="${table_id}_tr_2_r"> </td>  <td> <textarea name="" id="${table_id}_tr_2_mp" cols="20" rows="2"></textarea> </td> <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_2')"><i class="fas fa-trash-alt"></i> </Button> </td></tr>
+                <tr id="${table_id}_tr_3" deleteTr="false" > <td> <input type="text" name=" " id="${table_id}_tr_3_r"> </td>  <td> <textarea name="" id="${table_id}_tr_3_mp" cols="20" rows="2"></textarea>   </td><td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_3')"><i class="fas fa-trash-alt"></i> </Button> </td></tr>
+                </table>
+                
+                <div class="row">
+                    <div class="col">
+                    <div class="float-right">
+                        <button onclick="addligne('${table_id}')" type=""  class="btn btn-info add-new" style="font-size:15px;" ><i class="fa fa-plus"></i>Add Row</button>
+                         <button  onclick="deleteTr('div_${table_id}')" type="" class="btn btn-info delete-btn" title="Delete" data-toggle="tooltip " s ><i class="fas fa-trash-alt"></i> Remove Table</button>  </div>
+                    </div>
+                </div>
+                
+               </div>
+                </br>
+                `
+            console.log(table);
+
+            main.insertAdjacentHTML("beforeend", table);
+        }
+    }
+
+
+    function deleteTr(idtr) {
+        document.getElementById(idtr).hidden = true;
+        //  document.getElementById(idtr).style.display = "none";
+        document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+    }
+
+    function addligne(table_id) {
+        var id = parseInt(table_id.split('_')[1]);
+        console.log(id);
+        concurretsList[id] = concurretsList[id] + 1;
+        var newIdTR = concurretsList[id];
+
+        console.log(concurretsList);
+        var table = document.getElementById(table_id);
+        var html = `
+                     <tr id="${table_id}_tr_${newIdTR}">
+                        <td> <input type="text"  name=" " id="${table_id}_tr_${newIdTR}_r"> </td>  
+                        <td><textarea name="" id="${table_id}_tr_${newIdTR}_mp" cols="20" rows="2"></textarea>  </td>
+                        <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_${newIdTR}')"><i class="fas fa-trash-alt"></i> </Button> </td>
+
+                        </tr>
+                   `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+
+    }
+</script>
+
+
+<script>
+    function collect() {
+        if (concurretsList.length === 0) {
+            ae("Please add at least one Concurrents");
+            return -1;
+         }
+
+        var data = new Array();
+        for (let i = 0; i < concurretsList.length; i++) {
+            let isdel = false;
+            try {
+                isdel1 = document.getElementById(`div_table_${i}`).getAttribute("deletetr");
+                console.log(isdel1);
+                console.log("try : " + isdel1);
+            } catch (error) {
+                console.log(error);
+                console.error(error);
+                isdel1 = 'false';
+                console.log("catch : " + isdel1);
+
+            }
+
+            // console.log(isdel1);
+            if (isdel1 == "true") {
+                continue;
+            }
+
+
+            const nbrTr = concurretsList[i];
+            concurretName = document.getElementById(`table_${i}_name`).value.trim();
+
+            if (concurretName === "") {
+                ae();
+                return;
+            }
+            var risks = new Array();
+            for (let idtr = 1; idtr <= nbrTr; idtr++) {
+                if ((document.getElementById(`table_${i}_tr_${idtr}`).getAttribute("deleteTr") == "true")) {
+                    continue;
+                }
+                risk = document.getElementById(`table_${i}_tr_${idtr}_r`).value.trim();
+                mitigationPlans = document.getElementById(`table_${i}_tr_${idtr}_mp`).value.trim();
+
+                if (risk == "" && mitigationPlans == "") {
+
+                } else if (risk == "" || mitigationPlans == "") {
+                    ae();
+                    return;
+                } else {
+                    risks.push({
+                        'risk': risk,
+                        'mitigationPlans': mitigationPlans
+                    });
+
+                }
+            }
+
+            data.push({
+                'name': concurretName,
+                'concurrentRiskList': risks
+            });
+
+        }
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+
+            nt(res);
+
+        });
+
+
+    }
+</script>
+
+
+</html>

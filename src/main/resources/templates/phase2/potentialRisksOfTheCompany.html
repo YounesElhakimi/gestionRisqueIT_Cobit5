@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top">
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <style>
+        table {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        th {
+            text-align: center;
+        }
+    </style>
+    <div class="col-lg-8 mx-auto">
+
+
+        <h2 class="text-uppercase">
+            <strong>
+                Please specify the major incidents or potential risks of the company:
+
+            </strong>
+        </h2>
+
+
+        <br>
+        <br>
+
+        <main id="main">
+
+            <table class="table table-striped" id="table_0" border="2px" cellspacing="0" cellpadding="">
+                <tr id="table_0_tr_0">
+                    <th>Risk</th>
+                    <th> Mitigation plans </th>
+                    <th style="min-width:50px ; width: 50px;"> <i class="fas fa-trash-alt"></i></th>
+                </tr>
+                <tr id="table_0_tr_1" deleteTr="false">
+                    <td> <input type="text" name=" " id="table_0_tr_1_r"> </td>
+                    <td> <textarea rows="2" id="table_0_tr_1_mp"></textarea> </td>
+                    <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_1')"><i
+                                class="fas fa-trash-alt"></i> </Button> </td>
+                </tr>
+                <tr id="table_0_tr_2" deleteTr="false">
+                    <td> <input type="text" name=" " id="table_0_tr_2_r"> </td>
+                    <td> <textarea rows="2" id="table_0_tr_2_mp"> </textarea></td>
+                    <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_2')"><i
+                                class="fas fa-trash-alt"></i> </Button> </td>
+                </tr>
+                <tr id="table_0_tr_3" deleteTr="false">
+                    <td> <input type="text" name=" " id="table_0_tr_3_r"> </td>
+                    <td> <textarea rows="2" id="table_0_tr_3_mp"> </textarea> </td>
+                    <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_3')"><i
+                                class="fas fa-trash-alt"></i> </Button> </td>
+                </tr>
+
+            </table>
+            <div class="row">
+                <div class="col">
+                    <div class="float-right">
+                        <button onclick="addligne('table_0')" type="" class="btn btn-info add-new"
+                            style="font-size:15px;"><i class="fa fa-plus"></i>Add Row</button>
+                    </div>
+                </div>
+
+
+
+        </main>
+
+
+
+
+
+
+
+
+    </div>
+
+
+    <br><br><br>
+
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${PotList}]]*/ 'default';
+
+    console.log(entries);
+    console.log(JSON.stringify(entries));
+</script>
+
+<script>
+
+
+
+    var nbrL = 3
+    function addligne(table_id) {
+        var id = parseInt(table_id.split('_')[1]);
+        console.log(id);
+        nbrL = nbrL + 1;
+
+        var table = document.getElementById(table_id);
+        var html = `
+        <tr deleteTr="false" id="${table_id}_tr_${nbrL}" > 
+
+         <td> <input type="text" name=" " id="${table_id}_tr_${nbrL}_r">  </td>
+         <td> <textarea   rows="2" id="${table_id}_tr_${nbrL}_mp"> </textarea> </td>
+         <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_${nbrL}')"><i class="fas fa-trash-alt"></i> </Button> </td>
+        </tr>
+                   `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+
+    }
+    function initTable() {
+        let nbr = entries.length;
+        console.log(nbr);
+        if (nbr == 0) {
+            return null;
+        }
+        nbrL = nbr;
+
+
+        html = `
+                <tr id="table_0_tr_0"><th>Risk</th>  <th> Mitigation plans </th> <th style="min-width:50px ; width: 50px;"> <i class="fas fa-trash-alt"></i></th></tr>
+               
+                
+        `;
+
+        for (let i = 1; i <= entries.length; i++) {
+            const e = entries[i - 1];
+            console.log(e);
+            html += `
+                <tr id="table_0_tr_${i}" deleteTr="false"> 
+                    <td> <input type="text" name=" " id="table_0_tr_${i}_r" value = "${e['incident']}">  </td> 
+                    <td> <textarea   rows="2" id="table_0_tr_${i}_mp" > ${e['mitigationPlans']} </textarea> </td>
+                    <td> <Button class="btn btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_${i}')"><i class="fas fa-trash-alt"></i> </Button> </td> 
+                </tr>
+            `
+
+
+        }
+
+        document.getElementById('table_0').innerHTML = html;
+
+
+    }
+
+    initTable();
+
+</script>
+
+
+<script>
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 1; idtr <= nbrL; idtr++) {
+            if (document.getElementById(`table_0_tr_${idtr}`).getAttribute("deleteTr") == "true") {
+                continue;
+            }
+            risk = document.getElementById(`table_0_tr_${idtr}_r`).value
+            mitigationPlans = document.getElementById(`table_0_tr_${idtr}_mp`).value
+
+            if (risk == "" && mitigationPlans == "") {
+
+            } else if (risk == "" || mitigationPlans == "") {
+                ae();
+                return;
+            } else {
+                data.push({
+                    'incident': risk,
+                    'mitigationPlans': mitigationPlans
+                });
+
+            }
+        }
+
+        var sizeL = Object.keys(data).length;
+        if (sizeL === 0) {
+            ae("Please add at least one Major Incidents or Potential Risks of the company");
+            return -1;
+        }
+
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+
+            console.log(JSON.stringify(data));
+            nt(res);
+
+
+        });
+
+
+    }
+
+    function deleteTr(idtr) {
+        document.getElementById(idtr).hidden = true;
+        //  document.getElementById(idtr).style.display = "none";
+        document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+    }
+
+
+</script>
+
+
+</html>

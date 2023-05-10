@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body >
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+    <br>
+    <main class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase"><strong>Please  specify objectives and expectations:
+                        </strong></h2>
+                    <br>
+                </div>
+
+            </div>
+            <div class="col-lg-8 mx-auto">
+
+            <form id="form" action="#" th:action="@{/description}" th:object="${Objective}" method="post">
+                <input id="id" type="hidden" th:field="*{id}" />
+                <label for="description">description </label>
+                <br>
+               <textarea rows="10" cols="50" id ="description" type="text" th:field="*{description}" > </textarea>
+                
+            </form>
+            </div>
+            
+
+             
+        </div>
+
+    </main>
+
+    <br>
+
+    <div id="SO" class="row">
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        function collect() {
+            var r =0;
+            description = document.getElementById("description").value.trim();
+            if (description === "") {
+
+            ae();
+            return -1;
+           }
+            id = document.getElementById("id").value.trim();
+           data = {
+            "id" : parseInt(id),
+            "description" : description
+           }
+
+           console.log(data);
+        fetch("", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+
+        nt(res);
+
+        });
+        }
+    </script>
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+
+
+
+
+</html>

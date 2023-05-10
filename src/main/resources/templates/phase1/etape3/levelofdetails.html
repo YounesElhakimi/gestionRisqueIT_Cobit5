@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top">
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+
+    <br>
+
+    <main class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Please  Specify the level of details needed for the implementation of an IT risk management system:
+                        </strong>
+                    </h2>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+
+                <form th:action="@{/levelofdetailsSaved}" method="post">
+                    <div class="form-group">
+                        <label for="level4">  4 levels </label>
+                        <input id="level4" type="radio" name="levelofdetails" value="4" checked>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label for="level5">  5 levels</label>
+                        <input id="level5" type="radio" name="levelofdetails" value="5">
+
+                    </div>
+                    <div class="form-group">
+
+                        <label for="level6">  6 levels</label>
+                        <input id="level6" type="radio" name="levelofdetails" value="6">
+
+                    </div>
+
+
+                </form>
+                <br>
+
+
+
+            </div>
+        </div>
+
+    </main>
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+
+<br>
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${level}]]*/ 'default';
+    console.log(entries);
+    if (entries != null) {
+
+        //checked="checked"
+        document.getElementById(entries).setAttribute("checked", "checked");
+    }
+</script>
+
+<script>
+
+    function collect() {
+        newlvl = document.querySelector('input[name="levelofdetails"]:checked').value;
+        if (newlvl === null || typeof newlvl === 'undefined') {
+            ae();
+            return;
+        }
+        data = {
+            "levelofdetails": newlvl
+        }
+
+        console.log(data);
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+            nt(res);
+        });
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html>
+
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top">
+
+    <body id="page-top">
+        <div class="div_nav">
+            <div th:insert="fragments/ban.html :: div"></div>
+        </div>
+        <br>
+
+
+        <div>
+            <p id="titleOfPage" class="headTxt">
+                Please specify IT risks related to the company (risk scenario, causes, consequences, controls,
+                probability, impact, residual risk, cost-benefit of potential risk response, optimal risk response,
+                requirements for projects or programmes that will implement the selected risk responses…):
+            </p>
+        </div>
+
+        <style>
+            body {
+                color: #404E67;
+                background: #F5F7FA;
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            .table-wrapper {
+                width: 700px;
+                margin: 30px auto;
+                background: #fff;
+                padding: 20px;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            }
+
+            .table-title {
+                padding-bottom: 10px;
+                margin: 0 0 10px;
+            }
+
+            .table-title h2 {
+                margin: 6px 0 0;
+                font-size: 22px;
+            }
+
+            .table-title .add-new {
+                float: right;
+                height: 30px;
+                font-weight: bold;
+                font-size: 12px;
+                text-shadow: none;
+                min-width: 100px;
+                border-radius: 50px;
+                line-height: 13px;
+            }
+        </style>
+
+
+
+        <style>
+            textarea {
+
+                height: 100%;
+
+            }
+
+            .cNbIncidents {
+                display: none;
+            }
+
+            .Critical {
+                background-color: red;
+            }
+
+            .Major {
+                background-color: orange;
+            }
+
+            .Moderate {
+                background-color: yellow;
+
+            }
+
+            .Minor {
+                background-color: green;
+
+            }
+        </style>
+
+        <style>
+
+
+
+
+        </style>
+
+        <style>
+            .fl-table {
+                border-radius: 5px;
+                font-size: 12px;
+                font-weight: normal;
+                border: solid 1px;
+                border-collapse: collapse;
+                width: 50%;
+                max-width: 100%;
+                white-space: nowrap;
+                background-color: white;
+
+            }
+
+            .fl-table td,
+            .fl-table th {
+                text-align: center;
+                padding: 8px;
+                border: solid 1px;
+            }
+
+            .fl-table td {
+                border-right: 1px solid #f8f8f8;
+                font-size: 12px;
+                border: solid 1px;
+            }
+
+            .fl-table thead th {
+
+                color: rgb(0, 0, 0);
+                background: #00416A;
+                border: solid 1px;
+                min-width: 300px;
+            }
+
+
+            .fl-table thead th:nth-child(odd) {
+                color: rgb(0, 0, 0);
+                background: #B0C4DE;
+                border: solid 1px;
+            }
+
+            .fl-table tr:nth-child(even) {
+                background: #F8F8F8;
+                border: solid 1px;
+            }
+
+            /* Responsive */
+
+            @media (max-width: 767px) {
+                .fl-table {
+                    display: block;
+                    width: 100%;
+                }
+
+                .table-wrapper:before {
+                    content: "Scroll horizontally >";
+                    display: block;
+                    text-align: right;
+                    font-size: 11px;
+                    color: white;
+                    padding: 0 0 10px;
+                }
+
+                .fl-table thead,
+                .fl-table tbody,
+                .fl-table thead th {
+                    display: block;
+                }
+
+                .fl-table thead th:last-child {
+                    border-bottom: solid 1px;
+                }
+
+                .fl-table thead {
+                    float: left;
+                }
+
+                .fl-table tbody {
+                    width: auto;
+                    position: relative;
+                    overflow-x: auto;
+                }
+
+                .fl-table td,
+                .fl-table th {
+                    padding: 20px .625em .625em .625em;
+                    height: 60px;
+                    vertical-align: middle;
+                    box-sizing: border-box;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    width: 120px;
+                    font-size: 13px;
+                    text-overflow: ellipsis;
+                }
+
+                .fl-table thead th {
+                    text-align: left;
+                    border-bottom: 1px solid #f7f7f9;
+                }
+
+                .fl-table tbody tr {
+                    display: table-cell;
+                }
+
+                .fl-table tbody tr:nth-child(odd) {
+                    background: none;
+                }
+
+                .fl-table tr:nth-child(even) {
+                    background: transparent;
+                }
+
+                .fl-table tr td:nth-child(odd) {
+                    background: #F8F8F8;
+                    border-right: 1px solid #E6E4E4;
+                }
+
+                .fl-table tr td:nth-child(even) {
+                    border-right: 1px solid #E6E4E4;
+                }
+
+                .fl-table tbody td {
+                    display: block;
+                    text-align: center;
+                }
+            }
+
+            .table-wrapper {
+                margin: 10px 70px 70px;
+                box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+            }
+
+            tbody:nth-child(2n+1) {
+                background-color: #dee2e6;
+            }
+
+
+            .progressTH input{
+                min-width: 80% !important;
+                width: 80% !important;
+                max-width: 80% !important;
+            }
+        </style>
+        <div class="divtable">
+            <table class="fl-table " id="table_0" border="2px" cellspacing="0" cellpadding=""
+                style="display: block;overflow-x: auto;width:100%;">
+                <tr>
+                    <thead style="background-color:#B0C4DE;">
+                        <th class="headcol"> Macro-process </th>
+                        <th class=""> Process </th>
+                        <th class=""> Risk category </th>
+                        <th class=""> Risk </th>
+                        <th class=""> KRI </th>
+                        <th class=""> Risk factors </th>
+                        <th class=""> Consequences </th>
+                        <th class=""> Control activities </th>
+                        <th class=""> Effectiveness of controls </th>
+                        <th class=" cNbIncidents"> nbIncidents </th>
+                        <th class=""> Frequency / Probability </th>
+                        <th class=""> Impact </th>
+                        <th class=""> Exposure </th>
+                        <th class=""> Level of criticality</th>
+                        <th class=""> Potential risk response options </th>
+                        <th class=""> Cost of potential risk response option </th>
+                        <th class=""> Benefit of the potential risk response option</th>
+                        <th class="">Optimal option</th>
+                        <th class="">Risk Response Plan</th>
+                        <th class="">Needs for the implementation of risk response plans </th>
+                        <th class="progressTH"> Progress of risk response plans</th>
+                        <th style="min-width: 50px;"> <i class="fas fa-trash-alt"></i></th>
+
+                    </thead>
+                </tr>
+
+
+
+
+
+            </table>
+
+            <div class="row">
+                <div class="col">
+                    <div class="float-right">
+                        <button onclick="addRecT()" class="btn btn-info add-new"
+                            style="font-size:15px;margin: 10px 35px;"><i class="fas fa-tire-rugged"></i> Add Cobit5 Generic Scenarios</button>
+                    </div>
+                    <div class="float-right">
+                        <button onclick="delletAllRM()" class="btn btn-info add-new"
+                            style="font-size:15px;margin: 10px 35px;"><i class="fas fa-redo"></i> Init the table </button>
+                    </div>
+                    <div class="float-right">
+                        <button onclick="addligne('table_0')" class="btn btn-info add-new"
+                            style="font-size:15px;margin: 10px 35px;"><i class="fa fa-plus"></i>Add a Ligne</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <br> <br>
+            <br> <br>
+            <br> <br>
+
+            <datalist id="riskListChois">
+                                                                         
+<option value="Portfolio establishment and maintenance">
+</option>
+<option value="Programme / projects life cycle management (programme/ projects Initiation, economics, delivery, quality and termination)">
+</option>
+<option value="IT investmentdecision making">
+</option>
+<option value="IT expertise and skills">
+</option>
+<option value="Staff opérations (human error and malicious intent)">
+</option>
+<option value="Information (data breach: damage leakage and access)">
+</option>
+<option value="Architecture ( architectural vision and design)">
+</option>
+<option value="Infrastructure (hardware, operating system and controlling technology) (selection/ Implementation, operations and decommissioning)">
+</option>
+<option value="Software">
+</option>
+<option value="Business ownership of IT">
+</option>
+<option value="Supplier selection/ performance, contractual compliance, termination of service and transfer">
+</option>
+<option value="Regulatory compliance">
+</option>
+<option value="Geopolitical">
+</option>
+<option value="Infrastructure theft or destruction">
+</option>
+<option value="Malware">
+</option>
+<option value="Logical attacks">
+</option>
+<option value="Industrial action">
+</option>
+<option value="Environmental">
+</option>
+<option value="Acts of nature">
+</option>
+<option value="Innovation">
+</option>
+                 
+                 
+
+            </datalist>
+
+            <div th:insert="fragments\previousnext.html :: div"></div>
+
+    </body>
+
+    <script>
+        if (window.location.pathname == "/update_risk_mapping") {
+            document.getElementById("titleOfPage").innerText = `
+        Please update the risk mapping (status of Risk Response Plans):
+
+        `;
+        }
+    </script>
+
+    <footer th:insert="fragments/footer.html :: footer"></footer>
+
+    <script type="text/javascript" th:inline="javascript">
+        var entries = /*[[${riskMappingList}]]*/ 'default';
+        var level = /*[[${level}]]*/ '7';
+
+        if (level == null) {
+            level = 6;
+        }
+        var intL = 4;
+
+        try {
+            intL = parseInt(level);
+
+        } catch (error) {
+
+        }
+
+        console.log(entries);
+    </script>
+
+
+    <script>
+
+
+        function getNC(nbr) {
+
+            if (level == '4') {
+                if (nbr < 3) {
+                    return "Minor";
+                }
+                else if ((nbr >= 3) && (nbr < 6)) {
+                    return "Moderate";
+
+                }
+                else if ((nbr >= 6) && (nbr < 12)) {
+                    return "Major";
+
+                }
+                else if (nbr >= 12) {
+                    return "Critical";
+
+                }
+
+            }
+            else if (level == '5') {
+                if (nbr < 3) {
+                    return "Minor";
+                }
+                else if ((nbr >= 3) && (nbr < 7)) {
+                    return "Moderate";
+
+                }
+                else if ((nbr >= 8) && (nbr < 15)) {
+                    return "Major";
+
+                }
+                else if (nbr >= 15) {
+                    return "Critical";
+
+                }
+
+            }
+            else if (level == '6') {
+                if (nbr < 6) {
+                    return "Minor";
+                }
+                else if ((nbr >= 6) && (nbr < 15)) {
+                    return "Moderate";
+
+                }
+                else if ((nbr >= 15) && (nbr < 24)) {
+                    return "Major";
+
+                }
+                else if (nbr >= 24) {
+                    return "Critical";
+
+                }
+
+            }
+        }
+
+        function addEventForExposition(tr) {
+            document.getElementById(tr + '_frequence').addEventListener('change', function () {
+                freq = parseInt(document.getElementById(tr + '_frequence').value);
+                impct = parseInt(document.getElementById(tr + '_impact').value);
+                document.getElementById(tr + '_exposition').value = freq * impct;
+                document.getElementById(tr + '_criticalityLevel').textContent = getNC(freq * impct);
+                document.getElementById(tr + '_criticalityLevel').setAttribute("class", getNC(freq * impct));
+
+
+            });
+
+            document.getElementById(tr + '_impact').addEventListener('change', function () {
+                freq = parseInt(document.getElementById(tr + '_frequence').value);
+                impct = parseInt(document.getElementById(tr + '_impact').value);
+                document.getElementById(tr + '_exposition').value = freq * impct;
+                document.getElementById(tr + '_criticalityLevel').textContent = getNC(freq * impct);
+                document.getElementById(tr + '_criticalityLevel').setAttribute("class", getNC(freq * impct));
+
+
+            });
+        }
+
+        function getNum(str) {
+            if (str.search(/\d/i) == -1) {
+                return 0;
+            }
+            else {
+
+                return parseInt(str[str.search(/\d/i)]);
+            }
+
+        }
+
+
+        function getOpt(tr) {
+            optionList = ["Accept", "Avoid", "Mitigate", "Transfer"];
+            nbrOpt = -1;
+            lnameOpt = "Vide";
+            for (let i = 0; i < optionList.length; i++) {
+                const o = optionList[i];
+                coutTr = tr + "_option" + o + "Cout";
+                beneficeTr = tr + "_benefice" + o + "Cout";
+
+                Cout = document.getElementById(coutTr).value;
+                Benefice = document.getElementById(beneficeTr).value;
+
+                thisNbrOpt = getNum(Cout) * getNum(Benefice)
+                if (thisNbrOpt == nbrOpt) {
+                    lnameOpt += " , " + o;
+                }
+                if (thisNbrOpt > nbrOpt) {
+                    lnameOpt = o;
+                    nbrOpt = thisNbrOpt;
+
+                }
+
+                console.log("option " + o + "  nbr :" + thisNbrOpt);
+            }
+
+            console.log("optimale " + lnameOpt + "  nbr :" + nbrOpt);
+            return lnameOpt;
+        }
+
+        function addEventsForOO(tr) {
+            optionList = ["Accept", "Avoid", "Mitigate", "Transfer"];
+
+            for (let i = 0; i < optionList.length; i++) {
+                const o = optionList[i];
+                coutTr = tr + "_option" + o + "Cout";
+                beneficeTr = tr + "_benefice" + o + "Cout";
+
+                document.getElementById(coutTr).addEventListener('change', function () {
+
+                    console.log("getOpt : ", getOpt(tr));
+                    document.getElementById(tr + "_optionOptimale_c").textContent = getOpt(tr);
+                });
+
+                document.getElementById(beneficeTr).addEventListener('change', function () {
+
+                    console.log("getOpt : ", getOpt(tr));
+                    document.getElementById(tr + "_optionOptimale_c").textContent = getOpt(tr);
+                });
+
+            }
+
+
+        }
+
+
+
+        function initEventsLigne(tr) {
+            addEventsForOO(tr);
+            addEventForExposition(tr);
+        }
+
+
+    </script>
+
+
+    <script>
+        var nbrL = -1
+        function addligne(table_id) {
+            nbrL = nbrL + 1;
+
+            var table = document.getElementById(table_id);
+
+
+
+
+            var html = `
+        <tbody id="table_0_tr_${nbrL}">
+          <tr>
+        <td class="headcol"  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_macroProcessus" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_processus" ></textarea>   </td> 
+
+        <td class=""  rowspan="4" id="" > <input name="" type="text" list="riskListChois" class="txtar" id="table_0_tr_${nbrL}_category" > </td> 
+
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_risque" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_kRI" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_facteur" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_consequences" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_controlActivities" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <input type="number" min="1" max="${level}" value="1" name=""  cols="10" rows="5" class="txtar inputLevel" id="table_0_tr_${nbrL}_efficacite" >  </td> 
+        <td class=" cNbIncidents"   rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_nbIncidents" ></textarea>   </td> 
+       
+        <td class=""  rowspan="4" id="" > <input name=""  type="number"  class="txtar inputLevel"  min="1" max="${level}" value="1"  id="table_0_tr_${nbrL}_frequence" >   </td> 
+        <td class=""  rowspan="4" id="" > <input name=""  type="number"  class="txtar inputLevel"  min="1" max="${level}" value="1"  id="table_0_tr_${nbrL}_impact" >   </td> 
+        <td class=""  rowspan="4" id="" > <input name="" disabled   type="number" class="txtar inputLevel"  min="1" value="1" max="36" id="table_0_tr_${nbrL}_exposition" >   </td> 
+        <td class="Minor"   rowspan="4" class="criticalityLevel" id="table_0_tr_${nbrL}_criticalityLevel" > Minor  </td> 
+        
+        <td class="" > Accept </td> 
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_optionAcceptCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_beneficeAcceptCout">
+                <option value="Faible (1)"  selected>Faible (1)</option>
+                        <option value="NA" >NA</option>
+                        <option value="Moyen (2)">Moyen (2)</option>
+                        <option value="Elevé (3)">Elevé (3)</option>
+            </select>
+        </td>
+
+        
+       
+        <td class=""  rowspan="4"  id="table_0_tr_${nbrL}_optionOptimale_c">option optimale</td>
+
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_optionOptimale" ></textarea> </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_besoins" ></textarea> </td> 
+        <td class=""  rowspan="4" id="" > <input name="" type="number"  min="0" max="100"  class="txtar inputAv" id="table_0_tr_${nbrL}_avacncement" > % </td> 
+ 
+        <td class=""  rowspan="4" id="table_0_tr_${nbrL}_del">
+          <Button class="btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_${nbrL}')"> <i class="fas fa-trash-alt"></i></Button>
+        </td>
+ 
+        </tr>
+  
+    
+    <tr>
+        <td class=""   > Avoid </td> 
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_optionAvoidCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_beneficeAvoidCout">
+                <option value="Faible (1)">Faible (1)</option>
+                        <option value="NA" selected>NA</option>
+                        <option value="Moyen (2)">Moyen (2)</option>
+                        <option value="Elevé (3)">Elevé (3)</option>
+            </select>
+        </td>
+       
+    </tr>
+    <tr>
+        <td class=""   > Mitigate </td> 
+        <td class="" >
+            <select  id="table_0_tr_${nbrL}_optionMitigateCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_beneficeMitigateCout">
+                <option value="Faible (1)">Faible (1)</option>
+                        <option value="NA" >NA</option>
+                        <option value="Moyen (2)" selected>Moyen (2)</option>
+                        <option value="Elevé (3)">Elevé (3)</option>
+            </select>
+        </td>
+        
+    </tr>
+    <tr>
+        <td class=""   > Transfer </td> 
+        <td class="" >
+            <select  id="table_0_tr_${nbrL}_optionTransferCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select  id="table_0_tr_${nbrL}_beneficeTransferCout">
+                <option value="Faible (1)">Faible (1)</option>
+                        <option value="NA" >NA</option>
+                        <option value="Moyen (2)" >Moyen (2)</option>
+                        <option value="Elevé (3)" selected>Elevé (3)</option>
+            </select>
+        </td>
+       
+    </tr>
+
+     </tbody>
+     
+
+             `
+            // table.innerHTML = table.innerHTML +  html;
+
+            table.insertAdjacentHTML("beforeend",
+                html);
+
+            initEventsLigne(`table_0_tr_${nbrL}`);
+            document.getElementById(`table_0_tr_${nbrL}` + "_optionOptimale_c").textContent = getOpt(`table_0_tr_${nbrL}`)
+            initevPL();
+
+
+        }
+
+        function deleteTr(idtr) {
+
+            document.getElementById(idtr).hidden = true;
+            // document.getElementById(idtr).style.display = "none";
+            document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+        }
+
+        function initligne(index, e) {
+            listOfOptions = {
+                "optionAcceptCout": { "F": "", "M": "", "E": "", "N": "" },
+                "optionAvoidCout": { "F": "", "M": "", "E": "", "N": "" },
+                "optionMitigateCout": { "F": "", "M": "", "E": "", "N": "" },
+                "optionTransferCout": { "F": "", "M": "", "E": "", "N": "" },
+                "beneficeAcceptCout": { "F": "", "M": "", "E": "", "N": "" },
+                "beneficeAvoidCout": { "F": "", "M": "", "E": "", "N": "" },
+                "beneficeMitigateCout": { "F": "", "M": "", "E": "", "N": "" },
+                "beneficeTransferCout": { "F": "", "M": "", "E": "", "N": "" }
+            }
+
+            lisop = Object.keys(listOfOptions);
+            for (let i = 0; i < lisop.length; i++) {
+                const o = lisop[i];
+
+                console.log("e :", e);
+                console.log("e[o] :", e[o]);
+
+                var str = e[o];
+                var matches = str.match(/\b(\w)/g);
+                var key = matches[0];
+                listOfOptions[o][key] = 'selected="selected"'
+
+            }
+
+            var html = `
+        <tbody id="table_0_tr_${index}">
+          <tr>
+       <input type="text" disabled hidden="true" name="" id="table_0_tr_${index}_id" value="${e['id']}">
+        <td class="headcol"  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_macroProcessus" >${e['macroProcessus']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_processus" >${e['processus']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <input type="text" type="number" list="riskListChois" class="txtar" id="table_0_tr_${index}_category" value="${e['category']} "> </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_risque" >${e['risque']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_kRI" >${e['kri']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_facteur" >${e['facteur']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_consequences" >${e['consequences']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_controlActivities" >${e['controlActivities']}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <input type="number" min="1" max="${level}" name=""  cols="10" rows="5" class="txtar inputLevel" id="table_0_tr_${index}_efficacite" value = "${e['efficacite']}" >   </td> 
+        <td class=" cNbIncidents"   rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_nbIncidents" >${e['nbIncidents']}</textarea>   </td> 
+      
+        <td class=""  rowspan="4" id="" > <input name="" type="number"  cols="10" rows="5" min="1" max="${level}" class="txtar inputLevel" id="table_0_tr_${index}_frequence"  value="${e['frequence']}">  </td> 
+        <td class=""  rowspan="4" id="" > <input name="" type="number"  cols="10" rows="5" min="1" max="${level}" class="txtar inputLevel" id="table_0_tr_${index}_impact" value="${e['impact']}"> </td> 
+        <td class=""  rowspan="4" id="" > <input name="" disabled type="number"  min="1"  rows="5"max="36" class="txtar" id="table_0_tr_${index}_exposition" value="${e['exposition']}">  </td> 
+    
+        <td class=" ${e['criticalityLevel']}"  rowspan="4" class="criticalityLevel" id="table_0_tr_${index}_criticalityLevel" > ${e['criticalityLevel']} </td> 
+            
+        <td class="" > Accept </td> 
+        <td class="" >
+            <select id="table_0_tr_${index}_optionAcceptCout" value="${e['optionAcceptCout']}">
+                <option ${listOfOptions['optionAcceptCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['optionAcceptCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['optionAcceptCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['optionAcceptCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${index}_beneficeAcceptCout"  value="${e['beneficeAcceptCout']}">
+                <option ${listOfOptions['beneficeAcceptCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['beneficeAcceptCout']['N']}  value="NA">NA</option>
+                <option ${listOfOptions['beneficeAcceptCout']['M']}  value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['beneficeAcceptCout']['E']}  value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        
+       
+        <td class=""  rowspan="4"  id="table_0_tr_${index}_optionOptimale_c">${e['optionOptimaleCal']}</td>
+
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_optionOptimale" >${e['optionOptimale']}</textarea> </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${index}_besoins" > ${e['besoins']} </textarea> </td> 
+        <td class=""  rowspan="4" id="" > <input name="" type="number" min="0" max="100"  class="txtar inputAv" id="table_0_tr_${index}_avacncement" value="${e['avacncement']}"> % </td> 
+    
+        <td class=""  rowspan="4" id="table_0_tr_${index}_del">
+                    <Button class="btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_${index}')"> <i class="fas fa-trash-alt"></i></Button>
+                </td>
+    
+    </tr>
+  
+    
+    <tr>
+        <td class=""   > Avoid </td> 
+        <td class="" >
+            <select id="table_0_tr_${index}_optionAvoidCout"  value="${e['optionAvoidCout']}">
+                <option ${listOfOptions['optionAvoidCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['optionAvoidCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['optionAvoidCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['optionAvoidCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${index}_beneficeAvoidCout"  value="${e['beneficeAvoidCout']}">
+                <option ${listOfOptions['beneficeAvoidCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['beneficeAvoidCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['beneficeAvoidCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['beneficeAvoidCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+       
+    </tr>
+    <tr>
+        <td class=""   > Mitigate </td> 
+        <td class="" >
+            <select  id="table_0_tr_${index}_optionMitigateCout"  value="${e['optionMitigateCout']}">
+                <option ${listOfOptions['optionMitigateCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['optionMitigateCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['optionMitigateCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['optionMitigateCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${index}_beneficeMitigateCout" value="${e['beneficeMitigateCout']}">
+                <option ${listOfOptions['beneficeMitigateCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['beneficeMitigateCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['beneficeMitigateCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['beneficeMitigateCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+        
+    </tr>
+    <tr>
+        <td class=""   > Transfer </td> 
+        <td class="" >
+            <select  id="table_0_tr_${index}_optionTransferCout" value="${e['optionTransferCout']}">
+                <option ${listOfOptions['optionTransferCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['optionTransferCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['optionTransferCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['optionTransferCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select  id="table_0_tr_${index}_beneficeTransferCout" value="${e['beneficeTransferCout']}">
+                <option ${listOfOptions['beneficeTransferCout']['F']} value="Faible (3)">Faible (3)</option>
+                <option ${listOfOptions['beneficeTransferCout']['N']} value="NA">NA</option>
+                <option ${listOfOptions['beneficeTransferCout']['M']} value="Moyen (2)">Moyen (2)</option>
+                <option ${listOfOptions['beneficeTransferCout']['E']} value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+       
+    </tr>
+
+    </tbody>
+             `
+
+
+            return html;
+        }
+
+        function initTable() {
+            if (entries.length <= 0) {
+                addligne('table_0');
+                return;
+            }
+            nbrL = entries.length - 1;
+
+
+            var rhtml = `
+        <tr>
+            <thead style="background-color:#B0C4DE;">
+                <th class="headcol" > Macro-process   </th>
+        <th class="" > Process </th>
+        <th class="" > Risk category </th>
+        <th class="" > Risk </th>
+        <th class="" > KRI </th>
+        <th class="" > Risk factors </th>
+        <th class="" > Consequences </th>
+        <th class="" > Control activities </th>
+        <th class="" > Effectiveness of controls </th>
+        <th class=" cNbIncidents"  > nbIncidents </th>
+        <th class="" > Frequency / Probability </th>
+        <th class="" > Impact </th>
+        <th class="" > Exposure </th>
+        <th class="" > Level of criticality</th>
+        <th class="" > Potential risk response options </th>
+        <th class="" > Cost of potential risk response option </th>
+        <th class="" > Benefit of the potential risk response option</th>
+        <th class="" >Optimal option</th>
+        <th class="" >Risk Response Plan</th>
+        <th class="" >Needs for the implementation of risk response plans </th>
+        <th class="progressTH" > Progress of risk response plans</th> 
+        <th style="min-width: 50px;"> <i class="fas fa-trash-alt"></i></th>
+    </thead>
+        </tr>
+        `;
+
+            for (let index = 0; index < entries.length; index++) {
+                const e = entries[index];
+                rhtml += initligne(index, e);
+
+            }
+
+            document.getElementById('table_0').innerHTML = rhtml;
+
+            for (let i = 0; i < entries.length; i++) {
+                initEventsLigne(`table_0_tr_${i}`);
+            }
+        }
+        initTable();
+
+    </script>
+    <script>
+        
+
+
+
+        function initevPL() {
+            $(function () {
+            $(".inputLevel").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= intL && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
+            $(".inputLevel").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= intL && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+        });
+
+        $(function () {
+            $(".inputAv").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 100 && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
+            $(".inputAv").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 100 && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+        });
+        }
+    
+    
+        initevPL();
+    </script>
+    <script>
+
+        function collect() {
+
+
+            var data = new Array();
+            for (let idtr = 0; idtr <= nbrL; idtr++) {
+                console.log("=================" + idtr + "======================");
+
+                let isdel = false;
+                try {
+                    isdel1 = document.getElementById(`table_0_tr_${idtr}`).getAttribute("deletetr");
+                    console.log(isdel1);
+                    console.log("try : " + isdel1);
+                } catch (error) {
+                    console.log(error);
+                    console.error(error);
+                    isdel1 = 'false';
+                    console.log("catch : " + isdel1);
+
+                }
+                console.log("======================================");
+
+                // console.log(isdel1);
+                if (isdel1 == "true") {
+                    try {
+                        id = document.getElementById(`table_0_tr_${idtr}_id`).value.trim();
+                    } catch (error) {
+                        id = null;
+                    }
+
+                    console.log("id : " + id);
+
+                    if (id != null) {
+                        isdel = true;
+
+                        data.push({
+                            'id': parseInt(id),
+                            'isDel': isdel
+                        });
+                    }
+
+                    continue;
+                }
+
+
+                try {
+                    id = document.getElementById(`table_0_tr_${idtr}_id`).value.trim();
+                } catch (error) {
+                    id = null;
+                }
+
+                macroProcessus = document.getElementById(`table_0_tr_${idtr}_macroProcessus`).value.trim();
+                processus = document.getElementById(`table_0_tr_${idtr}_processus`).value.trim();
+                category = document.getElementById(`table_0_tr_${idtr}_category`).value.trim();
+                risque = document.getElementById(`table_0_tr_${idtr}_risque`).value.trim();
+                kRI = document.getElementById(`table_0_tr_${idtr}_kRI`).value.trim();
+                facteur = document.getElementById(`table_0_tr_${idtr}_facteur`).value.trim();
+                consequences = document.getElementById(`table_0_tr_${idtr}_consequences`).value.trim();
+                controlActivities = document.getElementById(`table_0_tr_${idtr}_controlActivities`).value.trim();
+                efficacite = document.getElementById(`table_0_tr_${idtr}_efficacite`).value.trim();
+                nbIncidents = document.getElementById(`table_0_tr_${idtr}_nbIncidents`).value.trim();
+                frequence = document.getElementById(`table_0_tr_${idtr}_frequence`).value.trim();
+                impact = document.getElementById(`table_0_tr_${idtr}_impact`).value.trim();
+                exposition = document.getElementById(`table_0_tr_${idtr}_exposition`).value.trim();
+                criticalityLevel = document.getElementById(`table_0_tr_${idtr}_criticalityLevel`).textContent.trim();
+                optionAcceptCout = document.getElementById(`table_0_tr_${idtr}_optionAcceptCout`).value.trim();
+                optionAvoidCout = document.getElementById(`table_0_tr_${idtr}_optionAvoidCout`).value.trim();
+                optionMitigateCout = document.getElementById(`table_0_tr_${idtr}_optionMitigateCout`).value.trim();
+                optionTransferCout = document.getElementById(`table_0_tr_${idtr}_optionTransferCout`).value.trim();
+                beneficeAcceptCout = document.getElementById(`table_0_tr_${idtr}_beneficeAcceptCout`).value.trim();
+                beneficeAvoidCout = document.getElementById(`table_0_tr_${idtr}_beneficeAvoidCout`).value.trim();
+                beneficeMitigateCout = document.getElementById(`table_0_tr_${idtr}_beneficeMitigateCout`).value.trim();
+                beneficeTransferCout = document.getElementById(`table_0_tr_${idtr}_beneficeTransferCout`).value.trim();
+                optionOptimale = document.getElementById(`table_0_tr_${idtr}_optionOptimale`).value.trim();
+                optionOptimaleCal = document.getElementById(`table_0_tr_${idtr}_optionOptimale_c`).textContent.trim();
+                besoins = document.getElementById(`table_0_tr_${idtr}_besoins`).value.trim();
+                avacncement = document.getElementById(`table_0_tr_${idtr}_avacncement`).value.trim();
+
+                if (
+                    macroProcessus === "" ||
+                    processus === "" ||
+                    category === "" ||
+                    risque === "" ||
+                    kRI === "" ||
+                    facteur === "" ||
+                    consequences === "" ||
+                    controlActivities === "" ||
+                    efficacite === "" ||
+                    frequence === "" ||
+                    impact === "" ||
+                    exposition === "" ||
+                    criticalityLevel === "" ||
+                    optionAcceptCout === "" ||
+                    optionAvoidCout === "" ||
+                    optionMitigateCout === "" ||
+                    optionTransferCout === "" ||
+                    beneficeAcceptCout === "" ||
+                    beneficeAvoidCout === "" ||
+                    beneficeMitigateCout === "" ||
+                    beneficeTransferCout === "" ||
+                    optionOptimale === "" ||
+                    optionOptimaleCal === "" ||
+                    besoins === "" ||
+                    avacncement === ""
+                ) {
+                    ae();
+                    return;
+                }
+
+                if (id === "") {
+                    longId = null;
+
+                } else {
+                    longId = parseInt(id);
+                }
+
+                dataEl = {
+                    "id": longId,
+                    "macroProcessus": macroProcessus,
+                    "processus": processus,
+                    "category": category,
+                    "risque": risque,
+                    "kri": kRI,
+                    "facteur": facteur,
+                    "consequences": consequences,
+                    "controlActivities": controlActivities,
+                    "efficacite": efficacite,
+                    "nbIncidents": nbIncidents,
+                    "frequence": frequence,
+                    "impact": impact,
+                    "exposition": exposition,
+                    "criticalityLevel": criticalityLevel,
+                    "optionAcceptCout": optionAcceptCout,
+                    "optionAvoidCout": optionAvoidCout,
+                    "optionMitigateCout": optionMitigateCout,
+                    "optionTransferCout": optionTransferCout,
+                    "beneficeAcceptCout": beneficeAcceptCout,
+                    "beneficeAvoidCout": beneficeAvoidCout,
+                    "beneficeMitigateCout": beneficeMitigateCout,
+                    "beneficeTransferCout": beneficeTransferCout,
+                    "optionOptimale": optionOptimale,
+                    "optionOptimaleCal": optionOptimaleCal,
+                    "besoins": besoins,
+                    "avacncement": avacncement
+
+
+                }
+                // console.log( JSON.stringify(dataEl));
+
+                data.push(dataEl);
+
+
+            }
+
+            console.log(JSON.stringify(data));
+
+            var sizeL = Object.keys(data).length;
+            if (sizeL === 0) {
+                ae("Please specify at least one  IT risks related to the company");
+                return -1;
+            }
+            fetch("", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(res => {
+                console.log("Request complete! response:", res);
+                nt(res);
+
+                console.log(res);
+
+            });
+
+
+        }
+
+
+
+    </script>
+
+    <script>
+        var recCatRisks = ["Portfolio establishment and maintenance",
+"Portfolio establishment and maintenance",
+"Portfolio establishment and maintenance",
+"Portfolio establishment and maintenance",
+"Programme/projects life cycle management (programme/ projects initiation, economics, delivery, quality and termination)",
+"Programme/projects life cycle management (programme/ projects initiation, economics, delivery, quality and termination)",
+"Programme/projects life cycle management (programme/ projects initiation, economics, delivery, quality and termination)",
+"Programme/projects life cycle management (programme/ projects initiation, economics, delivery, quality and termination)",
+"Programme/projects life cycle management (programme/ projects initiation, economics, delivery, quality and termination)",
+"Programme/projects life cycle management (programme/ projects initiation, economics, delivery, quality and termination)",
+"IT investment decision making",
+"IT investment decision making",
+"IT investment decision making",
+"IT investment decision making",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"IT expertise and skills",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Staff operations (human error and malicious intent)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Information (data breach: damage, leakage and access)",
+"Architecture (architectural vision and design)",
+"Architecture (architectural vision and design)",
+"Architecture (architectural vision and design)",
+"Architecture (architectural vision and design)",
+"Infrastructure (hardware, operating system and controlling technology) (selection/ implementation, operations and decommissioning)",
+"Infrastructure (hardware, operating system and controlling technology) (selection/ implementation, operations and decommissioning)",
+"Infrastructure (hardware, operating system and controlling technology) (selection/ implementation, operations and decommissioning)",
+"Infrastructure (hardware, operating system and controlling technology) (selection/ implementation, operations and decommissioning)",
+"Infrastructure (hardware, operating system and controlling technology) (selection/ implementation, operations and decommissioning)",
+"Infrastructure (hardware, operating system and controlling technology) (selection/ implementation, operations and decommissioning)",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Software",
+"Business ownership of IT",
+"Business ownership of IT",
+"Business ownership of IT",
+"Business ownership of IT",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Supplier selection/performance, contractual compliance, termination of service and transfer",
+"Regulatory compliance",
+"Regulatory compliance",
+"Regulatory compliance",
+"Geopolitical",
+"Geopolitical",
+"Geopolitical",
+"Infrastructure theft or destruction",
+"Infrastructure theft or destruction",
+"Infrastructure theft or destruction",
+"Infrastructure theft or destruction",
+"Malware",
+"Malware",
+"Malware",
+"Malware",
+"Logical attacks",
+"Logical attacks",
+"Logical attacks",
+"Logical attacks",
+"Logical attacks",
+"Logical attacks",
+"Industrial action",
+"Industrial action",
+"Industrial action",
+"Industrial action",
+"Environmental",
+"Acts of nature",
+"Acts of nature",
+"Acts of nature",
+"Acts of nature",
+"Acts of nature",
+"Acts of nature",
+"Innovation",
+"Innovation",
+"Innovation"]
+
+var recRisks = ["Wrong programmes are selected for implementation and are misaligned with corporate strategy and priorities.",
+"There is duplication between initiatives.",
+"A new important programme creates longterm incompatibility with the enterprise architecture.",
+"Competing resources are allocated and managed inefficiently and are misaligned to business priorities.",
+"Failing (due to cost, delays, scope creep, changed business priorities) projects are not terminated.",
+"There is an IT project budget overrun.",
+"There is occasional late IT project delivery by an internal development department.",
+"Routinely, there are important delays in IT project delivery.",
+"There are excessive delays in outsourced IT development project.",
+"Programmes/projects fail due to not obtaining the active involvement throughout the programme/project life cycle of all stakeholders (including sponsor).",
+"Business managers or representatives are not involved in important IT investment decision making (e.g., new applications, prioritisation, new technology opportunities).",
+"The wrong software, in terms of cost, performance, features, compatibility, etc., is selected for implementation.",
+"The wrong infrastructure, in terms of cost, performance, features, compatibility, etc., is selected for implementation.",
+"Redundant software is purchased.",
+"There is a lack of or mismatched IT-related skills within IT, e.g., due to new technologies.",
+"There is a lack of business understanding by IT staff affecting the service delivery / projects quality.",
+"There are insufficient skills to cover the business requirements.",
+"There is an inability to recruit IT staff.",
+"There is a lack of due diligence in the recruitment process.",
+"There is a lack of training leading to IT staff leaving.",
+"There is insufficient return on investment regarding training due to early leaving of trained IT staff (e.g., MBA).",
+"There is an overreliance on key IT staff.",
+"There is an inability to update the IT skills to the proper level through training.",
+"Staff operations (human error and malicious intent)",
+"IT equipment is accidentally damaged by staff.",
+"There are errors by IT staff (during backup, during upgrades of systems, during maintenance of systems, etc.).",
+"Information is input incorrectly by IT staff or system users.",
+"The data centre is destroyed (sabotage, etc.) by staff.",
+"There is a theft of a device with sensitive data by staff.",
+"There is a theft of a key infrastructure component by staff.",
+"Hardware components were configured erroneously.",
+"Critical servers in the computer room were damaged (e.g., accident, etc.).",
+"Hardware was tampered with intentionally (security devices, etc.).",
+"Hardware components are damaged, leading to (partial) destruction of data by internal staff.",
+"The database is corrupted, leading to inaccessible data.",
+"Portable media containing sensitive data (CD, USB drives, portable disks, etc.) is lost/ disclosed.",
+"Sensitive data is lost/disclosed through logical attacks.",
+"Backup media is lost or backups are not checked for effectiveness.",
+"Sensitive information is accidentally disclosed due to failure to follow information handling guidelines.",
+"Data (accounting, security-related data, sales figures, etc.) are modified intentionally.",
+"Sensitive information is disclosed through email or social media.",
+"Sensitive information is discovered due to inefficient retaining/archiving/disposing of information.",
+"IP is lost and/or competitive information is leaked due to key team members leaving the enterprise.",
+"The enterprise has an overflow of data and cannot deduct the business relevant information from the data (e.g., big data problem).",
+"The enterprise architecture is complex and inflexible, obstructing further evolution and expansion leading to missed business opportunities.",
+"The enterprise architecture is not fit for purpose and not supporting the business priorities.",
+"There is a failure to adopt and exploit new infrastructure in a timely manner.",
+"There is a failure to adopt and exploit new software (functionality, optimisation, etc.) in a timely manner.",
+"New (innovative) infrastructure is installed and as a result systems become unstable leading to operational incidents, e.g., Bring your own device (BYOD) programme.",
+"The systems cannot handle transaction volumes when user volumes increase.",
+"The systems cannot handle system load when new applications or initiatives are deployed.",
+"Intermittently, there are failures of utilities (telecom, electricity).",
+"The IT in use is obsolete and cannot satisfy new business requirements (networking, security, database, storage, etc.).",
+"Hardware fails due to overheating.",
+"There is an inability to use the software to realise desired outcomes (e.g., failure to make required business model or organisational changes).",
+"Immature software (early adopters, bugs, etc.) is implemented.",
+"The wrong software (cost, performance, features, compatibility, etc.) is selected for implementation.",
+"There are operational glitches when new software is made operational.",
+"Users cannot use and exploit new application software.",
+"Intentional modification of software leading to wrong data or fraudulent actions.",
+"Unintentional modification of software leads to unexpected results.",
+"Unintentional configuration and change management errors occur.",
+"Regular software malfunctioning of critical application software occurs.",
+"Intermittent software problems with important system software occur.",
+"Application software is obsolete (e.g., old technology, poorly documented, expensive to maintain, difficult to extend, not integrated in current architecture)",
+"There is an inability to revert back to former versions in case of operational issues with the new version.",
+"Business does not assume accountability over those IT areas it should, e.g., functional requirements, development priorities, assessing opportunities through new technologies.",
+"There is extensive dependency and use of end-user computing and ad hoc solutions for important information needs, leading to security deficiencies, inaccurate data or increasing costs/inefficient use of resources.",
+"Cost and ineffectiveness is related to IT related purchases outside of the procurement process.",
+"Inadequate requirements lead to ineffective service level agreements (SLAs).",
+"There is a lack of supplier due diligence regarding financial viability, delivery capability and sustainability of supplier’s service.",
+"Unreasonable terms of business are accepted from IT suppliers.",
+"Support and services delivered by vendors are inadequate and not in line with the SLA.",
+"Outsourcer performance is inadequate in a large-scale long-term outsourcing arrangement.",
+"There is non-compliance with software licence agreements (use and/or distribution of unlicenced software, etc.).",
+"There is an inability to transfer to alternative suppliers due to overreliance on current supplier.",
+"Cloud services are purchased by the business without the consultation/involvement of IT, resulting in inability to integrate the service with in-house services.",
+"There is non-compliance with regulations, e.g., privacy, accounting, manufacturing.",
+"Unawareness of potential regulatory changes have an impact on the operational IT environment.",
+"The regulator prevents cross-border dataflow due to insufficient controls.",
+"There is no access due to disruptive incident in other premises.",
+"Government interference and national policies limit service capability.",
+"Targeted action against the enterprise results in destruction of infrastructure.",
+"There is a theft of a device with sensitive data.",
+"There is a theft of a substantial number of development servers.",
+"Destruction of the data centre (sabotage, etc.) occurs.",
+"There is accidental destruction of individual devices.",
+"There is an intrusion of malware on critical operational servers.",
+"Regularly, there is infection of laptops with malware.",
+"A disgruntled employee implements a time bomb that leads to data loss.",
+"Company data are stolen through unauthorised access gained by a phishing attack.",
+"Unauthorised users try to break into systems.",
+"There is a service interruption due to denial-of-service attack.",
+"The web site is defaced.",
+"Industrial espionage takes place.",
+"There is a virus attack.",
+"Hacktivism takes place.",
+"Facilities and building are not accessible because of a labour union strike.",
+"Key staff is not available through industrial action (e.g., transportation strike).",
+"A third party is not able to provide services because of strike.",
+"There is no access to capital caused by a strike of the banking industry.",
+"The equipment used is not environmentally friendly (e.g., power consumption, packaging).",
+"There is an earthquake.",
+"There is a tsunami.",
+"There are major storms and tropical cyclones.",
+"There is a major wildfire.",
+"There is flooding.",
+"The water table is rising.",
+"New and important technology trends are not identified.",
+"There is a failure to adopt and exploit new software (functionality, optimisation, etc.) in a timely manner.",
+"New and important software trends are not identified (consumerisation of IT)."]
+
+    </script>
+
+    <script>
+     function addREcligne(r ,c) {
+            nbrL = nbrL + 1;
+
+            var table = document.getElementById('table_0');
+
+
+
+
+            var html = `
+        <tbody id="table_0_tr_${nbrL}">
+          <tr>
+        <td class="headcol"  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_macroProcessus" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_processus" ></textarea>   </td> 
+
+        <td class=""  rowspan="4" id="" > <input name="" type="text" list="riskListChois" value="${c}" class="txtar" id="table_0_tr_${nbrL}_category" ></td> 
+
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_risque" >${r}</textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_kRI" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_facteur" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_consequences" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_controlActivities" ></textarea>   </td> 
+        <td class=""  rowspan="4" id="" > <input type="number" min="1" max="${level}" value="1" name=""  cols="10" rows="5" class="txtar inputLevel" id="table_0_tr_${nbrL}_efficacite" >  </td> 
+        <td class=" cNbIncidents"   rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_nbIncidents" ></textarea>   </td> 
+       
+        <td class=""  rowspan="4" id="" > <input name=""  type="number"  class="txtar inputLevel"  min="1" max="${level}" value="1"  id="table_0_tr_${nbrL}_frequence" >   </td> 
+        <td class=""  rowspan="4" id="" > <input name=""  type="number"  class="txtar inputLevel"  min="1" max="${level}" value="1"  id="table_0_tr_${nbrL}_impact" >   </td> 
+        <td class=""  rowspan="4" id="" > <input name="" disabled   type="number" class="txtar inputLevel"  min="1" value="1" max="36" id="table_0_tr_${nbrL}_exposition" >   </td> 
+        <td class="Minor"   rowspan="4" class="criticalityLevel" id="table_0_tr_${nbrL}_criticalityLevel" > Minor  </td> 
+        
+        <td class="" > Accept </td> 
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_optionAcceptCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_beneficeAcceptCout">
+                <option value="Faible (1)"  selected>Faible (1)</option>
+                        <option value="NA" >NA</option>
+                        <option value="Moyen (2)">Moyen (2)</option>
+                        <option value="Elevé (3)">Elevé (3)</option>
+            </select>
+        </td>
+
+        
+       
+        <td class=""  rowspan="4"  id="table_0_tr_${nbrL}_optionOptimale_c">option optimale</td>
+
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_optionOptimale" ></textarea> </td> 
+        <td class=""  rowspan="4" id="" > <textarea name=""  cols="10" rows="5" class="txtar" id="table_0_tr_${nbrL}_besoins" ></textarea> </td> 
+        <td class=""  rowspan="4" id="" > <input name="" type="number"  min="0" max="100"  class="txtar inputAv" id="table_0_tr_${nbrL}_avacncement" > % </td> 
+ 
+        <td class=""  rowspan="4" id="table_0_tr_${nbrL}_del">
+          <Button class="btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_${nbrL}')"> <i class="fas fa-trash-alt"></i></Button>
+        </td>
+ 
+        </tr>
+  
+    
+    <tr>
+        <td class=""   > Avoid </td> 
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_optionAvoidCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_beneficeAvoidCout">
+                <option value="Faible (1)">Faible (1)</option>
+                        <option value="NA" selected>NA</option>
+                        <option value="Moyen (2)">Moyen (2)</option>
+                        <option value="Elevé (3)">Elevé (3)</option>
+            </select>
+        </td>
+       
+    </tr>
+    <tr>
+        <td class=""   > Mitigate </td> 
+        <td class="" >
+            <select  id="table_0_tr_${nbrL}_optionMitigateCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select id="table_0_tr_${nbrL}_beneficeMitigateCout">
+                <option value="Faible (1)">Faible (1)</option>
+                        <option value="NA" >NA</option>
+                        <option value="Moyen (2)" selected>Moyen (2)</option>
+                        <option value="Elevé (3)">Elevé (3)</option>
+            </select>
+        </td>
+        
+    </tr>
+    <tr>
+        <td class=""   > Transfer </td> 
+        <td class="" >
+            <select  id="table_0_tr_${nbrL}_optionTransferCout">
+                <option value="Faible (3)">Faible (3)</option>
+                <option value="NA">NA</option>
+                <option value="Moyen (2)">Moyen (2)</option>
+                <option value="Elevé (1)">Elevé (1)</option>
+            </select>
+        </td>
+
+        <td class="" >
+            <select  id="table_0_tr_${nbrL}_beneficeTransferCout">
+                <option value="Faible (1)">Faible (1)</option>
+                        <option value="NA" >NA</option>
+                        <option value="Moyen (2)" >Moyen (2)</option>
+                        <option value="Elevé (3)" selected>Elevé (3)</option>
+            </select>
+        </td>
+       
+    </tr>
+
+     </tbody>
+     
+
+             `
+            // table.innerHTML = table.innerHTML +  html;
+
+            table.insertAdjacentHTML("beforeend",
+                html);
+
+            initEventsLigne(`table_0_tr_${nbrL}`);
+            document.getElementById(`table_0_tr_${nbrL}` + "_optionOptimale_c").textContent = getOpt(`table_0_tr_${nbrL}`)
+
+
+        }
+
+
+    function addRecT(){
+        for (let i = 0; i < recCatRisks.length; i++) {
+            addREcligne( recRisks[i], recCatRisks[i]);
+        }
+
+        initevPL();
+    }
+
+    function delletAllRM(){
+        document.getElementById('table_0').innerHTML = `
+        <tr>
+                    <thead style="background-color:#B0C4DE;">
+                        <th class="headcol"> Macro-process </th>
+                        <th class=""> Process </th>
+                        <th class=""> Risk category </th>
+                        <th class=""> Risk </th>
+                        <th class=""> KRI </th>
+                        <th class=""> Risk factors </th>
+                        <th class=""> Consequences </th>
+                        <th class=""> Control activities </th>
+                        <th class=""> Effectiveness of controls </th>
+                        <th class=" cNbIncidents"> nbIncidents </th>
+                        <th class=""> Frequency / Probability </th>
+                        <th class=""> Impact </th>
+                        <th class=""> Exposure </th>
+                        <th class=""> Level of criticality</th>
+                        <th class=""> Potential risk response options </th>
+                        <th class=""> Cost of potential risk response option </th>
+                        <th class=""> Benefit of the potential risk response option</th>
+                        <th class="">Optimal option</th>
+                        <th class="">Risk Response Plan</th>
+                        <th class="">Needs for the implementation of risk response plans </th>
+                        <th class="progressTH"> Progress of risk response plans</th>
+                        <th style="min-width: 50px;"> <i class="fas fa-trash-alt"></i></th>
+
+                    </thead>
+                </tr>
+
+        `;
+
+        nbrL = -1;
+        addligne('table_0');
+    }
+    
+    </script>
+
+</html>
+

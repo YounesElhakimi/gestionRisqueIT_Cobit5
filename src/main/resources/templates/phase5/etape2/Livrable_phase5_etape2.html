@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+<style>
+   .Critical {
+                background-color: red;
+            }
+
+            .Major {
+                background-color: orange;
+            }
+
+            .Moderate {
+                background-color: yellow;
+
+            }
+
+            .Minor {
+                background-color: green;
+
+            }
+</style>
+
+<body id="page-top" >
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+
+    <main class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                        
+                        </strong>
+                    </h2>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+
+                 <div class="col-lg-4 ">
+
+
+                    <div class="form-group">
+    
+                       
+                        <h4  class="text-uppercase" >
+                            <strong>
+                                Risk monitoring report
+                            </strong>
+                            
+          
+                               
+                        </h4>
+                            <button id ="taggelHiddenBtnSur" onclick="taggelHidden('exportContentSur' , 'taggelHiddenBtnSur')" class="btn btn-yh btn-xl js-scroll-trigger">
+                                display 
+                            </button>
+        
+             
+        
+                            <button onclick="Export2Word('exportContentSur' ,`11- Phase 5_Rapport de surveillance des risques_Template`)" class="btn btn-yh btn-xl js-scroll-trigger">
+                                Download  
+                            </button>
+                     
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 ">
+
+
+                    <div class="form-group">
+    
+                       
+                        <h4  class="text-uppercase" >
+                            <strong>
+                                 Risk mapping 
+                            </strong>
+                              
+
+                            </h4>
+    
+                        <button id ="taggelHiddenBtn3" onclick="taggelHidden('exportContent3' , 'taggelHiddenBtn3')" class="btn btn-yh btn-xl js-scroll-trigger">
+                            display 
+                        </button>
+    
+         
+    
+                        <button onclick="Export2Excel('exportContent3',`Cartographie des risques_Template.xlsx`)" class="btn btn-yh btn-xl js-scroll-trigger">
+                            Download  
+                        </button>
+                     
+                    </div>
+                </div>
+
+                <div class="col-lg-4 ">
+
+
+                    <div class="form-group">
+    
+                       
+                        <h4  class="text-uppercase" >
+
+                            <strong>
+                                KRI Dashboard
+
+                            </strong>
+                            </h4>
+    
+                        <button id ="taggelHiddenBtn5" onclick="taggelHidden('exportContent5' , 'taggelHiddenBtn5')" class="btn btn-yh btn-xl js-scroll-trigger">
+                            display 
+                        </button>
+    
+         
+    
+                        <button onclick="Export2Excel('exportContent5',`kri.xlsx`)" class="btn btn-yh btn-xl js-scroll-trigger">
+                            Download  
+                        </button>
+                     
+                    </div>
+                </div>
+            </div>
+
+            
+
+    </main>
+
+
+
+
+    <br>
+
+    <style>
+        #exportContent{
+          
+        }
+    </style>
+
+    <div id="exportContentSur" hidden>
+       
+    </div>
+
+    <style>
+        table{
+            font-size: 12px;
+        }
+        .theadRM th {
+        
+           color: rgb(0, 0, 0);
+            background: #00416A;
+           border:solid 1px;
+           min-width: 120px;
+           max-width: 120px;
+      }
+    
+      .thShort{
+        min-width: 75px !important;
+           max-width: 85px !important;
+      }
+    
+      .headtable{ 
+        background-color:white;
+      }
+    </style>
+
+
+    
+    <div id="exportContent3" hidden class="divtable"  style="display: block;overflow-x: auto;width:100%;">
+
+        <div th:insert="fragments/headTable.html :: div"></div>
+        <table class="fl-table " id="riskMappingTable" border="2px" cellspacing="0" cellpadding="">
+            
+        </table>
+    </div>
+
+    <div id="exportContent5" hidden class="divtable"  style="display: block;overflow-x: auto;width:100%;">
+
+        <div th:insert="fragments/headTable.html :: div"></div>
+        <table class="fl-table " id="tableKRI" border="2px" cellspacing="0" cellpadding="">
+            
+        </table>
+    </div>
+<br><br><br><br>
+  
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+
+    <script>
+        function taggelHidden(id = 'exportContent' , btn ='taggelHiddenBtn') {
+            div = document.getElementById(id); 
+            btn =  document.getElementById(btn); 
+
+            if (div.hidden) {
+                div.hidden = false;
+                btn.textContent = "Hide";
+            }else{
+                div.hidden = true;
+                btn.textContent = " Display";
+
+            }
+        }
+    </script>
+
+
+<script>
+     function collect() {
+            next();
+        }  
+</script>
+
+
+
+
+</body>
+<footer th:insert="fragments/footer.html :: footer"></footer>
+<script type="text/javascript" th:inline="javascript">
+    var rm = /*[[${rm}]]*/  null;
+
+function initTablePRR() {
+if (rm.length == 0 || rm == null) {
+    return "vide"
+}
+  html = ``;
+for (let j = 0; j < rm.length; j++) {
+
+    html +=
+        `
+  
+    <td  id="" > <p class="td_p">
+         ${rm[j]["risque"]} 
+     
+     </p></td> 
+    <td  id="" > <p class="td_p">
+         ${rm[j]["frequence"]} 
+     
+     </p></td> 
+    <td  id="" > <p class="td_p">
+         ${rm[j]["impact"]} 
+     
+     </p></td> 
+ 
+    <td  id="" > <p class="td_p">
+         ${rm[j]["efficacite"]} 
+     
+     </p></td> 
+        
+    <td  id="" > <p class="td_p">
+         ${rm[j]["criticalityLevel"]} 
+     
+     </p></td> 
+
+     <td  id="" > <p class="td_p">
+         ${rm[j]["controlActivities"]} 
+     
+     </p></td> 
+
+     <td  id="" > <p class="td_p">
+         ${rm[j]["optionOptimale"]} 
+     
+     </p></td> 
+
+     <td  id="" > <p class="td_p">
+         ${rm[j]["avacncement"]}  %
+     
+     </p></td> 
+      
+
+
+
+</tr>
+`
+}
+
+return html;
+
+}
+
+var prrHTML = initTablePRR() ;
+
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    var kri = /*[[${kriMeasuresDTOList}]]*/ 'default';
+
+    function initTableKRI() {
+        if (kri.length == 0 || kri == null) {
+            return  'vide';
+        }
+
+var html = ``;
+for (let j = 0; j < kri.length; j++) {
+
+    html +=
+        `
+<tr>
+
+    <td>  <p class="td_p">   
+        ${kri[j]['kri']}
+     </p> </td>
+
+     <td>  <p class="td_p">   
+        ${kri[j]['risque']}
+     </p> </td>
+ 
+    <td>  <p class="td_p"> 
+        ${kri[j]['mesure1']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${kri[j]['cible1']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${kri[j]['ecart1']}
+         </p> </td>
+   
+    <td>  <p class="td_p">
+        ${kri[j]['mesure2']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kri[j]['cible2']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kri[j]['ecart2']}
+         </p> </td>
+   
+    <td>  <p class="td_p">
+        ${kri[j]['mesure3']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kri[j]['cible3']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kri[j]['ecart3']}
+         </p> </td>
+ 
+    <td>  <p class="td_p">
+        ${kri[j]['mesure4']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kri[j]['cible4']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kri[j]['ecart4']}
+         </p> </td>
+
+    <td>  <p class="td_p"> 
+         ${kri[j]['explicationsDesEcarts']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${kri[j]['mesuresCorrectives']} 
+        </p> </td>    
+
+</tr>
+`
+};
+
+return html;
+
+
+
+}
+
+var htmlKRI = initTableKRI();
+
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    var riskEventList = /*[[${riskEventList}]]*/ 'default';
+
+    function initTableriskEventList() {
+        if (riskEventList.length == 0 || riskEventList == null) {
+            return  'vide';
+        }
+
+var html = ``;
+for (let j = 0; j < riskEventList.length; j++) {
+
+    html +=
+        `
+<tr>
+
+    <td>  <p class="td_p">   
+        ${riskEventList[j]['description']}
+     </p> </td>
+
+     <td>  <p class="td_p">   
+        ${riskEventList[j]['date']}
+     </p> </td>
+ 
+   
+    <td>  <p class="td_p"> 
+        ${riskEventList[j]['impacte']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${riskEventList[j]['impacteMAD']} HD
+         </p> </td>
+   
+    <td>  <p class="td_p">
+        ${riskEventList[j]['risque']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${riskEventList[j]['actionPlan']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${riskEventList[j]['avancement']} %
+         </p> </td>
+  
+</tr>
+`
+};
+
+return html;
+
+
+
+}
+
+var htmlriskEvent = initTableriskEventList();
+
+</script>
+
+
+<script type="text/javascript" th:inline="javascript">
+    var op = /*[[${objectifProgressionList}]]*/ 'default';
+
+    function initTableop() {
+        if (op.length == 0 || op == null) {
+            return  'vide';
+        }
+
+var html = ``;
+for (let j = 0; j < op.length; j++) {
+
+    html +=
+        `
+<tr>
+
+    <td>  <p class="td_p">   
+        ${op[j]['objectif']}
+     </p> </td>
+
+     <td>  <p class="td_p">   
+        ${op[j]['risque']}
+     </p> </td>
+ 
+    <td>  <p class="td_p"> 
+        ${op[j]['cible']} %
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${op[j]['realisation']} %
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${op[j]['analyseEcart']}
+         </p> </td>
+   
+</tr>
+`
+};
+
+return html;
+
+
+
+}
+
+var htmlop = initTableop();
+
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+ var ProblemDescription = /*[[${ProblemDescription}]]*/ 'default';
+ var htmlProblemDescription = ProblemDescription['description'];
+
+</script>
+<script>
+    
+    var htmlDocSR = `
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><img width="125" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQsAAAC9CAMAAAHkaJgqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEOUExURf////z8/Ozu7sXKymd2d4WRkV1tbrzBwWJxcm17fLm/v+Xo6KCpqZKendve3tTX2H6Kivf4+HSBgbC4t6aurnmGh5egoPLz883R0ers7OLl5VdnaI6Ymf37+vGtffXKrut2G/vw5u+XW+6JQfzy6vO/mPCOTPjfzfCLSPG0ifbTvO+jb+6FOfnn1+6dZPPFoffy8eHT0MSoo66Gf6d5cbeTiNK6td3LxpFSQ3AZAHwvHe6hZ2sGAHcnE4dENZpoXHUcAOXu9Nvn8KJxZb/U5Iqy0XGiyFuXw0CIujuEu6zI3jaBuSt8tsnb6MmvqXclEaXC2hVysWsAAH+rzIA3J5ZfUYpFM0pbWzlOSwAAAOFAu18AAABadFJOU///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////ANHWim8AAAAJcEhZcwAADsQAAA7EAZUrDhsAABtxSURBVHhe7V0Le9q40tYjxMVarLhgBz2Rvf1OYeluT+g+Sdqm4QtNluRsy5KGNM1uzv//JWdGli9gQyABcmneEPBFkkejy8xII5ncBn3zOx3MMgfTYd0YxLJE2xxOQd2yfmk3zUk+8DHt2cl8oITszAzT7e4Nh6ft9ktznkUXQAbDWY/qdnvdw+Fg2G5vmyuT6HYD+CeDwdRk/obb5FO3OxgMf72BYkim0W5D1jLg5bL+1WFobjI9zI/Gp8Hgc7v9s7mewNzWmELxboTz8/Pdi4uLN53X5s6i8EkBfwQhAfxswL/ieAER5tDV3wZQ5NIczoeG9IAtm9Z1xatv2teYqOt6RPKy4y+W0gJg5nc6LNscTINl+eZoCqhltW5sHzMrEgSwyKuZQfbwq91u6JM8YBUZfmnNSARCXEGdbrdfmQuT6HZ3p9YzjR24fdAdfRsMt6f0CBBAf01NRBHMwnn36mIw+C03SNxwPgwGX9vtbHU27QZ/wvZnricIA2gcDwZn7Qyx56bR6GZDLi7Im465swCgUSj4Dop4wqJOIGwkjv4mUOM1kmoIMeaFFBuS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" alt="image"></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-size:43px;line-height:107%;font-family:"Calibri Light",sans-serif;'>&nbsp;</span></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="font-size:37px;line-height:107%;">Risk monitoring report</span></strong></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="font-size:37px;line-height:107%;">&nbsp;</span></strong></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="font-size:27px;line-height:107%;">Project</span></strong><span style="font-size:27px;line-height:107%;">&nbsp;: Roadmap for the implementation of an IT risk management system IT for the organization : <span  class="thisOrg"> organization name</span> </span></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="font-size:29px;line-height:107%;">&nbsp;</span></strong></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="font-size:27px;line-height:107%;">Phase 5</span></strong><span style="font-size:27px;line-height:107%;">&nbsp;: Monitoring and surveillance</span></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="font-size:29px;line-height:107%;">&nbsp;</span></strong></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><u><span style="text-decoration:none;">&nbsp;</span></u></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><u><span style="text-decoration:none;">&nbsp;</span></u></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><u><span style="text-decoration:none;">&nbsp;</span></u></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'><u>Authors</u>: Hasnaa Berrada</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>&nbsp;P. Jaouad Boutahar&nbsp;</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>P. Souhail El Ghazi El Houssaini</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>&nbsp;</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;${toDay()}</p>
+
+<div style="clear:both!important;"></div>
+<div style="page-break-after:always"></div> 
+<div style="clear:both!important;"> </div>
+
+<p style='margin-top:12.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:107%;font-size:21px;font-family:"Calibri Light",sans-serif;color:#2E74B5;'>Table of contents</p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:5.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><a href="#_Toc103765132">1.<span style="color:windowtext;text-decoration: none;">&nbsp; &nbsp; &nbsp;</span>Inventory of control activities and monitoring of  risk reduction plans<span style="color:windowtext;text-decoration:none;">.&nbsp;</span><span style="color:windowtext;text-decoration:none;"></span></a></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:5.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><a href="#_Toc103765133">2.<span style="color:windowtext;text-decoration:none;">&nbsp; &nbsp; &nbsp;</span>KRI monitoring<span style="color:windowtext;text-decoration:none;">&nbsp;</span><span style="color:windowtext;text-decoration:none;"></span></a></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:5.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><a href="#_Toc103765134">3.<span style="color:windowtext;text-decoration:none;">&nbsp; &nbsp; &nbsp;</span>Incident monitoring<span style="color:windowtext;text-decoration:none;">.&nbsp;</span><span style="color:windowtext;text-decoration:none;"></span></a></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:5.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><a href="#_Toc103765135">4.<span style="color:windowtext;text-decoration:none;">&nbsp; &nbsp; &nbsp;</span>Monitoring of identified objectives.<span style="color:windowtext;text-decoration:none;">.&nbsp;</span><span style="color:windowtext;text-decoration:none;"></span></a></p>
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:5.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><a href="#_Toc103765136">5.<span style="color:windowtext;text-decoration:none;">&nbsp; &nbsp; &nbsp;</span>Risk management issues<span style="color:windowtext;text-decoration:none;">.&nbsp;</span><span style="color:windowtext;text-decoration:none;"></span></a></p>
+
+
+<div style="clear:both!important;"></div>
+<div style="page-break-after:always"></div> 
+<div style="clear:both!important;"> </div>
+
+
+<style>
+    table{
+        border-collapse:collapse;border:none;
+    }
+</style>
+
+<style>
+    .td_bc-w{
+        background: rgb(217, 226, 243);
+        padding: 0cm 5.4pt;
+        vertical-align: top;
+        
+    }
+
+    .td_p{
+        margin-top:0cm;
+        margin-right:0cm;
+        margin-bottom:0cm;
+        margin-left:0cm;
+        line-height:  normal;
+        font-size:15px;
+        font-family:"Calibri",sans-serif;
+        text-align:justify;
+
+    }
+
+    .td_bc-1{
+
+      
+        background: rgb(217, 226, 243);
+        padding: 0cm 5.4pt;
+        vertical-align: top;
+
+    }
+    td{
+        width: 113.25pt;
+        border-right: 1pt solid windowtext;
+        border-bottom: 1pt solid windowtext;
+        border-left: 1pt solid windowtext;
+        border-image: initial;
+        border-top: none;
+        padding: 0cm 5.4pt;
+        vertical-align: top;
+        
+    }
+</style>
+
+<style>
+    .so_h1 {
+        margin-top: 12.0pt;
+        margin-right: 0cm;
+        margin-bottom: 0cm;
+        margin-left: 0cm;
+        line-height: 107%;
+        font-size: 21px;
+        font-family: "Calibri Light", sans-serif;
+        color: #2E74B5;
+        font-weight: normal;
+
+    }
+
+    .so_ol {
+        margin-bottom: 0cm;
+        /* list-style-type: decimal; */
+        list-style-type: none;
+
+        margin-left: 4.199999999999999px;
+
+    }
+
+    .so_ul {
+        margin-bottom: 0cm;
+        list-style-type: undefined;
+        margin-left: 26px;
+
+    }
+
+    .so_h2 {
+        margin-top: 2.0pt;
+        margin-right: 0cm;
+        margin-bottom: 0cm;
+        margin-left: 0cm;
+        line-height: 107%;
+        font-size: 17px;
+        font-family: "Calibri Light", sans-serif;
+        color: #2E74B5;
+        font-weight: normal;
+
+    }
+
+    .el {
+
+        list-style-type: none;
+    }
+</style>
+
+<div class="ps1">
+    
+            <h1 class="so_h1">
+              1.  Inventory of control activities and monitoring of  risk reduction plans
+            </h1>
+    
+</div>
+<div>
+
+<table >
+    <tbody>
+        <tr>
+            <td style="width: 48.55pt;border-top: 1pt solid rgb(68, 114, 196);border-bottom: 1pt solid rgb(68, 114, 196);border-left: 1pt solid rgb(68, 114, 196);border-image: initial;border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">Risk</span></strong></p>
+            </td>
+            <td style="width: 63.5pt;border-top: 1pt solid rgb(68, 114, 196);border-left: none;border-bottom: 1pt solid rgb(68, 114, 196);border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;"> Probability</span></strong></p>
+            </td>
+            <td style="width: 48.9pt;border-top: 1pt solid rgb(68, 114, 196);border-left: none;border-bottom: 1pt solid rgb(68, 114, 196);border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">Impact</span></strong></p>
+            </td>
+            <td style="width: 49.3pt;border-top: 1pt solid rgb(68, 114, 196);border-left: none;border-bottom: 1pt solid rgb(68, 114, 196);border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">Criticality</span></strong></p>
+            </td>
+            <td style="width: 62.4pt;border-top: 1pt solid rgb(68, 114, 196);border-left: none;border-bottom: 1pt solid rgb(68, 114, 196);border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">Control activities</span></strong></p>
+            </td>
+            <td style="width: 53.55pt;border-top: 1pt solid rgb(68, 114, 196);border-left: none;border-bottom: 1pt solid rgb(68, 114, 196);border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">Effectiveness of controls</span></strong></p>
+            </td>
+            <td style="width: 65.7pt;border-top: 1pt solid rgb(68, 114, 196);border-left: none;border-bottom: 1pt solid rgb(68, 114, 196);border-right: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">Risk reduction plan</span></strong></p>
+            </td>
+            <td style="width: 61.2pt;border-top: 1pt solid rgb(68, 114, 196);border-right: 1pt solid rgb(68, 114, 196);border-bottom: 1pt solid rgb(68, 114, 196);border-image: initial;border-left: none;background: rgb(68, 114, 196);padding: 0cm 5.4pt;vertical-align: top;">
+                <p class="td_p"><strong><span style="color:white;">% Progress</span></strong></p>
+            </td>
+        </tr>
+      
+        
+        ${prrHTML}
+  
+    </tbody>
+</table>
+</div>
+
+
+
+
+<div class="ps1">
+  
+            <h1 class="so_h1">
+               2. KRI monitoring
+             </h1>
+   
+</div>
+<div>
+
+<table style="width: 4.8e+2pt;border: none;border-collapse:collapse;">
+    <tbody>
+        <tr>
+            <td style="width:20.35pt;border:solid windowtext 1.0pt;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">KRI</span></p>
+            </td>
+            <td style="width: 36.1pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;background: rgb(222, 234, 246);padding: 0cm 3.5pt;height: 43.5pt;vertical-align: top;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Corresponding risk</span></p>
+            </td>
+            <td style="width:22.0pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Measure  1</span></p>
+            </td>
+            <td style="width:27.45pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Target  1</span></p>
+            </td>
+            <td style="width:27.95pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Gap  1</span></p>
+            </td>
+            <td style="width:29.65pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Measure  2</span></p>
+            </td>
+            <td style="width:27.4pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Target  2</span></p>
+            </td>
+            <td style="width:27.95pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Gap  2</span></p>
+            </td>
+            <td style="width:29.7pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Measure  3</span></p>
+            </td>
+            <td style="width:27.4pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Target  3</span></p>
+            </td>
+            <td style="width:27.95pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Gap  3</span></p>
+            </td>
+            <td style="width:31.2pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Measure  4</span></p>
+            </td>
+            <td style="width:27.4pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Target  4</span></p>
+            </td>
+            <td style="width:27.95pt;border:solid windowtext 1.0pt;border-left:  none;background:yellow;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Gap  4</span></p>
+            </td>
+            <td style="width:49.45pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Explanations of the gaps</span></p>
+            </td>
+            <td style="width:44.65pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:43.5pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'><span style="font-size:13px;color:black;">Corrective measures </span></p>
+            </td>
+        </tr>
+
+        ${htmlKRI}
+      
+    </tbody>
+</table>
+</div>
+
+<div class="ps1">
+   
+            <h1 class="so_h1">
+               3. Incident monitoring
+             </h1>
+   
+</div>
+<div>
+
+<table >
+    <tbody>
+        <tr>
+            <td style="width:70.65pt;border:solid windowtext 1.0pt;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Description of incident</span></strong></p>
+            </td>
+            <td style="width:49.6pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Date of incident</span></strong></p>
+            </td>
+            <td style="width:49.6pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Estimated impact</span></strong></p>
+            </td>
+            <td style="width:70.9pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Quantified impact (MAD)</span></strong></p>
+            </td>
+            <td style="width:63.8pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Corresponding risk</span></strong></p>
+            </td>
+            <td style="width:106.3pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Action plan implemented in response to the incident</span></strong></p>
+            </td>
+            <td style="width: 77.95pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;background: rgb(221, 235, 247);padding: 0cm 3.5pt;height: 29pt;vertical-align: top;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">% Progress of the action plan</span></strong></p>
+            </td>
+        </tr>
+       
+        ${htmlriskEvent}
+    </tbody>
+</table>
+</div>
+
+<br>
+
+
+
+<div class="ps1">
+ 
+            <h1 class="so_h1">
+              4.  Monitoring of identified objectives.
+             </h1>
+
+</div>
+<div>
+<table style="width: 4.8e+2pt;border: none;border-collapse:collapse;">
+    <tbody>
+        <tr>
+            
+            <td style="width:184.25pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">Identified objectives</span></strong></p>
+            </td>
+            <td style="width:127.6pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">  Corresponding risk</span></strong></p>
+            </td>
+            <td style="width:70.85pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">
+                    Target objective  (%)
+                </span></strong></p>
+            </td>
+
+            <td style="width:70.85pt;border:solid windowtext 1.0pt;border-left:  none;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">% achievement of objectives</span></strong></p>
+            </td>
+
+            <td style="width:99.0pt;border:solid windowtext 1.0pt;background:#DDEBF7;padding:0cm 3.5pt 0cm 3.5pt;height:29.0pt;">
+                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style="color:black;">
+                    Gap analysis
+                </span></strong></p>
+            </td>
+        </tr>
+
+        ${htmlop}
+    </tbody>
+</table>
+</div>
+
+
+<div class="ps1">
+ 
+            <h1 class="so_h1">
+                5. Risk management issues.
+             </h1>
+ 
+</div>
+<br>
+<p>
+${htmlProblemDescription}
+</p>
+    `;
+
+
+// insert htmldoc in the document 
+document.getElementById('exportContentSur').innerHTML = htmlDocSR;
+console.log(htmlDocSR);
+    
+</script>
+
+
+
+<script type="text/javascript" >
+    var entries = rm;
+
+
+      function getNum(str) {
+      if (str.search(/\d/i) == -1) {
+          return 0;
+      }
+      else{
+
+          return parseInt(str[str.search(/\d/i)]);
+      }
+
+  }
+  
+  function getOpt(tr) {
+      optionList  = ["Accept" , "Avoid" ,"Mitigate" ,"Transfer"];
+      nbrOpt = -1;
+      lnameOpt = "Vide";
+      for (let i = 0; i < optionList.length; i++) {
+          const o = optionList[i];
+          coutTr = tr+"_option"+o+"Cout";
+          beneficeTr = tr+"_benefice"+o+"Cout";
+          
+          Cout = document.getElementById(coutTr).value;
+          Benefice = document.getElementById(beneficeTr).value;
+
+          thisNbrOpt = getNum(Cout) * getNum(Benefice)
+          if (thisNbrOpt == nbrOpt) {
+              lnameOpt += " , " + o;
+          }
+          if (thisNbrOpt > nbrOpt) {
+              lnameOpt = o;
+              nbrOpt = thisNbrOpt;
+
+          }
+
+          console.log("option "+o+"  nbr :"+thisNbrOpt);
+      }
+
+      console.log("optimale "+lnameOpt+"  nbr :"+nbrOpt);
+      return lnameOpt;
+  }
+
+  var nbrL = -1;
+
+  function initligneCR(index , e) {
+   listOfOptions = {
+   "optionAcceptCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "optionAvoidCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "optionMitigateCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "optionTransferCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "beneficeAcceptCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "beneficeAvoidCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "beneficeMitigateCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+   "beneficeTransferCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""}
+   }
+  
+    lisop =  Object.keys(listOfOptions);
+    for (let i = 0; i < lisop.length; i++) {
+       const o = lisop[i];
+
+        console.log("e :" ,e);
+        console.log("e[o] :" ,e[o]);
+
+       var str =e[o];
+       var matches = str.match(/\b(\w)/g);
+       var key = matches[0];
+       listOfOptions[o][key] = 'selected="selected"'
+       
+    }
+       
+       var html = `
+       <tbody id="table_0_tr_${index}">
+   <tr>
+<input type="text" disabled hidden="true" name="" id="table_0_tr_${index}_id" value="${e['id']}">
+
+<td class="headcol"  rowspan="4" id="" >
+    ${e['macroProcessus']}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['processus']}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['category']}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['risque']}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['kri']}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['facteur'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['consequences'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+   </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['controlActivities'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+   </td>
+
+ <td class=""  rowspan="4" id="" > 
+   ${e['efficacite']}
+</td> 
+
+
+
+
+ <td class=""  rowspan="4" id="" > 
+   ${e['frequence']}
+     </td> 
+ <td class=""  rowspan="4" id="" > 
+   ${e['impact']}
+    </td> 
+ <td class=""  rowspan="4" id="" > 
+   ${e['exposition']}
+     </td> 
+
+ <td class=" ${e['criticalityLevel']}"  rowspan="4" class="criticalityLevel" id="table_0_tr_${index}_criticalityLevel" > ${e['criticalityLevel']} </td> 
+     
+ <td class="" > Accept </td> 
+ <td class="" >
+   ${e['optionAcceptCout']}
+ </td>
+
+ <td class="" >
+   ${e['beneficeAcceptCout']}
+ </td>
+
+ 
+
+ <td class="${e['optionOptimaleCal']}"  rowspan="4"  id="table_0_tr_${index}_optionOptimale_c">
+   ${e['optionOptimaleCal']}
+ </td>
+
+ <td class=""  rowspan="4" id="" >
+    ${e['optionOptimale'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+
+    </textarea> </td> 
+ <td class=""  rowspan="4" id="" >
+   ${e['besoins'].replace(/(?:\r\n|\r|\n)/g, '<br>')} 
+</td> 
+ <td class=""  rowspan="4" id="" > 
+   ${e['avacncement']}
+   </td> 
+
+
+</tr>
+
+
+<tr>
+ <td class=""   > Avoid </td> 
+ <td class="" >
+   ${e['optionAvoidCout']}
+ </td>
+
+ <td class="" >
+   ${e['beneficeAvoidCout']}
+ </td>
+
+</tr>
+<tr>
+ <td class=""   > Mitigate </td> 
+ <td class="" >
+   ${e['optionMitigateCout']}
+ </td>
+
+ <td class="" >
+   ${e['beneficeMitigateCout']}
+ </td>
+ 
+</tr>
+<tr>
+ <td class=""   > Transfer </td> 
+ <td class="" >
+   ${e['optionTransferCout']}
+ </td>
+
+ <td class="" >
+   ${e['beneficeTransferCout']}
+ </td>
+
+</tr>
+
+</tbody>
+            `
+     
+     
+            return html;
+   }
+
+   function initTableCR() {
+       if (entries.length <= 0) {
+           return;
+       }
+       nbrL = entries.length -1;
+
+
+       var rhtml = `
+       <thead class="theadRM" style="background-color:#B0C4DE;">
+         
+         <tr>
+         <th class="headcol"> Macro-processus   </th>
+         <th class=""> Processus </th>
+         <th class=""> Risk category </th>
+         <th class=""> Risk </th>
+         <th class=""> kRI </th>
+
+         <th class=""> Risk factors </th>
+         <th class=""> Consequences </th>
+         <th class=""> Control activities </th>
+         <th class="thShort"> Effectiveness of controls </th>
+         <th class="thShort"> Frequency / Probability </th>
+
+         <th class="thShort"> Impact </th>
+         <th class="thShort"> Exposure </th>
+         <th class="thShort"> Level of criticality</th>
+         <th class=""> Potential risk response options </th>
+         <th class=""> Cost of potential risk response option </th>
+
+         <th class=""> Benefit of the potential risk response option</th>
+         <th class="thShort">optimal option</th>
+         <th class="">Risk Response Plan</th>
+         <th class="">Needs for the implementation of risk response plans </th>
+         <th class="thShort"> progress of risk response plans</th> 
+       
+     </tr>
+     
+     </thead>
+       `;
+
+       for (let index = 0; index < entries.length; index++) {
+       const e = entries[index];
+       rhtml += initligneCR(index ,e);  
+
+   }
+
+    document.getElementById('riskMappingTable').innerHTML = rhtml;
+
+
+   }
+ 
+   initTableCR();
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    var kriList = /*[[${kriMeasuresDTOListUpd}]]*/ 'default';
+    
+
+    function initTableKRILast() {
+
+var html = `<tr>
+    <thead class="theadRM" style="background-color:#B0C4DE;">
+
+    <th>KRI</th>
+    <th>Corresponding risk</th>
+    <th>Calculation formula	</th>
+    <th>Producing entity </th>
+    <th>Process of obtaining and transmitting</th>
+    <th>Measurement periodicity</th>
+    
+    <th class="thShort">      
+       Measure 1
+    </th>
+    <th class="thShort">      
+        Target 1
+    </th>
+    <th class="thShort">      
+        Gap 1
+    </th>
+   
+    <th class="thShort">     
+       Measure 2
+    </th>
+    <th class="thShort">     
+        Target 2
+    </th>
+    <th class="thShort">     
+        Gap 2
+    </th>
+   
+    <th class="thShort">     
+       Measure 3
+    </th>
+    <th class="thShort">     
+        Target 3
+    </th>
+    <th class="thShort">     
+        Gap 3
+    </th>
+ 
+    <th class="thShort">     
+       Measure 4
+    </th>
+    <th class="thShort">     
+        Target 4
+    </th>
+    <th class="thShort">     
+        Gap 4
+    </th>
+
+    <th>      
+        Explanations of the gaps
+        </th>
+    <th>         
+        Corrective  measures 
+</th> 
+
+</thead>
+
+</tr>`;
+for (let j = 0; j < kriList.length; j++) {
+ 
+    html +=
+        `
+<td>
+    ${kriList[j]["kri"]} 
+</td>
+
+<td>
+    ${kriList[j]["risque"]}
+</td>
+
+<td>
+    ${kriList[j]["formuleDeCalcul"]}
+</td>
+
+<td>
+    ${kriList[j]["entiteProductrice"]}
+</td>
+
+<td>
+    ${kriList[j]["processusDObtention"]}
+</td>
+
+<td>
+    ${kriList[j]["periodiciteDeMesure"]}
+</td>
+
+
+<td>  <p class="td_p"> 
+        ${kriList[j]['mesure1']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${kriList[j]['cible1']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${kriList[j]['ecart1']}
+         </p> </td>
+   
+    <td>  <p class="td_p">
+        ${kriList[j]['mesure2']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kriList[j]['cible2']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kriList[j]['ecart2']}
+         </p> </td>
+   
+    <td>  <p class="td_p">
+        ${kriList[j]['mesure3']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kriList[j]['cible3']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kriList[j]['ecart3']}
+         </p> </td>
+ 
+    <td>  <p class="td_p">
+        ${kriList[j]['mesure4']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kriList[j]['cible4']}
+         </p> </td>
+    <td>  <p class="td_p">
+        ${kriList[j]['ecart4']}
+         </p> </td>
+
+    <td>  <p class="td_p"> 
+         ${kriList[j]['explicationsDesEcarts']}
+         </p> </td>
+    <td>  <p class="td_p"> 
+        ${kriList[j]['mesuresCorrectives']} 
+        </p> </td>    
+
+
+</tr>
+`
+}
+
+document.getElementById('tableKRI').innerHTML = html;
+
+
+
+}
+
+
+
+initTableKRILast();
+</script>
+
+
+<script th:src="@{js/Export2Word.js}"></script>
+
+
+
+</html>

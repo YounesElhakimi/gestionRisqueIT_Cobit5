@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:insert="fragments/head.html :: head"></head>
+
+<style>
+    textarea {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <p id="titleOfPage" class="headTxt">
+                    Examine the progress in achieving the identified objectives:            
+                </p>
+    
+            </div>
+    
+        </div>
+    </div>
+
+
+   
+    <div class="divtable">
+        <table  id="table_0"  class="table table-striped" >
+            <tr>
+        <th> Identified objectives (description)      </th>
+        <th> Corresponding risks       </th>
+        <th> Target objective (%)       </th>
+        <th> % achievement of objectives       </th>
+        <th>Gap analysis (description)        </th>
+        <th style="min-width: 50px;" > <i class="fas fa-trash-alt"></i> </th>
+
+    </tr>
+    </table>
+
+    <div class="row">
+        <div class="col">
+        <div class="float-right">
+            <button onclick="addligne('table_0')" type=""  class="btn btn-info add-new" style="font-size:15px;" ><i class="fa fa-plus"></i>add a Row</button>
+        </div>
+    </div>
+    <br>
+    </div>
+   
+    <br>
+
+    <br>
+
+ 
+    <datalist id="raList">
+        <option>risque 1</option>
+        <option>risque 2</option>
+      
+    </datalist>
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${objectifProgressionList}]]*/ 'default';
+    var raList = /*[[${raList}]]*/ 'default';
+
+    console.log(entries);
+
+
+</script>
+
+<script>
+       function listOfRisques() {
+        if (raList.length == 0) {
+            return ;
+        }
+
+        html = ``;
+        for (let i = 0; i < raList.length; i++) {
+            const e = raList[i];
+            html += `  <option>${e['risque']}</option>`;
+            
+        }
+
+        html += ``;
+
+       listhtml =document.getElementById('raList');
+       listhtml.innerHTML = html;
+
+    }
+
+        listOfRisques();
+
+</script>
+
+<script>
+      var nbrL = -1
+    function addligne(table_id){
+        nbrL = nbrL + 1;
+
+        var table = document.getElementById(table_id);
+        var html = `
+                <tr id="${table_id}_tr_${nbrL}"> 
+                    <input type="text" hidden disabled id="table_0_tr_${nbrL}_id" value="null" >
+                  <td>  <textarea name=""  cols="10" rows="2" class="txtar" id = "table_0_tr_${nbrL}_objectif" ></textarea></td>
+                    <td> <input type="text"  id = "table_0_tr_${nbrL}_risque" list="raList"> </td>
+                    <td> <input  type="number" min="0" max="100" class="inputvalueProg"  id = "table_0_tr_${nbrL}_cible"> </td>
+                
+                    <td> <input  type="number" min="0" max="100" class="inputvalueProg"    id = "table_0_tr_${nbrL}_realisation"> </td>
+                    <td>  <textarea name=""  cols="10" rows="2" class="txtar" id = "table_0_tr_${nbrL}_analyseEcart" ></textarea></td>
+
+             
+                   
+                    <td  id="table_0_tr_${nbrL}_del">
+                         <Button class="btn btn-info  delete-btn"  onclick="deleteTr('${table_id}_tr_${nbrL}')"> <i class="fas fa-trash-alt"></i> </Button>
+                    </td>
+                </tr>
+                   `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+            initEvLP();
+    }
+</script>
+
+<script>
+    function initTable() {
+
+        var html = `
+        <tr>
+            <th> Identified objectives (description)      </th>
+        <th> Corresponding risks       </th>
+        <th> Target objective (%)       </th>
+        <th> % achievement of objectives       </th>
+        <th>Gap analysis (description)        </th>
+        <th style="min-width: 50px;" > <i class="fas fa-trash-alt"></i> </th>
+    </tr>
+        `;
+        for (let j = 0; j < entries.length; j++) {
+            nbrL = j;
+            html +=
+                `
+            <tr id="table_0_tr_${j}">                                                                            
+            <input type="text" hidden disabled id="table_0_tr_${j}_id" value="${entries[j]["id"]}" >
+            <td>  <textarea name=""  cols="10" rows="2" class="txtar" id = "table_0_tr_${j}_objectif" >${entries[j]['objectif']}</textarea></td>
+            <td> <input type="text" value="${entries[j]['risque']}" id = "table_0_tr_${j}_risque" list="raList"> </td>
+            <td> <input  type="number" min="0" max="100" class="inputvalueProg" value="${entries[j]['cible']}" id = "table_0_tr_${j}_cible"> </td>
+            <td> <input  type="number" min="0" max="100" class="inputvalueProg"   value="${entries[j]['realisation']}" id = "table_0_tr_${j}_realisation"> </td>
+            <td>  <textarea name=""  cols="10" rows="2" class="txtar" id = "table_0_tr_${j}_analyseEcart" >${entries[j]['analyseEcart']}</textarea></td>                
+            <td  id="table_0_tr_${j}_del">
+                         <Button class="btn btn-info  delete-btn"  onclick="deleteTr('table_0_tr_${j}')"> <i class="fas fa-trash-alt"></i> </Button>
+             </td>
+        </tr>
+        `
+        };
+
+        document.getElementById('table_0').innerHTML = html;
+
+
+
+    }
+
+</script>
+
+<script>
+    
+    function deleteTr(idtr) {
+
+document.getElementById(idtr).hidden = true;
+// document.getElementById(idtr).style.display = "none";
+document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+}
+
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 0; idtr <= nbrL ; idtr++) {
+
+            
+            let isdel = false;
+            try {
+                isdel1 = document.getElementById(`table_0_tr_${idtr}`).getAttribute("deletetr");
+                console.log(isdel1);
+                console.log("try : "+isdel1);
+            } catch (error) {
+                console.log(error);
+                console.error(error);
+                isdel1 = 'false';
+                console.log("catch : "+isdel1);
+
+            }
+            console.log("======================================");
+            
+           // console.log(isdel1);
+            if (isdel1 == "true") {
+                
+            continue;
+                }
+            t_index = "table_0_tr_" + idtr;
+            id = document.getElementById(t_index + "_id").value.trim();
+            objectif = document.getElementById(t_index + '_objectif').value.trim();
+            risque = document.getElementById(t_index + '_risque').value.trim();
+            cible = document.getElementById(t_index + '_cible').value.trim();
+            realisation = document.getElementById(t_index + '_realisation').value.trim();
+            analyseEcart = document.getElementById(t_index + '_analyseEcart').value.trim();                
+            // console.log("kri   : " , kri);
+
+            if (risque === "" && objectif === "" && cible === "" && realisation === "" && analyseEcart === "" ) {
+                
+                continue;
+            }else  if (risque === "" || objectif === "" || cible === "" || realisation === "" || analyseEcart === "" ) {
+                ae();
+                return;
+            }
+            data.push({
+            'id' : id,
+            'objectif': objectif,
+            'risque': risque,                     
+            'cible': cible,                      
+            'realisation': realisation,          
+            'analyseEcart': analyseEcart          
+                                                  
+            }
+            );
+
+
+
+
+        }
+
+        console.log(JSON.stringify(data));
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+            nt(res);
+
+        });
+
+
+    }
+
+    if (entries.length > 0) {
+        initTable();
+    }else{
+        addligne('table_0');
+    }
+
+
+</script>
+
+
+<script>
+    function initEvLP(params) {
+        $(function () {
+            $(".inputvalueProg").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 100 && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
+            $(".inputvalueProg").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= 100 && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+        });
+    }
+
+    initEvLP();
+</script>
+</html>

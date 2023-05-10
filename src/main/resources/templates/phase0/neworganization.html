@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:insert="fragments/head.html :: head" ></head>  
+
+<body id="page-top">
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+    <br>
+    <main class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase"><strong>Please specify the name of the organization where to implement an IT risk management : </strong></h2>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+            
+                <form action="#" th:action="@{/newOrg}" th:object="${Organization}" method="post">
+                    <input id="id" type="hidden" th:field="*{id}" />
+                    <div class="form-group">
+                  <label for="name">Organization Name</label>  
+                     <input lass="form-control" id="name" type="text" th:field="*{name}" /></p>
+                </div>
+                </form>
+
+                </div>
+        </div>
+    </main>
+
+
+    <script>
+        function collect() {
+            name = document.getElementById("name").value.trim();
+            id = document.getElementById("id").value.trim();
+
+            if (name == "") {
+                ae("Please specify the name of the organization!");
+                return;
+            }
+           data = {
+            "id" : parseInt(id),
+            "name" : name
+           }
+
+           console.log(data);
+        fetch("", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+        nt(res);
+
+        });
+        }
+    </script>
+
+
+
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+
+
+    
+</body>
+
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+
+
+</html>

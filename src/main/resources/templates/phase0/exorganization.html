@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:insert="fragments/head.html :: head" ></head>  
+
+<body id="page-top">
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+    <br>
+    
+    <main class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase"><strong>Please specify the name of the organization where to implement an IT risk management : </strong></h2>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+            
+                <div id="form">
+
+                </div>
+                </div>
+        </div>
+    </main>
+
+    <script type="text/javascript" th:inline="javascript">
+        var organizationList = /*[[${organizationList}]]*/ 'default';
+        console.log(organizationList);
+        var html = ' <select id="exorgc" name="orgs" class="form-control">';
+         
+        if (organizationList.length > 0) {
+            console.log("organizationList.length : ",organizationList.length);
+            for (let i = 0; i < organizationList.length; i++) {
+                console.log("i : ",i );
+                console.log("organizationList[i]['name'] : ",organizationList[i]['name'] );
+                html += `<option value="${i}">${organizationList[i]['name']}</option>`;
+            }
+        }
+        html += '</select>';
+
+        document.getElementById('form').innerHTML = html;
+
+    </script>
+
+    <script>
+        function collect() {
+            i = parseInt(document.getElementById("exorgc").value);
+
+           data = organizationList[i];
+
+           console.log(data);
+        fetch("", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+        nt(res);
+        });
+        }
+    </script>
+
+
+
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+
+
+    
+</body>
+
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+
+
+</html>

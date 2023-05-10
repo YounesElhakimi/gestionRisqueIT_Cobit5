@@ -1,0 +1,77 @@
+@startuml
+
+
+class Organization {
+     -String name
+}
+
+class FileInfo {
+    -String name
+    -String url
+
+}
+
+class Gantt {
+
+     -Date startDatePhase1
+     -Date startDatePhase2
+     -Date startDatePhase3
+     -Date startDatePhase4
+     -Date startDatePhase5
+     -Date endDatePhase1
+     -Date endDatePhase2
+     -Date endDatePhase3
+     -Date endDatePhase4
+     -Date endDatePhase5
+}
+
+class ImplementationInfo {
+    -String levelofdetails
+    -Boolean p1e1
+    -Boolean p1e2
+    -Boolean p1e3
+    -Boolean p2
+    -Boolean p3e1
+    -Boolean p3e2
+    -Boolean p4e1
+    -Boolean p4e2
+    -Boolean p5e1
+    -Boolean p5e2
+    -Boolean p5e3
+
+}
+
+ class MajorRisks {
+    -String title
+    -String description
+}
+ class StrategicOrientations {
+    -String title
+    -String description
+}
+
+ class Objective {
+    -String title
+    -String description
+}
+
+class Stakeholders {
+    -String name;
+}
+
+class TeamProjectMember {
+    -String name;
+}
+
+FileInfo "0..*" -- "1" Organization
+MajorRisks "1" -- "1..*" Organization
+Organization "1" -- "1..*" StrategicOrientations
+Organization "1" -- "1..*" Stakeholders
+Organization "1" -- "1..*" TeamProjectMember
+Organization "1" -- "1" Objective
+ImplementationInfo "1" -- "1" Organization
+Gantt "1" -- "1" Organization
+
+
+
+@enduml

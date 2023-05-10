@@ -1,0 +1,61 @@
+@startuml
+
+
+class Organization {
+     -String name
+}
+class RiskMapping {
+    ......
+}
+
+class CommunicationPlan {
+    - String action
+    - String objectif
+    - String cible
+    - String responsable
+    - String echeance
+}
+
+
+class HistoriqueControlesAssuranceQualite {
+    - String risque
+    - String frequence
+    - String impact
+    - String criticalityLevel
+    - String efficacite
+}
+
+
+class MechanismsDescription {
+    - String  object
+    - String  perimetre
+    - String  regleDeGestion
+    - String  principauxIntervenants
+    - String  logigrammeDuProcessus
+    - String  descriptionDuprocessus
+    - String  reportingPeriodique
+    - String  gestionDesIncidents
+    - String  suiviDesKRI
+}
+class MetricsOfRiskGovernance {
+    - String formuleDeCalcul
+    - String entiteProductrice
+    - String processusDObtention
+    - String periodiciteDeMesure
+}
+
+class FileInfo{
+ .......
+}
+
+Organization "1" -- "1..*" CommunicationPlan
+MechanismsDescription "1" -- "1" Organization
+RiskMapping "1" -- "1..*" HistoriqueControlesAssuranceQualite
+RiskMapping "1" -- "1..*" MetricsOfRiskGovernance
+FileInfo "1" -- "1" Organization : "photo du Logilogramme"
+
+
+Organization "1" -- "1..*" RiskMapping
+
+
+@enduml

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .text {
+            display: block;
+            width: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            }
+
+    </style>
+
+    
+    <div id="divFiles"  class="table-responsive">
+
+    </div>
+
+<ul>
+    
+</ul>
+
+<script type="text/javascript" th:inline="javascript">
+    var files = /*[[${fileInfos}]]*/ '';
+    
+
+
+    function card(index,e) {
+        deleName = e['name']
+        deleName =  deleName.replace(/"/gi,'<1>');
+        deleName =  deleName.replace(/'/gi,'<2>');
+        deleName =  deleName.replace(/`/gi,'<3>');
+        return `
+        <tr id="tr_${index}"> 
+            
+            <td>
+              ${e['name']}
+            </td>
+ 
+            <td>
+                <a href="${e['url']}"><i class="fas fa-download"></i> </a> 
+            </td>
+            <td>
+              <a  a onclick='deleteFile("${deleName}" , "tr_${index}")'>  <i class="fas fa-trash-alt"></i> </a>
+            </td>
+
+            
+            
+           
+        </tr>
+        `;
+    }
+
+    function initDiv() {
+        
+        html = `<table class="table">
+            <tr>
+      <th scope="col">Document name</th>
+      <th scope="col">Download</th>
+      <th scope="col">Remove</th>
+    </tr>
+            `;
+        for (let i = 0; i < files.length; i++) {
+            const e = files[i];
+            html += card(i , e);
+        }
+        html += `</table>`;
+
+        document.getElementById('divFiles').innerHTML = html;
+    }
+
+    initDiv();
+
+    function deleteFile(deleName ,tr_id) {
+        deleName =  deleName.replace(/<1>/gi,'"');
+        deleName =  deleName.replace(/<2>/gi,"'");
+        deleName =  deleName.replace(/<3>/gi,'`');
+    console.log("fileName :",deleName);
+    data = {
+        "name" : deleName
+    }
+
+    fetch("/deleteFile", {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'}, 
+    body: JSON.stringify(data)
+    }).then(res => {
+    console.log("Request complete! response:", res);
+    if (res.ok) {
+        document.getElementById(tr_id).hidden = true
+    }
+
+    });
+}
+</script>
+
+</body>
+</html>

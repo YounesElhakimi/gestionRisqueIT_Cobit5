@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head th:insert="fragments/head.html :: head"></head>
+
+
+
+
+<body>
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+            <div th:if="'2' == ${colspan}" class="headTxt">
+        <p class="headTxt">
+            Please complete the process mapping of your organization :
+        </p>
+    </div>
+
+    <div th:if="'2' != ${colspan}" class="headTxt">
+        <p class="headTxt">
+            Please specify the dependance between business processes and IT service management processes and IT infrastructure resources, precise IT services and IT infrastructure resources which are essential to sustain the operation of business processes:
+        </p>
+       </div>
+
+            </div>
+    
+        </div>
+    </div>
+
+    
+    
+
+     <div th:if="'2' == ${colspan}">
+        <style>
+            .tdNotDis{
+                display: none;
+            }
+        </style>
+    
+    </div>
+    <style>
+    
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border:solid 1px;
+            border-collapse: collapse;
+            width: 50%;
+            max-width: 100%;
+            white-space: nowrap;
+            background-color: white;
+        
+        }
+        
+        .fl-table td, .fl-table th {
+            text-align: center;
+            padding: 8px;
+               border:solid 1px;
+        }
+        
+        .fl-table td {
+            border-right: 1px solid #f8f8f8;
+            font-size: 12px;
+               border:solid 1px;
+        }
+        
+        .fl-table thead th {
+            
+            color: rgb(0, 0, 0);
+            background: #00416A;
+               border:solid 1px;
+               min-width: 250px;
+        }
+        
+        
+        .fl-table thead th:nth-child(odd) {
+            color:rgb(0, 0, 0);
+            background:#B0C4DE;
+               border:solid 1px;
+        }
+        
+        .fl-table tr:nth-child(even) {
+            background: #F8F8F8;
+            border:solid 1px;
+        }
+        
+        /* Responsive */
+        
+        @media (max-width: 767px) {
+            .fl-table {
+                display: block;
+                width: 100%;
+            }
+            .table-wrapper:before{
+                content: "Scroll horizontally >";
+                display: block;
+                text-align: right;
+                font-size: 11px;
+                color: white;
+                padding: 0 0 10px;
+            }
+            .fl-table thead, .fl-table tbody, .fl-table thead th {
+                display: block;
+            }
+            .fl-table thead th:last-child{
+                border-bottom: solid 1px;
+            }
+            .fl-table thead {
+                float: left;
+            }
+            .fl-table tbody {
+                width: auto;
+                position: relative;
+                overflow-x: auto;
+            }
+            .fl-table td, .fl-table th {
+                padding: 20px .625em .625em .625em;
+                height: 60px;
+                vertical-align: middle;
+                box-sizing: border-box;
+                overflow-x: hidden;
+                overflow-y: auto;
+                width: 120px;
+                font-size: 13px;
+                text-overflow: ellipsis;
+            }
+            .fl-table thead th {
+                text-align: left;
+                border-bottom: 1px solid #f7f7f9;
+            }
+            .fl-table tbody tr {
+                display: table-cell;
+            }
+            .fl-table tbody tr:nth-child(odd) {
+                background: none;
+            }
+            .fl-table tr:nth-child(even) {
+                background: transparent;
+            }
+            .fl-table tr td:nth-child(odd) {
+                background: #F8F8F8;
+                border-right: 1px solid #E6E4E4;
+            }
+            .fl-table tr td:nth-child(even) {
+                border-right: 1px solid #E6E4E4;
+            }
+            .fl-table tbody td {
+                display: block;
+                text-align: center;
+            }
+        }
+        .table-wrapper{
+            margin: 10px 70px 70px;
+            box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+        }
+        tbody:nth-child(2n) {
+                    background-color: #dee2e6;
+                }
+        
+        .delete-btn{
+            display: block;
+        }
+
+        .delettd{
+            min-width: 50px;
+        }
+
+        
+        </style>
+        <div class="divtable">
+    <table class="fl-table "  id="table_0" border="2px" cellspacing="0" cellpadding="" style="display: block;overflow-x: auto;width:100%;">
+
+        <tr>
+            <thead style="background-color:#B0C4DE;">
+            <th class="th_bc_aq">Activity </th>
+            <th class="th_bc_aq">Macro Process </th>
+            <th class="th_bc_aq">Process</th>
+            <th class = "th_bc_aq " >Sub-Process</th>
+            <th class = "th_bc_aq tdNotDis" > IT Applications </th>
+            <th class = "th_bc_aq tdNotDis" > IT Process</th>
+            <th class = "th_bc_aq tdNotDis" >IT infrastructure</th>
+            <th class = "th_bc_aq tdNotDis" >Critical sub-process(Yes / No)</th>
+            <th style="min-width: 50px;" class="th_bc_aq"> <i class="fas fa-trash-alt"></i> </th>
+
+        </thead>
+        </tr>
+
+        <tbody id="table_0_div_0">
+
+            <tr id="table_0_div_0_tr">
+                <td id="table_0_div_0_tr_td_1" rowspan="4"><textarea name="" id="table_0_div_0_activite"
+                        rows="5"></textarea>
+                 <Button  class="btn btn-info  delete-btn"onclick="deleteTr('table_0_div_0')"><i class="fas fa-trash-alt"></i> remove Activity</Button>
+   
+                </td>
+                <td id="table_0_div_0_tr_td_2" rowspan="4"> <textarea name="" id="table_0_div_0_macroProcessus"
+                        rows="5"></textarea> </td>
+                <td id="table_0_div_0_tr_td_3" rowspan="4"> <textarea name="" id="table_0_div_0_processus"
+                        rows="5"></textarea> </td>
+                <td></td>
+                <td class = "tdNotDis"></td>
+                <td class = "tdNotDis"></td>
+                <td class = "tdNotDis"></td>
+                <td class = "tdNotDis"></td>
+                <td></td>
+
+            </tr>
+
+            <tr id="table_0_div_0_tr_0">
+                <td><textarea name="" id="table_0_div_0_tr_0_sousProcessus" rows="5"></textarea></td>
+                <td class = "tdNotDis"><textarea name="" id="table_0_div_0_tr_0_applicationsIT" rows="5"></textarea></td>
+                <td class = "tdNotDis"><textarea name="" id="table_0_div_0_tr_0_processusIT" rows="5"></textarea></td>
+                <td class = "tdNotDis"><textarea name="" id="table_0_div_0_tr_0_infrastructuresIT" rows="5"></textarea></td>
+                <td class = "tdNotDis"><input type="button" value="Yes"  onclick="taggleBolean('table_0_div_0_tr_0_critique')" name="" id="table_0_div_0_tr_0_critique" ></td>
+
+                <td>
+                    <Button onclick="deleteTr('table_0_div_0_tr_0')" class=" btn btn-info  delete-btn"><i class="fas fa-trash-alt"></i> </Button>
+                </td>
+            </tr>
+            <tr id="table_0_div_0_tr_1">
+
+                <td ><textarea name="" id="table_0_div_0_tr_1_sousProcessus" rows="5"></textarea></td>
+                <td class = "tdNotDis"><textarea name="" id="table_0_div_0_tr_1_applicationsIT" rows="5"></textarea></td>
+                <td class = "tdNotDis"><textarea name="" id="table_0_div_0_tr_1_processusIT" rows="5"></textarea></td>
+                <td class = "tdNotDis"><textarea name="" id="table_0_div_0_tr_1_infrastructuresIT" rows="5"></textarea></td>
+                <td class = "tdNotDis"><input type="button" value="Yes"  onclick="taggleBolean('table_0_div_0_tr_1_critique')" name="" id="table_0_div_0_tr_1_critique" ></td>
+                <td>
+                    <Button onclick="deleteTr('table_0_div_0_tr_1')" class=" btn btn-info  delete-btn"><i class="fas fa-trash-alt"></i> </Button>
+                </td>
+            </tr>
+
+            <tr id="div_0">
+
+                <td colspan="${colspan}"> <button onclick="addSP('div_0')" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add a Sub-Process	</button></td>
+
+            </tr>
+        </tbody>
+
+
+
+
+
+    </table>
+<br>
+    <div class="row">
+        <div class="col">
+        <div class="float-right">
+            <button onclick="addligne('table_0')" type=""  class="btn btn-info add-new" style="font-size:15px;" ><i class="fa fa-plus"></i>Add a Row</button>
+        </div>
+    </div>
+
+    <br><br>
+
+   </div>
+
+   <br><br>
+
+    <script type="text/javascript" th:inline="javascript">
+        var entries = /*[[${entries}]]*/ 'default';
+        var colspan =  /*[[${colspan}]]*/ '6';
+    
+    </script>
+
+    <script>
+        function taggleBolean(id) {
+            v = document.getElementById(id);
+            
+            if (v.value == "Yes") {
+                v.value  = "No";
+            }else{
+                v.value  = "Yes"
+            }
+        }
+
+    </script>
+
+    <script>
+        var nbrL = 0
+        function addligne(table_id) {
+            nbrL = nbrL + 1;
+
+            var table = document.getElementById(table_id);
+            var html = `
+        <tbody  id="table_0_div_${nbrL}">
+
+        <tr id="table_0_div_${nbrL}_tr">
+            <td id="table_0_div_${nbrL}_tr_td_1" rowspan="4"> <textarea name="" id="table_0_div_${nbrL}_activite" rows="5"></textarea> 
+                <Button  class="btn btn-info  delete-btn" onclick="deleteTr('table_0_div_${nbrL}')"><i class="fas fa-trash-alt"></i> remove Activity</Button>
+
+                </td>
+            <td id="table_0_div_${nbrL}_tr_td_2" rowspan="4"> <textarea name="" id="table_0_div_${nbrL}_macroProcessus" rows="5"></textarea>  </td>
+            <td id="table_0_div_${nbrL}_tr_td_3" rowspan="4"> <textarea name="" id="table_0_div_${nbrL}_processus" rows="5"></textarea </td>
+
+             <td></td>
+            <td class = "tdNotDis"></td>
+            <td class = "tdNotDis"></td>
+            <td class = "tdNotDis"></td>
+            <td class = "tdNotDis"></td>
+            <td></td>
+
+
+        </tr>
+
+        <tr  id="table_0_div_${nbrL}_tr_0">
+            <td  ><textarea name="" id="table_0_div_${nbrL}_tr_0_sousProcessus" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><textarea name="" id="table_0_div_${nbrL}_tr_0_applicationsIT" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><textarea name="" id="table_0_div_${nbrL}_tr_0_processusIT" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><textarea name="" id="table_0_div_${nbrL}_tr_0_infrastructuresIT" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><input type="button" value="Yes"  onclick="taggleBolean('table_0_div_${nbrL}_tr_0_critique')" name="" id="table_0_div_${nbrL}_tr_0_critique" ></td>
+            <td>
+                <Button onclick="deleteTr('table_0_div_${nbrL}_tr_0')" class=" btn btn-info  delete-btn"><i class="fas fa-trash-alt"></i> </Button>
+            </td>
+        </tr>
+
+        <tr id="table_0_div_${nbrL}_tr_1">
+    
+            <td ><textarea name="" id="table_0_div_${nbrL}_tr_1_sousProcessus" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><textarea name="" id="table_0_div_${nbrL}_tr_1_applicationsIT" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><textarea name="" id="table_0_div_${nbrL}_tr_1_processusIT" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><textarea name="" id="table_0_div_${nbrL}_tr_1_infrastructuresIT" rows="5"></textarea></td>
+            <td class = "tdNotDis" ><input type="button" value="Yes"  onclick="taggleBolean('table_0_div_${nbrL}_tr_1_critique')"  name="" id="table_0_div_${nbrL}_tr_1_critique" ></td>
+            <td>
+                <Button onclick="deleteTr('table_0_div_${nbrL}_tr_1')" class=" btn btn-info  delete-btn"><i class="fas fa-trash-alt"></i> </Button>
+            </td>
+            </tr>
+    
+        <tr id="div_${nbrL}">
+           
+    
+            <td colspan="${colspan}"  > <button onclick="addSP('div_${nbrL}')" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add a Sub-Process	</button></td>
+          
+        </tr>
+
+        </tbody>
+             `
+            // table.innerHTML = table.innerHTML +  html;
+
+            table.insertAdjacentHTML("beforeend",
+                html);
+
+        }
+
+        function addSP(div_id_addsp) {
+            div_id = "table_0_" + div_id_addsp;
+            console.log(div_id);
+            console.log("befor");
+            div = document.getElementById(div_id_addsp);
+            tr = document.getElementById(div_id + "_tr")
+            td2 = document.getElementById(div_id + "_tr_td_2")
+            td3 = document.getElementById(div_id + "_tr_td_3")
+
+            td1 = document.getElementById(div_id + "_tr_td_1")
+
+            rowspan = parseInt(td1.getAttribute("rowspan")) + 1
+
+            console.log(rowspan);
+
+
+            td1.setAttribute("rowspan", rowspan)
+            td2.setAttribute("rowspan", rowspan)
+            td3.setAttribute("rowspan", rowspan)
+
+            id = div_id + "_tr_" + (rowspan - 3)
+
+
+            var html = `
+            <tr id="${id}">
+            <td><textarea name="" id="${id}_sousProcessus" rows="5"></textarea></td>
+            <td class = "tdNotDis"><textarea name="" id="${id}_applicationsIT" rows="5"></textarea></td>
+            <td class = "tdNotDis"><textarea name="" id="${id}_processusIT" rows="5"></textarea></td>
+            <td class = "tdNotDis"><textarea name="" id="${id}_infrastructuresIT" rows="5"></textarea></td>
+            <td class = "tdNotDis"><input type="button" value="Yes"  onclick="taggleBolean('${id}_critique')" name="" id="${id}_critique" ></td>
+                  
+            <td>
+                <Button onclick="deleteTr('${id}')" class=" btn btn-info  delete-btn"><i class="fas fa-trash-alt"></i> </Button>
+            </td>
+            </tr>
+             `
+            // table.innerHTML = table.innerHTML +  html;
+
+            div.insertAdjacentHTML("beforebegin",
+                html);
+            console.log("end");
+
+
+        }
+
+    </script>
+
+    <script type="text/javascript" th:inline="javascript">
+      
+
+
+        console.log(entries);
+        function initTable() {
+            console.log(entries.length);
+            if (entries.length == 0) {
+                return;
+            }
+            var html = `<tr>
+                <thead style="background-color:#B0C4DE;">
+            <th class="th_bc_aq">Activity </th>
+            <th class="th_bc_aq">Macro Process </th>
+            <th class="th_bc_aq">Process</th>
+            <th class = "th_bc_aq " >Sub-Process</th>
+            <th class = "th_bc_aq tdNotDis" > IT Applications </th>
+            <th class = "th_bc_aq tdNotDis" > IT Process</th>
+            <th class = "th_bc_aq tdNotDis" >IT infrastructure</th>
+            <th class = "th_bc_aq tdNotDis" >Critical sub-process(Yes / No)</th>
+            <th style="min-width: 50px;" class="th_bc_aq"> <i class="fas fa-trash-alt"></i> </th>
+
+          
+            </thead>
+            </tr>`;
+            for (let j = 0; j < entries.length; j++) {
+                let mr = entries[j];
+                let splist = mr['sousProcessusList'];
+                let nbrOfSP = splist.length
+                console.log(nbrL);
+                nbrL = j;
+                console.log(nbrL);
+
+                html +=
+                    `
+            <tbody id="table_0_div_${j}">
+            <tr id="table_0_div_${j}_tr">
+             <input type="text" disabled hidden="true" name="" id="table_0_div_${j}_id" value="${mr['id']}">
+            <td id="table_0_div_${j}_tr_td_1" rowspan="${nbrOfSP + 2}">
+                <textarea name="" id="table_0_div_${j}_activite" rows="5">${mr["activite"]}</textarea>
+       
+                <Button  class="btn btn-info  delete-btn"  onclick="deleteTr('table_0_div_${j}')"><i class="fas fa-trash-alt"></i> remove Activity</Button>
+
+            </td>
+
+            <td id="table_0_div_${j}_tr_td_2" rowspan="${nbrOfSP + 2}"> <textarea name="" id="table_0_div_${j}_macroProcessus" rows="5">${mr["macroProcessus"]}</textarea> </td>
+            <td id="table_0_div_${j}_tr_td_3" rowspan="${nbrOfSP + 2}"> <textarea name="" id="table_0_div_${j}_processus" rows="5">${mr["processus"]}</textarea> </td>
+            
+            <td></td>
+            <td class = "tdNotDis" ></td>
+            <td class = "tdNotDis" ></td>
+            <td class = "tdNotDis" ></td>
+            <td class = "tdNotDis" ></td>
+            <td></td>
+
+        </tr>
+            `
+
+
+                for (let i = 0; i < nbrOfSP; i++) {
+                    let e = splist[i];
+                    if (e["critique"] === "") {
+                        e["critique"] = "Yes";
+                    }
+
+                    html += `
+                    <tr id="table_0_div_${j}_tr_${i}">
+
+                    <td><textarea name="" id="table_0_div_${j}_tr_${i}_sousProcessus" rows="5" >${e["sousProcessus"]}</textarea></td>
+                    <td class = "tdNotDis"><textarea name="" id="table_0_div_${j}_tr_${i}_applicationsIT" rows="5" >${e["applicationsIT"]}</textarea></td>
+                    <td class = "tdNotDis"><textarea name="" id="table_0_div_${j}_tr_${i}_processusIT" rows="5" >${e["processusIT"]}</textarea></td>
+                    <td class = "tdNotDis"><textarea name="" id="table_0_div_${j}_tr_${i}_infrastructuresIT" rows="5">${e["infrastructuresIT"]}</textarea></td>
+                    <td class = "tdNotDis"><input type="button" value="${e["critique"]}"  onclick="taggleBolean('table_0_div_${j}_tr_${i}_critique')" name="" id="table_0_div_${j}_tr_${i}_critique"  ></td>
+                    <td>
+                <Button onclick="deleteTr('table_0_div_${j}_tr_${i}')" class=" btn btn-info  delete-btn"><i class="fas fa-trash-alt"></i> </Button>
+                    </td>
+                    </tr>
+                 `
+
+
+                }
+
+                html += `
+                <tr id="div_${j}">
+
+
+                 <td colspan="${colspan}"  > <button onclick="addSP('div_${j}')" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add a Sub-Process	</button></td>
+
+                </tr>
+            </tbody>
+            `
+
+            }
+
+
+
+            document.getElementById('table_0').innerHTML = html;
+
+
+
+        }
+
+        initTable();
+    </script>
+
+
+    <script>
+
+        function deleteTr(idtr) {
+            document.getElementById(idtr).hidden = true;
+            //  document.getElementById(idtr).style.display = "none";
+            document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+        }
+
+        function collect() {
+
+
+            var data = new Array();
+            for (let idtr = 0; idtr <= nbrL; idtr++) {
+                let isdel = false;
+                var id;
+                try {
+                    isdel1 = document.getElementById(`table_0_div_${idtr}`).getAttribute("deletetr");
+                    console.log(isdel1);
+                    console.log("try : " + isdel1);
+                } catch (error) {
+                    console.log(error);
+                    console.error(error);
+                    isdel1 = 'false';
+                    console.log("catch : " + isdel1);
+
+                }
+                console.log("======================================");
+
+                // console.log(isdel1);
+                if (isdel1 == "true") {
+                    try {
+                        id = document.getElementById(`table_0_div_${idtr}_id`).value.trim();
+                    } catch (error) {
+                        id = null;
+                    }
+
+                    console.log("id : " + id);
+
+                    if (id != null) {
+                        isdel = true;
+
+                        data.push({
+                            'id': parseInt(id),
+                            'activite': "",
+                            'processus': "",
+                            'macroProcessus': "",
+                            'sousProcessusList': []
+                        });
+                    }
+
+                    continue;
+                }
+
+
+
+
+
+                t_index = "table_0_div_" + idtr;
+                td1 = document.getElementById(t_index + "_tr_td_1")
+                nbrOfSP = parseInt(td1.getAttribute("rowspan")) - 2
+
+                activit = document.getElementById(t_index + "_activite").value.trim();
+                macroProcessus = document.getElementById(t_index + "_macroProcessus").value.trim();
+                processus = document.getElementById(t_index + "_processus").value.trim();
+                if (activit === "" || macroProcessus === "" ||  processus ==="") {
+                    ae();
+                    return;
+                }
+                var sPList = new Array();
+                for (let index = 0; index < nbrOfSP; index++) {
+                    isdel2 = 'false';
+                    try {
+                    isdel2 = document.getElementById(`table_0_div_${idtr}_tr_${index}`).getAttribute("deletetr");
+                        console.log("isdel2  ",isdel2 );
+                } catch (error) {
+                    console.log(error);
+                    console.error(error);
+                    isdel1 = 'false';
+                    console.log("catch : " + isdel1);
+
+                }
+
+                if (isdel2 == "true") {
+                    continue;
+                }
+                    //table_0_div_0_tr_0_sousProcessus
+                    sousProcessus = document.getElementById(`table_0_div_${idtr}_tr_${index}_sousProcessus`).value.trim();
+                    applicationsIT = document.getElementById(`table_0_div_${idtr}_tr_${index}_applicationsIT`).value.trim();
+                    processusIT = document.getElementById(`table_0_div_${idtr}_tr_${index}_processusIT`).value.trim();
+                    infrastructuresIT = document.getElementById(`table_0_div_${idtr}_tr_${index}_infrastructuresIT`).value.trim();
+                    critique = document.getElementById(`table_0_div_${idtr}_tr_${index}_critique`).value.trim();
+
+                    if (window.location.pathname === "/complete_the_process_mapping") {
+                        if (sousProcessus === "") {
+                            ae();
+                            return;
+                        }
+                    }
+                    else if (window.location.pathname === "/complete_the_sous_processes_mapping") {
+                        if (sousProcessus === "" || applicationsIT ==="" || processusIT === "" || infrastructuresIT ==="" || critique ==="") {
+                            ae();
+                            return;
+                        }
+                    }
+
+                    sPList.push({
+                        'sousProcessus': sousProcessus,
+                        'applicationsIT': applicationsIT,
+                        'processusIT': processusIT,
+                        'infrastructuresIT': infrastructuresIT,
+                        'critique': critique,
+
+                    }
+                    );
+
+
+                }
+
+
+
+                try {
+                    id = document.getElementById(`table_0_div_${idtr}_id`).value.trim();
+                } catch (error) {
+                    id = null;
+                }
+
+                console.log('id : ' + id);
+                data.push({
+                    'id': parseInt(id),
+                    'activite': activit,
+                    'processus': processus,
+                    'macroProcessus': macroProcessus,
+                    'sousProcessusList': sPList
+
+                }
+                );
+
+
+
+
+            }
+
+            console.log(JSON.stringify(data));
+
+
+            var sizeL = Object.keys(data).length;
+        if (sizeL === 0) {
+            ae("Please add at least one Processus");
+            return -1;
+        }
+
+            let ic = 0;
+            let lenData = 0;
+         
+            console.log("data : " , data);
+            console.log("data.length : " , data.length);
+            for (let key = 0; key < data.length; key++) {
+                lenData++;
+                const e = data[key];
+                if (e['activite'] === '' && e['processus'] === '' && e['macroProcessus'] === '' && e["sousProcessusList"].length === 0) {
+                    ic++;
+                    
+                }
+            }
+
+            if (ic === lenData) {
+                ae("Please add at least one Processus");
+                return -1;
+            }
+
+
+            fetch("", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(res => {
+                console.log("Request complete! response:", res);
+
+                nt(res);
+            });
+
+
+
+        }
+
+    </script>
+ 
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+</html>

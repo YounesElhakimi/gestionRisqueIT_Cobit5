@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<style>
+    input {
+        width: 100%;
+    }
+
+    .critique{
+        color: red;
+    }
+
+    .majeur{
+        color: orange;
+    }
+
+    .modéré{
+        color: yellow;
+       
+    }
+
+    .mineur{
+        color: green;
+        
+    }
+    
+</style>
+
+<body>
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <div>
+        <p id="titleOfPage" class="headTxt">
+            Examine the results of evaluations, internal audits and quality assurance reports and associate them with the risk profile (Risk mapping):    
+        </p>
+    </div>
+
+    <div class="divtable">
+
+        <table  id="table_0"  class="table table-striped" >
+
+    </table>
+
+    </div>
+
+   
+    <br>
+    <br>
+
+  
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+<script>
+    if (window.location.pathname == "/update_controles_assurance_qualite") {
+        document.getElementById("titleOfPage").innerText = `
+        Please identify the impact of incident analysis on the risk profile (risk mapping) :
+
+        `;
+    }
+</script>
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${caqList}]]*/ 'default';
+    var level = /*[[${level}]]*/ '7';
+    var intL = 6;
+    if (level != null) {
+        intL = parseInt(level);
+    }
+
+    console.log(entries);
+</script>
+
+<script>
+    
+function getNC(nbr) {
+
+    console.log("nbr : ",nbr);
+    if (isNaN(nbr)) {
+        return "";
+    }
+    
+    if (level == '4' ) {
+        if (nbr < 3) {
+            return "mineur";
+        }
+        else if ((nbr >= 3) && (nbr < 6) ) {
+            return "modéré";
+            
+        }
+        else if((nbr >= 6) && (nbr < 12) ){
+            return "majeur";
+            
+        }
+        else if(nbr >= 12 ){
+            return "critique";
+
+        }
+
+    }
+    else if (level == '5' ) {
+        if (nbr < 3) {
+            return "mineur";
+        }
+        else if ((nbr >= 3) && (nbr < 7) ) {
+            return "modéré";
+            
+        }
+        else if((nbr >= 8) && (nbr < 15) ){
+            return "majeur";
+            
+        }
+        else if(nbr >= 15 ){
+            return "critique";
+
+        }
+
+    }
+    else if (level == '6' ) {
+        if (nbr < 6) {
+            return "mineur";
+        }
+        else if ((nbr >= 6) && (nbr < 15) ) {
+            return "modéré";
+            
+        }
+        else if((nbr >= 15) && (nbr < 24) ){
+            return "majeur";
+            
+        }
+        else if(nbr >= 24 ){
+            return "critique";
+
+        }
+
+    }
+}
+         
+    function addEventForExposition(tr) {
+       document.getElementById(tr+'_frequence_new').addEventListener('change', function () {
+      freq = parseInt(document.getElementById(tr+'_frequence_new').value);
+      impct = parseInt( document.getElementById(tr+'_impact_new').value);
+    //  document.getElementById(tr+'_exposition').value = freq * impct;
+      document.getElementById(tr+'_criticalityLevel_new').value = getNC(freq * impct);
+      document.getElementById(tr+'_criticalityLevel_new').setAttribute("class" ,  getNC(freq * impct));
+
+
+   });
+
+   document.getElementById(tr+'_impact_new').addEventListener('change', function () {
+      freq = parseInt(document.getElementById(tr+'_frequence_new').value);
+      impct = parseInt( document.getElementById(tr+'_impact_new').value);
+    //  document.getElementById(tr+'_exposition').value = freq * impct;
+      document.getElementById(tr+'_criticalityLevel_new').value = getNC(freq * impct);
+      document.getElementById(tr+'_criticalityLevel_new').setAttribute("class" ,  getNC(freq * impct));
+
+
+   });
+    }
+
+    function initTable() {
+
+
+
+
+        var html = `<tr>
+            <th >Edit</th>
+            <th >Risk</th>
+            
+            <th >Initial probability</th>
+            <th >Initial Impact </th>
+            <th >initial  control effectiveness</th>
+
+            <th >Initial criticality </th>
+
+            <th >New probability</th>
+            <th >New Impact</th>
+
+
+            <th >New control effectiveness </th>
+
+            <th >New  criticality </th>
+
+            
+        </tr>`;
+        for (let j = 0; j < entries.length; j++) {
+
+            html +=
+                `
+            <input type="text" hidden disabled id="table_0_tr_${j}_id" value="${entries[j]["id"]}" >
+            
+            <td  id="" > <input    type="checkbox"  class="txtar" id="table_0_tr_${j}_isModf"  onclick="tuggleInputes('table_0_tr_${j}')">  </td> 
+            
+            <td  id="" > <input disabled  type="text"                     class="txtar" id="table_0_tr_${j}_risque"     value="${entries[j]["risque"]}">  </td> 
+            <td  id="" > <input disabled  type="number" min="1" max="${level}"  class="txtar inputLevel" id="table_0_tr_${j}_frequence"  value="${entries[j]["frequence"]}">  </td> 
+            <td  id="" > <input disabled  type="number" min="1" max="${level}"  class="txtar inputLevel" id="table_0_tr_${j}_impact"     value="${entries[j]["impact"]}">  </td> 
+            <td  id="" > <input disabled  type="number" min="1" max="${level}"  class="txtar inputLevel" id="table_0_tr_${j}_efficacite" value="${entries[j]["efficacite"]}">  </td>  </td> 
+            <td  id="" > <input disabled  type="text"   class="txtar ${entries[j]["criticalityLevel"]}" id="table_0_tr_${j}_criticalityLevel" value="${entries[j]["criticalityLevel"]}">  </td>  </td> 
+
+            <td  id="" > <input disabled  type="number" min="1" max="${level}"  class="txtar inputLevel" id="table_0_tr_${j}_frequence_new" value="" >  </td> 
+            <td  id="" > <input disabled  type="number" min="" max="${level}"  class="txtar inputLevel" id="table_0_tr_${j}_impact_new" value="">  </td> 
+            <td  id="" > <input disabled  type="number" min="1" max="${level}"  class="txtar inputLevel" id="table_0_tr_${j}_efficacite_new" value="">  </td> 
+           
+            <td  id="" > <input disabled  type="text"   class="txtar mineur" id="table_0_tr_${j}_criticalityLevel_new" value="">  </td> 
+      
+        </tr>
+        `
+       
+        }
+
+        document.getElementById('table_0').innerHTML = html;
+
+        for (let j = 0; j < entries.length; j++) {
+            addEventForExposition(`table_0_tr_${j}`);
+        }
+
+
+    }
+
+</script>
+
+
+<script>
+   
+    function tuggleInputes(id) {
+        isCheked = document.getElementById(id + "_isModf").checked
+        console.log("clicked  :" + id + "_isModf");
+
+        console.log("isCheked  :" , isCheked);
+
+        if (isCheked) {
+            console.log(id + "is checked");
+
+            frequenceInps = document.getElementById(id + "_frequence_new").disabled = false;
+            impactInps = document.getElementById(id + "_impact_new").disabled = false;
+          //  criticalityLevelInps = document.getElementById(id + "_criticalityLevel_new").disabled = false;
+            efficaciteInps = document.getElementById(id + "_efficacite_new").disabled = false;
+
+        } else {
+            console.log(id + "is unchecked");
+
+            frequenceInps = document.getElementById(id + "_frequence_new").disabled = true;
+            impactInps = document.getElementById(id + "_impact_new").disabled = true;
+           // criticalityLevelInps = document.getElementById(id + "_criticalityLevel_new").disabled = true;
+            efficaciteInps = document.getElementById(id + "_efficacite_new").disabled = true;
+
+
+
+
+        }
+    }
+</script>
+
+<script>
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 0; idtr < entries.length; idtr++) {
+            
+            t_index = "table_0_tr_" + idtr;
+            isCheked = document.getElementById(t_index + "_isModf").checked
+
+            if (!isCheked) {
+                continue
+                console.log("continue");
+            }
+
+            id = document.getElementById(t_index + "_id").value.trim();
+            frequence = document.getElementById(t_index + "_frequence_new").value;
+            impact = document.getElementById(t_index + "_impact_new").value;
+            criticalityLevel = document.getElementById(t_index + "_criticalityLevel_new").value;
+            efficacite = document.getElementById(t_index + "_efficacite_new").value;
+
+
+            // console.log("kri   : " , kri);
+
+            if (efficacite === "" && criticalityLevel === "" && impact === "" && frequence === ""  ) {
+                
+                continue;
+            }else  if (efficacite === "" || criticalityLevel === "" || impact === "" || frequence === ""  ) {
+                ae();
+                return;
+            }
+
+
+            data.push({
+                'id': id,
+                "frequence": frequence,
+                "impact": impact,
+                "criticalityLevel": criticalityLevel,
+                "efficacite": efficacite
+            }
+            );
+
+
+
+
+        }
+
+        console.log(JSON.stringify(data));
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+           next();
+
+        });
+
+
+    }
+
+    if (entries.length > 0) {
+        initTable();
+    }
+
+    
+    function initevPL() {
+            $(function () {
+            $(".inputLevel").keydown(function () {
+                // Save old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= intL && parseInt($(this).val()) >= 0))
+                    $(this).data("old", $(this).val());
+            });
+            $(".inputLevel").keyup(function () {
+                // Check correct, else revert back to old value.
+                if (!$(this).val() || (parseInt($(this).val()) <= intL && parseInt($(this).val()) >= 0))
+                    ;
+                else
+                    $(this).val($(this).data("old"));
+            });
+        });
+
+  
+        }
+    
+        initevPL();
+ 
+</script>
+
+
+</html>

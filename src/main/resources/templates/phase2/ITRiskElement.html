@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top">
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <style>
+        .table_itR{
+            width:1100px;
+
+        }
+
+        tbody:nth-child(2n) {
+            background-color: #dee2e6;
+        }
+
+        .td_mdl{
+            vertical-align: middle !important;
+
+        }
+
+        .td_mdl input{
+            margin-bottom: 10px;
+        }
+
+        .delettd{
+            min-width: 50px;
+        }
+
+        /* table { border: 5px ridge(2,2,1) !important }
+        tbody { border: 4px ridge !important } */
+    </style>
+
+    <header class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Please organise the elements related to IT risk as specified below:
+
+                        </strong>
+                    </h2>
+                    <br>
+                </div>
+
+            </div>
+            <style>
+                .td_d_n {
+                    border-style: hidden !important;
+                   
+                }
+            </style>
+
+            <main id="main">
+                <table  id="table_0" class="table table_itR" style="border-color:#00416A;border-width: 5px;">
+                    <tr id="table_0_tr">
+                        <th >Source</th>  
+                        <th > Risk event</th>
+                        <th >Category</th>
+                        <th >Factor / cause of risk</th>
+                        <th >Frequency</th>
+                        <th >Impact</th>
+                        <th class="delettd"> <i class="fas fa-trash-alt"></i></th>
+                    </tr>
+
+                    <tbody id="tbody_0">
+                        <tr id="tbody_0_tr_0">
+                            <td id="tbody_0_s" class="td_mdl" rowspan="4" nbrl="4"> <input type="text" value="Incidents or potential risks"
+                                    id="tbody_0_tr_0_s">
+                            <Button  class="btn btn-info  delete-btn" onclick="deleteTr('tbody_0')"><i class="fas fa-trash-alt"></i> remove source</Button>
+                          
+                       </td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                         
+                        </tr>
+                        <tr id="tbody_0_tr_1">
+                            <td> <textarea type="text"  id="tbody_0_tr_1_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_0_tr_1_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_0_tr_1_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_0_tr_1_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_0_tr_1_i"> </td>
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_0_tr_1')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr id="tbody_0_tr_2">
+
+                            <td> <textarea type="text"  id="tbody_0_tr_2_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_0_tr_2_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_0_tr_2_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_0_tr_2_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_0_tr_2_i"> </td>
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_0_tr_2')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr id="tbody_0_add">
+                            <td colspan="6"><button class="btn btn-info add-new" onclick="addSP('0')"><i class="fa fa-plus"></i> Add an element</button></td>
+                        </tr>
+
+                    </tbody>
+                    <tbody id="tbody_1">
+                        <tr id="tbody_1_tr_0">
+                            <td id="tbody_1_s" class="td_mdl" rowspan="4" nbrl="4"> <input type="text" value="Benchmark"
+                                    id="tbody_1_tr_0_s">
+                                    <Button  class="btn btn-info  delete-btn" onclick="deleteTr('tbody_1')"><i class="fas fa-trash-alt"></i> remove source</Button>
+
+                            </td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                        
+                        </tr>
+                        <tr id="tbody_1_tr_1">
+                            <td> <textarea type="text"  id="tbody_1_tr_1_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_1_tr_1_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_1_tr_1_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_1_tr_1_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_1_tr_1_i"> </td>
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_1_tr_1')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        
+                        <tr id="tbody_1_tr_2">
+                    
+                            <td> <textarea type="text"  id="tbody_1_tr_2_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_1_tr_2_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_1_tr_2_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_1_tr_2_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_1_tr_2_i"> </td>
+                            
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_1_tr_2')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+
+                        <tr id="tbody_1_add">
+                            <td colspan="6"><button class="btn btn-info add-new" onclick="addSP('1')"><i class="fa fa-plus"></i> Add an element</button></td>
+                        </tr>
+                    
+                    </tbody>
+                    <tbody id="tbody_2">
+                        <tr id="tbody_2_tr_0">
+                            <td id="tbody_2_s" class="td_mdl" rowspan="4" nbrl="4"> <input type="text" value="Internal environment"
+                                    id="tbody_2_tr_0_s">
+                                    <Button  class="btn btn-info  delete-btn" onclick="deleteTr('tbody_2')"><i class="fas fa-trash-alt"></i> remove source</Button>
+
+                            </td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                       
+                        </tr>
+                        <tr id="tbody_2_tr_1">
+                            <td> <textarea type="text"  id="tbody_2_tr_1_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_2_tr_1_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_2_tr_1_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_2_tr_1_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_2_tr_1_i"> </td>
+                            
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_2_tr_1')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr id="tbody_2_tr_2">
+                    
+                            <td> <textarea type="text"  id="tbody_2_tr_2_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_2_tr_2_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_2_tr_2_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_2_tr_2_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_2_tr_2_i"> </td>
+                            
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_2_tr_2')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr id="tbody_2_add">
+                            <td colspan="6"><button class="btn btn-info add-new" onclick="addSP('2')"><i class="fa fa-plus"></i> Add an element</button></td>
+                        </tr>
+                    
+                    </tbody>
+                    <tbody id="tbody_3">
+                        <tr id="tbody_3_tr_0">
+                            <td id="tbody_3_s" class="td_mdl" rowspan="4" nbrl="4"> <input type="text" value="External environment"
+                                    id="tbody_3_tr_0_s">
+                                    <Button  class="btn btn-info  delete-btn" onclick="deleteTr('tbody_3')"><i class="fas fa-trash-alt"></i> remove source</Button>
+
+                            </td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                     
+                        </tr>
+                        <tr id="tbody_3_tr_1">
+                            <td> <textarea type="text"  id="tbody_3_tr_1_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_3_tr_1_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_3_tr_1_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_3_tr_1_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_3_tr_1_i"> </td>
+                            
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_3_tr_1')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr id="tbody_3_tr_2">
+                    
+                            <td> <textarea type="text"  id="tbody_3_tr_2_e"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_3_tr_2_c"> </textarea></td>
+                            <td> <textarea type="text"  id="tbody_3_tr_2_cr"></textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_3_tr_2_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" id="tbody_3_tr_2_i"> </td>
+                            
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_3_tr_2')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr id="tbody_3_add">
+                            <td colspan="6"><button class="btn btn-info add-new" onclick="addSP('3')"><i class="fa fa-plus"></i> Add an element</button></td>
+                        </tr>
+                
+                    </tbody>
+
+
+                </table>
+                <div class="row">
+                    <div class="col">
+                    <div class="float-right">
+                        <button onclick="addligne('table_0')" type=""  class="btn btn-info add-new" style="font-size:15px;" ><i class="fa fa-plus"></i>add a Source</button>
+                    </div>
+                </div>
+            
+                <!-- <br>
+                <button onclick="collect()" type="" class="btn btn-primary btn-xl js-scroll-trigger">save</button>
+                <button onclick="next()" type="" class="btn btn-primary btn-xl js-scroll-trigger">next</button> -->
+
+
+            </main>
+
+            <br>
+            <br>
+
+        </div>
+
+    </header>
+    <div th:insert="fragments\previousnext.html :: div"></div>
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+
+<script type="text/javascript" th:inline="javascript">
+    var nbrL = 3;
+    var entries = /*[[${ITRiskElementList}]]*/ '';
+    var level = /*[[${level}]]*/ '7';
+    var intL = 4;
+
+    try {
+     intL = parseInt(level);
+        
+    } catch (error) {
+        
+    }
+    
+    if (entries.length == 0 ) {
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 1; j < 2; j++) {
+                document.getElementById(`tbody_${i}_tr_${j}_f`).setAttribute("max" , level);
+                document.getElementById(`tbody_${i}_tr_${j}_i`).setAttribute("max" , level);
+            }         
+        }
+        
+    }
+
+
+    var entries1 = [
+        {
+            "id": 14,
+            "source": "src3",
+            "organization": {
+                "id": 1,
+                "name": "alpha",
+                "implementationInfo": null
+            },
+            "itRiskElementList": [
+                {
+                    "id": 16,
+                    "evenement": " env3_1",
+                    "categorie": " cat3_1",
+                    "frequence": " 1",
+                    "facteur": " 1",
+                    "impact": " impact",
+                    "organization": null
+                },
+                {
+                    "id": 17,
+                    "evenement": " enve3_2",
+                    "categorie": " cat3_2",
+                    "frequence": " 2",
+                    "facteur": " 2",
+                    "impact": " impact",
+                    "organization": null
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "source": "src2",
+            "organization": {
+                "id": 1,
+                "name": "alpha",
+                "implementationInfo": null
+            },
+            "itRiskElementList": [
+                {
+                    "id": 18,
+                    "evenement": " env2_1",
+                    "categorie": " cat2_1",
+                    "frequence": " 1",
+                    "facteur": " 1",
+                    "impact": " impact",
+                    "organization": null
+                },
+                {
+                    "id": 19,
+                    "evenement": " enve2_2",
+                    "categorie": " cat2_2",
+                    "frequence": " 2",
+                    "facteur": " 2",
+                    "impact": " impact",
+                    "organization": null
+                }
+            ]
+        }
+    ]
+
+    console.log(entries);
+    console.log(JSON.stringify(entries));
+</script>
+
+
+<script>
+    function newSL(tbody_id, trid) {
+
+        id = "tbody_" + tbody_id + "_tr_" + trid
+
+
+        var html = `
+            <tr id="${id}">
+                    <td> <textarea id="${id}_e"> </textarea> </td>
+                    <td> <textarea id="${id}_c"> </textarea> </td>
+                    <td> <textarea id="${id}_cr"> </textarea> </td>
+                    <td> <input  type="number" class="inputLevel" min="1" value="1" max="${level}" value="0" id="${id}_f">  </td>
+                    <td> <input  type="number" class="inputLevel" min="1" value="1"  max="${level}" value="0" id="${id}_i">  </td>
+                    <td> <Button class="btn btn-info  delete-btn"  onclick="deleteTr('${id}')"><i class="fas fa-trash-alt"></i> </Button> </td>                        
+
+             </tr>
+             `
+        return html;
+    }
+    function addSP(tbody_id) {
+        console.log("befor");
+        source = document.getElementById("tbody_" + tbody_id + "_s");
+        addBut = document.getElementById("tbody_" + tbody_id + "_add");
+        rowspan = parseInt(source.getAttribute("rowspan")) + 1
+        nbrLsp = parseInt(source.getAttribute("nbrl")) + 1
+        source.setAttribute("rowspan", rowspan)
+        source.setAttribute("nbrl", nbrLsp)
+        trid = nbrLsp - 2
+
+
+        var html = newSL(tbody_id, trid)
+
+        addBut.insertAdjacentHTML("beforebegin",
+            html);
+        console.log("end");
+        initEvL();
+
+    }
+
+</script>
+
+<script>
+
+    function initTable() {
+        if (entries.length <= 0) {
+            return;
+        }
+
+        nbrL = entries.length - 1;
+        console.log(nbrL);
+        var html = `
+              <tr id="table_0_tr" class="table_itR">
+                        <th >Source</th>  
+                        <th > Risk event</th>
+                        <th >Category</th>
+                        <th >Factor / cause of risk</th>
+                        <th >Frequency</th>
+                        <th >Impact</th>
+                        <th class="delettd"> <i class="fas fa-trash-alt"></i></th>
+
+                    </tr>
+        `;
+
+        for (let i = 0; i < entries.length; i++) {
+            const e = entries[i];
+            const elist = e['itRiskElementList'];
+            console.log(elist);
+            html += `
+                 <tbody id="tbody_${i}">
+                        <tr id="tbody_${i}_tr">
+                            <td  id="tbody_${i}_s" class="td_mdl" rowspan="${elist.length + 2}" nbrl="${elist.length + 2}"> <input type="text" value="${e['source']}" id="tbody_${i}_tr_0_s">
+                                <Button  class="btn btn-info  delete-btn" onclick="deleteTr('tbody_${i}')"><i class="fas fa-trash-alt"></i> remove source</Button>
+
+                                </td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                         
+                        </tr>
+                       `
+            for (let j = 1; j <= elist.length; j++) {
+                const je = elist[j - 1];
+                html += `
+                <tr id="tbody_${i}_tr_${j}">
+                            <td> <textarea   id="tbody_${i}_tr_${j}_e" > ${je['evenement']}</textarea> </td>
+                            <td> <textarea   id="tbody_${i}_tr_${j}_c" > ${je['categorie']}</textarea> </td>
+                            <td> <textarea   id="tbody_${i}_tr_${j}_cr" > ${je['facteur']}</textarea>  </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" max="${level}"  id="tbody_${i}_tr_${j}_f" value="${je['frequence']}"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" max="${level}"  id="tbody_${i}_tr_${j}_i" value="${je['impact']}"> </td>
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_${i}_tr_${j}')"><i class="fas fa-trash-alt"></i> </Button> </td>                        
+                        </tr>
+                `;
+            }
+
+
+            html += `
+                        <tr  id="tbody_${i}_add">
+                            <td colspan="6"><button class="btn btn-info add-new" onclick="addSP('${i}')"><i class="fa fa-plus"></i> Add an element</button></td>
+                        </tr>
+                        
+                    </tbody>
+            `
+
+        }
+
+        document.getElementById('table_0').innerHTML = html;
+
+    }
+
+    initTable();
+</script>
+
+<script>
+
+    function addligne(table_id) {
+        var id = parseInt(table_id.split('_')[1]);
+        console.log(id);
+        nbrL = nbrL + 1;
+        tbodyId = nbrL;
+        var table = document.getElementById(table_id);
+        var html = `
+        
+        <tbody id="tbody_${tbodyId}">
+                        <tr id="tbody_${tbodyId}_tr_0">
+                            <td  id="tbody_${tbodyId}_s" class="td_mdl" rowspan="4" nbrl="4"> 
+                                <input type="text" value="Incidents or  potential risks" id="tbody_${tbodyId}_tr_0_s">
+                                <Button  class="btn btn-info  delete-btn" onclick="deleteTr('tbody_${tbodyId}')"><i class="fas fa-trash-alt"></i> remove source</Button>
+
+                                </td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                            <td class="td_d_n"></td>
+                     
+                        </tr>
+                        <tr id ="tbody_${tbodyId}_tr_1">
+                            <td> <textarea id="tbody_${tbodyId}_tr_1_e"> </textarea> </td>
+                            <td> <textarea id="tbody_${tbodyId}_tr_1_c"> </textarea> </td>
+                            <td> <textarea id="tbody_${tbodyId}_tr_1_cr"> </textarea> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" max="${level}" value="0" id="tbody_${tbodyId}_tr_1_f"> </td>
+                            <td> <input type="number" class="inputLevel" min="1" value="1" max="${level}" value="0" id="tbody_${tbodyId}_tr_1_i"> </td>
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_${tbodyId}_tr_1')"><i class="fas fa-trash-alt"></i> </Button> </td>                        
+                        </tr>
+                        <tr id="tbody_${tbodyId}_tr_2">
+    
+                            <td> <textarea id="tbody_${tbodyId}_tr_2_e"> </textarea> </td>
+                            <td> <textarea id="tbody_${tbodyId}_tr_2_c"> </textarea> </td>
+                            
+                            <td> <textarea id="tbody_${tbodyId}_tr_2_cr"> </textarea> </td>
+                            <td> <input  type="number"  min="1" value="1" max="${level}" value="0" id="tbody_${tbodyId}_tr_2_f"> </td>
+                            <td> <input  type="number"  min="1" value="1" max="${level}" value="0" id="tbody_${tbodyId}_tr_2_i"> </td>
+                            <td class="delettd"> <Button class="btn btn-info  delete-btn" onclick="deleteTr('tbody_${tbodyId}_tr_2')"><i class="fas fa-trash-alt"></i> </Button> </td>
+                        </tr>
+                        <tr  id="tbody_${tbodyId}_add">
+                            <td colspan="6"><button class="btn btn-info add-new" onclick="addSP('${tbodyId}')"><i class="fa fa-plus"></i> Add an element</button></td>
+                        </tr>
+                        
+                    </tbody>
+             `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+            initEvLP();
+    }
+
+    function deleteTr(idtr) {
+
+        document.getElementById(idtr).hidden = true;
+        // document.getElementById(idtr).style.display = "none";
+        document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+        let splist = idtr.split("_")
+        console.log(splist);
+
+        if (splist.length == 4) {
+            console.log("yes");
+            tbody_id = splist[1];
+            source = document.getElementById("tbody_" + tbody_id + "_s");
+            addBut = document.getElementById("tbody_" + tbody_id + "_add");
+           
+            rowspan = parseInt(source.getAttribute("rowspan")) - 1;
+            source.setAttribute("rowspan", rowspan)
+          
+            console.log('rowspan = ', rowspan);
+        }
+
+    }
+
+
+    function collect() {
+
+
+        var data = new Array();
+
+        for (let idtr = 0; idtr <= nbrL; idtr++) {
+            let isdel = 'false';
+            try {
+                isdel = document.getElementById("tbody_" + idtr).getAttribute("deleteTr")
+            } catch (error) {
+                isdel = 'false';
+            }
+            if (isdel == "true") {
+                continue;
+            }
+            source = document.getElementById(`tbody_${idtr}_tr_0_s`).value.trim();
+            n = parseInt(document.getElementById(`tbody_${idtr}_s`).getAttribute("nbrl")) - 2
+            if (source === "") {
+                ae();
+                return;
+            }
+            var itRiskElementList = new Array();
+            for (let i = 1; i <= n; i++) {
+                let isdel1 = 'false';
+                try {
+                    isdel1 = document.getElementById(`tbody_${idtr}_tr_${i}`).getAttribute("deleteTr")
+                } catch (error) {
+                    isdel1 = 'false';
+                }
+                if (isdel1 == "true") {
+                    continue;
+                }
+                evenement = document.getElementById(`tbody_${idtr}_tr_${i}_e`).value.trim();
+                categorie = document.getElementById(`tbody_${idtr}_tr_${i}_c`).value.trim();
+                facteur = document.getElementById(`tbody_${idtr}_tr_${i}_cr`).value.trim();
+                frequence = document.getElementById(`tbody_${idtr}_tr_${i}_f`).value;
+                impact = document.getElementById(`tbody_${idtr}_tr_${i}_i`).value;
+
+           
+                 if (evenement === "" || categorie==="" || frequence===""|| facteur===""|| impact===""  ) {
+                         ae();
+                        return -1;                    
+                }
+
+                itRiskElementList.push({
+                    "evenement": evenement,
+                    "categorie": categorie,
+                    "frequence": frequence,
+                    "facteur": facteur,
+                    "impact": impact
+
+                }
+                );
+            }
+
+
+        
+        if (itRiskElementList.length === 0) {
+            ae("Please add at least one Risk event for one Source");
+            return -1;
+        }else{
+            data.push({
+                "source": source,
+                "itRiskElementList": itRiskElementList
+            }
+            );
+        }
+            
+
+
+        }
+
+        console.log(JSON.stringify(data));
+
+
+
+        var sizeL = Object.keys(data).length;
+        if (sizeL === 0) {
+            ae("Please add at least one Source");
+            return -1;
+        }
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+           nt(res);
+
+        });
+
+
+    }
+
+
+ 
+</script>
+
+<script>
+  function initEvL(params) {
+    $(function () {
+      $(".inputLevel").keydown(function () {
+        // Save old value.
+        if (!$(this).val() || (parseInt($(this).val()) <= intL && parseInt($(this).val()) >= 1))
+        $(this).data("old", $(this).val());
+      });
+      $(".inputLevel").keyup(function () {
+        // Check correct, else revert back to old value.
+        if (!$(this).val() || (parseInt($(this).val()) <= intL && parseInt($(this).val()) >= 1))
+          ;
+        else
+          $(this).val($(this).data("old"));
+      });
+    });
+  }
+  initEvL();
+</script>
+</html>

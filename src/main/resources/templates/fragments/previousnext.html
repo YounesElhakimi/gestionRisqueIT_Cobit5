@@ -1,0 +1,382 @@
+<div>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+
+  <style>
+    .ba {
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 16px;
+    }
+
+    .ba:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .previous {
+      background-color: #f1f1f1;
+      color: black;
+    }
+
+    .next {
+      /* background-color: #04AA6D; */
+      background-color: #00416A;
+      color: white;
+    }
+
+    .round {
+      border-radius: 50%;
+    }
+
+    #fixedbutton {
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+    }
+
+    #fixedbuttonOnleft {
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+    }
+  </style>
+
+
+
+
+  <div id="fixedbutton">
+
+
+
+    <button onclick="previous()" class="previous ba">&laquo; Previous</button>
+    <button onclick="collect()" class="next ba">Next &raquo;</button>
+
+  </div>
+
+
+  <div id="fixedbuttonOnleft">
+
+
+    <button onclick="opensidenav()" class="next ba" data-toggle="modal" data-target="#exampleModal"> Document </button>
+
+  </div>
+
+  <script>
+    if (window.location.pathname === "/ExOrg" || window.location.pathname === "/newOrg") {
+      document.getElementById("fixedbuttonOnleft").hidden = true
+    }
+  </script>
+
+
+  <script>
+    listofLinks = [
+      "",
+      "",
+      "/ExOrg",
+      "/allsteps",
+
+      "",
+      "/newOrg",
+      "/allsteps",
+
+      //phase1
+      "/uploads/DOC_PHASE1_ITAPE1",
+      "/strategicOrientations",
+      "/majorrisks",
+      "/description",
+      "/allsteps",
+
+      "/uploads/DOC_PHASE1_ITAPE2",
+      "/team_project",
+      "/stakeholders",
+      "/phasesGanttDiagram",
+      "/GanttDiagram",
+      "/Projectscopingnote",
+      "/allsteps",
+
+      "/uploads/DOC_PHASE1_ITAPE3",
+      "/levelofdetails",
+      "/levelofdetailsSaved",
+      "/methodologicalReference",
+      "/allsteps",
+
+
+      //phase2
+      "/uploads/DOC_PHASE2_ITAPE1",
+      "/methodologyToHandleRisk",
+      "/internalMajorFact",
+      "/externalMajorFact",
+      "/concurrentsMajorRisks",
+      "/potentialRisksOfTheCompany",
+      "/ITRiskElement",
+      "/LivrablePhase2",
+      "/allsteps",
+
+      //phase3
+      "/uploads/DOC_PHASE3_ITAPE1",
+      "/Cartographie_des_risques",
+      "/RiskMapping",
+      "/allsteps",
+
+      "/uploads/DOC_PHASE3_ITAPE2",
+      "/complete_the_process_mapping",
+      "/complete_the_sous_processes_mapping",
+      "/riskEvent",
+      "/Livrable_phase3",
+      "/allsteps",
+
+      "/uploads/DOC_PHASE4_ITAPE1",
+      "/communication_plan",
+      "/mechanisms_description",
+      "/logigramme",
+      "/kri_board",
+      "/Livrable_phase4_etape1",
+      "/allsteps",
+
+
+      "/uploads/DOC_PHASE4_ITAPE2",
+      "/uploads/DOC_PHASE4_AUDITS_CONTROLS",
+      "/controles_assurance_qualite",
+      "/Livrable_phase4_etape2",
+      "/allsteps",
+
+      "/uploads/DOC_PHASE5_ITAPE1",
+      "/business_continuity_plan",
+      "/update_data_about_IT_incidents",
+      "/update_controles_assurance_qualite",
+      "/Livrable_phase5_etape1",
+      "/allsteps",
+
+      "/uploads/DOC_PHASE5_ITAPE2",
+      "/update_risk_mapping",
+      "/update_measures_kri",
+      "/objectif_progression",
+      "/problem_description",
+      "/Livrable_phase5_etape2",
+      "/allsteps"
+    ]
+    console.log("this path", window.location.pathname);
+    path = window.location.pathname
+    index = listofLinks.indexOf(path)
+    if (index > 0) {
+      console.log("previous : ", listofLinks[index - 1]);
+    }
+    if (index < (listofLinks.length - 1)) {
+      console.log("next : ", listofLinks[index + 1]);
+    }
+
+    function previous() {
+
+
+      if (typeof iiForAllsteps === 'undefined' || window.location.pathname != "/allsteps") {
+        path = window.location.pathname
+        index = listofLinks.indexOf(path)
+        if (index > 0) {
+          window.location.pathname = listofLinks[index - 1]
+        }
+
+
+      } else {
+
+        if (iiForAllsteps['p5e2']) {
+          window.location.pathname = "/Livrable_phase5_etape2"
+        } else if (iiForAllsteps['p5e1']) {
+          window.location.pathname = "/Livrable_phase5_etape1"
+        } else if (iiForAllsteps['p4e2']) {
+          window.location.pathname = "/Livrable_phase4_etape2"
+        } else if (iiForAllsteps['p4e1']) {
+          window.location.pathname = "/Livrable_phase4_etape1"
+        } else if (iiForAllsteps['p3e2']) {
+          window.location.pathname = "/Livrable_phase3"
+        } else if (iiForAllsteps['p3e1']) {
+          window.location.pathname = "/RiskMapping"
+        } else if (iiForAllsteps['p2']) {
+          window.location.pathname = "//LivrablePhase2"
+        } else if (iiForAllsteps['p1e3']) {
+          window.location.pathname = "/methodologicalReference"
+        } else if (iiForAllsteps['p1e2']) {
+          window.location.pathname = "/Projectscopingnote"
+        } else if (iiForAllsteps['p1e1']) {
+          window.location.pathname = "/description"
+        } else {
+          window.location.pathname = "/newOrg"
+
+        }
+      }
+
+
+    }
+
+
+
+
+    function next(returnc = 0) {
+      
+
+        try {
+        console.log("try collect");
+      //  returnc =  collect();
+       if (returnc === -1) {
+        ae();
+        return;
+       }else if (returnc === -2) {
+        swal('Error' , "bad request! try again." ,'error');
+        return;
+       }
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+        if (typeof iiForAllsteps === 'undefined' || window.location.pathname != "/allsteps") {
+          path = window.location.pathname
+          index = listofLinks.indexOf(path)
+
+          
+            window.location.pathname = listofLinks[index + 1];
+          
+
+        } else {
+
+          if (iiForAllsteps['p5e2']) {
+            window.location.pathname = "/allsteps"
+          } else if (iiForAllsteps['p5e1']) {
+            window.location.pathname = "/uploads/DOC_PHASE5_ITAPE2"
+          } else if (iiForAllsteps['p4e2']) {
+            window.location.pathname = "/uploads/DOC_PHASE5_ITAPE1"
+          } else if (iiForAllsteps['p4e1']) {
+            window.location.pathname = "/uploads/DOC_PHASE4_ITAPE2"
+          } else if (iiForAllsteps['p3e2']) {
+            window.location.pathname = "/uploads/DOC_PHASE4_ITAPE1"
+          } else if (iiForAllsteps['p3e1']) {
+            window.location.pathname = "/uploads/DOC_PHASE3_ITAPE2"
+          } else if (iiForAllsteps['p2']) {
+            window.location.pathname = "/uploads/DOC_PHASE3_ITAPE1"
+          } else if (iiForAllsteps['p1e3']) {
+            window.location.pathname = "/uploads/DOC_PHASE2_ITAPE1"
+          } else if (iiForAllsteps['p1e2']) {
+            window.location.pathname = "/uploads/DOC_PHASE1_ITAPE3"
+          } else if (iiForAllsteps['p1e1']) {
+            window.location.pathname = "/uploads/DOC_PHASE1_ITAPE2"
+          } else {
+            window.location.pathname = "/uploads/DOC_PHASE1_ITAPE1"
+
+          }
+        }
+      
+    }
+
+
+
+
+
+  </script>
+
+
+<script>
+ function nt(res){
+    if (res.ok) {
+                  next();
+            }
+            else{
+                  next(-2);
+            }
+  }
+</script>
+
+
+
+  <style>
+    .sidenav {
+      height: 100%;
+      width: 500px;
+      position: fixed;
+      display: none;
+      z-index: 1;
+      background-color: white;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+
+
+
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+
+    .btnclose {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      font-size: 15px;
+      color: red !important;
+      background-color: white !important;
+    }
+
+    .btnclose:hover ,  .btnclose:active ,  .btnclose:focus{
+      background-color: red !important;
+       color: white !important;
+      border-color :red !important ;
+      box-shadow: rgb(241, 81, 81);
+
+    }
+
+
+
+  </style>
+
+  
+
+  <div id="sidenav" class="sidenav" style="overflow: hidden;">
+
+    <button class="btnclose btn   delete-btn" onclick="closesidenav()">
+      <!-- <i class="fal fa-window-close"></i>         -->
+      <i class="fas fa-times-circle fa-lg"></i>
+    </button>
+
+
+
+
+    <iframe src="http://localhost:8080/Allfiles" style="height: 100%; width: 100%;">
+    </iframe>
+  </div>
+
+
+
+
+  <script>
+    
+    function closesidenav() {
+      document.getElementById("sidenav").style.display = 'none';
+    }
+
+    function opensidenav() {
+      document.getElementById("sidenav").style.display = 'block';
+    }
+  </script>
+</div>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body >
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+        <br>
+
+    <main class="text-center ">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase"><strong>Please specify the methodology to collect, classify and analyse IT risk data:
+                        </strong></h2>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+
+
+                <form action="#" th:action="@{/methodologyToHandleRisk}" th:object="${MethodologyToHandleRisk}" method="post">
+                    <input id="id" type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label for="description">description:</label>
+                        <textarea class="form-control" rows="10" cols="50" id="description" type="text" th:field="*{description}" ></textarea>
+                 
+                    </div>
+              </form>
+                <br>
+
+        
+            </div>
+        </div>
+        
+
+    </main>
+
+    <br>
+    <script>
+        function collect() {
+            description = document.getElementById("description").value.trim();
+            id = document.getElementById("id").value.trim();
+            if (description == "") {
+                ae();
+                return -1;
+            }
+           data = {
+            "id" : parseInt(id),
+            "description" : description
+           }
+
+           console.log(data);
+        fetch("", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+        nt(res);
+        
+
+        });
+        }
+    </script>
+
+
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+
+
+</html>

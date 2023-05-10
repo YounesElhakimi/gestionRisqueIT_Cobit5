@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet"
+    type="text/css" />
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  <meta charset=utf-8 />
+  <title>JS Bin</title>
+  <!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<body>
+  <div class="div_nav">
+    <div th:insert="fragments/ban.html :: div"></div>
+  </div>
+  <br>
+  <style>
+    article,
+    aside,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
+
+    .uploaddiv {
+      padding: 20px 100px;
+      text-align: center;
+      align-items: center;
+    }
+  </style>
+
+  <main class="text-center text-Black d-flex masthead">
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2 class="text-uppercase">
+
+            PLEASE SPECIFY THE WORKFLOW IMAGE NEEDED FOR THE IMPLEMENTATION OF THE ROADMAP:
+            </strong>
+          </h2>
+        </div>
+
+      </div>
+
+      <form id="myForm" th:action="@{/logigramme}" method="post" enctype="multipart/form-data">
+        <div class="uploaddiv">
+    
+          <label for="fileUploader" class="btn btn-info">Choose flowchart image</label>
+          <input id="fileUploader" type='file' name="image" accept="image/png, image/jpeg" onchange="readURL(this);"
+            style="display:none ;" />
+        </div>
+    
+      </form>
+      <br>
+      <br>
+
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+         
+            <div id="img">
+              <img id="blah" src="#" alt="" />
+    
+            </div>
+          </div>
+  
+        </div>
+  
+    
+
+  </main>
+  <br><br>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script type="text/javascript" th:inline="javascript">
+    var image = /*[[${Photo}]]*/ null;
+
+    console.log(image);
+
+    if (image == null) {
+      console.log("is null");
+    }
+    else {
+      document.getElementById("img").innerHTML = `<img id="blah"   src="/files/${image}" alt="logigramme" style="width: 500px; height:100%;">`;
+    }
+
+  </script>
+  <div th:insert="fragments\previousnext.html :: div"></div>
+
+
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#blah')
+            .attr('src', e.target.result)
+            .width(500)
+            .height("100%");
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+ 
+ 
+
+    function collect() {
+    //  var formData = new FormData(document.getElementById("myForm"));// yourForm: form selector        
+
+    
+    const img =  document.getElementById("fileUploader").files[0];
+    const formData = new FormData()
+    formData.append('image', img)
+
+    console.log("image : " ,img);
+
+    if (typeof img === 'undefined' && !(document.getElementById('blah').src === window.location.href+'#'))  {
+   
+      next();
+      return;
+
+    } else  if (typeof img == 'undefined' )  {
+      ae('select an image');
+      return;
+    } 
+ 
+
+
+
+
+    formData
+     fetch("", {
+            method: "POST",
+            body: formData
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+          
+            nt(res);
+
+        });
+
+     //      $.ajax({
+//     type: "POST",
+//     url: "",// where you wanna post
+//     data: formData,
+//     processData: false,
+//     contentType: false,
+//     error: function(jqXHR, textStatus, errorMessage) {
+//         console.log(errorMessage); // Optional
+//         next(-2);
+//     },
+//     success: function(res) {
+//       console.log(res);
+      
+//       alert("success");
+//     } 
+    
+// });
+
+return 1;
+    }
+  </script>
+
+
+
+</body>
+
+</html>

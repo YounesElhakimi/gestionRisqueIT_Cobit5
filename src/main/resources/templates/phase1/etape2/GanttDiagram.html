@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top">
+
+  <div style="background-color: white;">
+    <div th:insert="fragments/ban.html :: div"></div>
+  </div>
+
+
+  <main class="text-center" style="background-color: #B0C4DE;">
+
+
+
+    <script type="text/javascript" th:inline="javascript">
+      var gantt = /*[[${Gantt}]]*/  null;
+
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .chartMenu {
+        width: 100vw;
+        height: 40px;
+        background: #1A1A1A;
+        color: #B0C4DE;
+      }
+
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+
+      .chartCard {
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background: #B0C4DE;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chartBox {
+        width: 68%;
+        padding: 20px;
+        border-radius: 20px;
+        border: solid 3px #00416A;
+        background: white;
+      }
+    </style>
+
+
+
+
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+    <br>
+  </main>
+
+
+
+    <script>
+
+      // setup 
+      const data = {
+        labels: ['Phase1: Framing the project', 'Phase2: Data collection and synthesis', 'Phase 3: Developement of IT risk management framework', 'Phase 4: Change management / Communication and awareness-raising', 'Phase5: MonitoringandSurveillance'],
+        datasets: [{
+          label: 'Weeks',
+          data: [
+            // ['2022-07-01','2022-07-03'],
+            // ['2022-08-23','2022-08-25'],
+            // ['2022-07-01','2022-08-01'],
+            // ['2022-07-01','2022-08-01'],
+            // ['2022-07-01','2022-08-01']
+
+            [gantt['startDatePhase1'], gantt['endDatePhase1']],
+            [gantt['startDatePhase2'], gantt['endDatePhase2']],
+            [gantt['startDatePhase3'], gantt['endDatePhase3']],
+            [gantt['startDatePhase4'], gantt['endDatePhase4']],
+            [gantt['startDatePhase5'], gantt['endDatePhase5']]
+          ],
+          backgroundColor: [
+            'rgba(255, 26, 104, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+
+          ],
+          borderColor: [
+            'rgba(255, 26, 104, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      };
+
+      // config 
+      const config = {
+        type: 'bar',
+        data,
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: {
+              min: gantt['startDatePhase1'],
+              type: 'time',
+              time: {
+                unit: 'week'
+              }
+            },
+            y: {
+              beginAtZero: true
+            }
+          },
+          animation: {
+            duration: 0, // general animation time
+          }
+        }
+      };
+
+      // render init block
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    </script>
+
+
+
+
+ 
+
+  
+  <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+
+<script>
+
+function collect() {
+            next();
+        }
+
+</script>
+
+</html>

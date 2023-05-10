@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<style>
+    textarea{
+        width:100%;
+    }
+
+
+</style>
+
+<body>
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <div>
+        <p class="headTxt">
+            Please identify key goals and metrics of risk governance and management processes to be monitored :
+    
+        </p>
+    </div>
+    <div class="divtable">
+
+    <table  id="table_0"  class="table table-striped" >
+
+    </table>
+    </div>
+
+<br>
+<br>
+
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${kriList}]]*/ 'default';
+
+    console.log(entries);
+</script>
+
+<script>
+    function initTable() {
+
+        var html = `<tr>
+            <th >KRI</th>
+            <th >Corresponding risk</th>
+            <th >Calculation formula</th>
+            <th >Producing entity </th>
+            <th >Process of obtaining and transmitting</th>
+            <th >Measurement periodicity</th>
+
+        </tr>`;
+        for (let j = 0; j < entries.length; j++) {
+         
+            html +=
+                `
+        <input type="text" hidden disabled id="table_0_tr_${j}_id" value="${entries[j]["id"]}" >
+        <td><textarea disabled name="" id="table_0_tr_${j}_kri" rows="5" > ${entries[j]["kri"]} </textarea></td>
+        <td><textarea disabled name="" id="table_0_tr_${j}_risque" rows="5" >${entries[j]["risque"]}</textarea></td>
+        <td><textarea name="" id="table_0_tr_${j}_formuleDeCalcul" rows="5" >${entries[j]["formuleDeCalcul"]}</textarea></td>
+        <td><textarea name="" id="table_0_tr_${j}_entiteProductrice" rows="5" >${entries[j]["entiteProductrice"]}</textarea></td>
+        <td><textarea name="" id="table_0_tr_${j}_processusDObtention" rows="5">${entries[j]["processusDObtention"]}</textarea></td>
+        <td><textarea name="" id="table_0_tr_${j}_periodiciteDeMesure" rows="5">${entries[j]["periodiciteDeMesure"]}</textarea></td>
+        </tr>
+        `
+        }
+
+        document.getElementById('table_0').innerHTML = html;
+
+
+
+    }
+
+</script>
+
+<script>
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 0; idtr < entries.length; idtr++) {
+            t_index = "table_0_tr_" + idtr;
+            id = document.getElementById(t_index + "_id").value.trim();
+            kri = document.getElementById(t_index + "_kri").value.trim();
+            risque = document.getElementById(t_index + "_risque").value.trim();
+            formuleDeCalcul = document.getElementById(t_index + "_formuleDeCalcul").value.trim();
+            entiteProductrice = document.getElementById(t_index + "_entiteProductrice").value.trim();
+            processusDObtention = document.getElementById(t_index + "_processusDObtention").value.trim();
+            periodiciteDeMesure = document.getElementById(t_index + "_periodiciteDeMesure").value.trim();
+
+
+            // console.log("kri   : " , kri);
+            if (kri === "" && risque === "" && formuleDeCalcul === "" && entiteProductrice === "" && processusDObtention === "" && periodiciteDeMesure === "" ) {
+                
+                continue;
+            }else  if (kri === "" || risque === "" || formuleDeCalcul === "" || entiteProductrice === "" || processusDObtention === "" || periodiciteDeMesure === "" ) {
+                ae();
+                return;
+            }
+
+            data.push({
+                'id': id,
+                'kri': kri,
+                'risque': risque,
+                'formuleDeCalcul': formuleDeCalcul,
+                'entiteProductrice': entiteProductrice,
+                'processusDObtention': processusDObtention,
+                'periodiciteDeMesure': periodiciteDeMesure,
+            }
+            );
+
+
+
+
+        }
+
+        console.log(JSON.stringify(data));
+        var sizeL = Object.keys(data).length;
+        if (sizeL === 0) {
+            ae("Please add at least one  IT risk events ");
+            return -1;
+        }
+
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+          
+            nt(res);
+
+        });
+
+
+    }
+
+    if(entries.length > 0) {
+        initTable();
+    }
+
+
+</script>
+
+
+</html>

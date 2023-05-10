@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<style>
+    .background {
+
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .background::before {
+        content: "";
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/b.png);
+        background-size: cover;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+
+    }
+
+    .title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        text-transform: uppercase;
+        margin: 0;
+        font-size: 3rem;
+        white-space: nowrap;
+
+
+
+    }
+</style>
+
+
+<body id="page-top"  th:style="'background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(' + @{img/b.png} + ');'">
+
+
+    <div class="background">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="title">
+                    <h1 class="uppercase"><strong>Roadmap for the implementation of an IT risk
+                            <br> management system based on Cobit 5</strong></h1>
+                    <br>
+                    <p class="text-faded mb-5" style="color:#B0C4DE;">Please select one option : <br></p>
+
+                    <a class="btn btn-yh btn-xl js-scroll-trigger" role="button" th:href="@{/ExOrg}"
+                        style="color:white;background-color:#B0C4DE;"><strong>Existing organization</strong><br></a>
+                    &nbsp; &nbsp;
+                    <a class="btn btn-yh btn-xl js-scroll-trigger" role="button" th:href="@{/newOrg}"
+                        style="color:white;background-color:#B0C4DE;;"><strong>New organization</strong></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+<footer th:insert="fragments/footer.html :: footer"></footer>  
+
+</html>

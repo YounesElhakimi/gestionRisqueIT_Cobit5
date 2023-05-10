@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<style>
+    body {
+        height: 100vh;
+    }
+</style>
+<body>
+    
+    <br>
+    <br>
+    <br>
+
+    <style>
+        .polygon6{
+            clip-path: polygon(85% 0, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+
+        }
+        .dp1{
+            margin-right: 2%;
+
+            background-color: aquamarine;
+        }
+
+        .dp2{
+            background-color: red;
+        }
+        .dp3{
+            background-color: blue;
+        }
+        .dp4{
+            clip-path:polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+            padding-left: 2%;
+            margin-top: 2%;
+            background-color: green;
+        }
+        .dp5{
+            background-color:  yellow;
+        }
+
+        div{
+            text-align: center;
+            
+            /* justify-content: center; */
+            /* align-items: center; */
+
+
+        }
+
+        .divA{ 
+            width:70%;
+            margin: 15% auto;
+            min-height: 20%;
+            margin-top: 5%;
+            border-style: solid;
+        }
+
+        .divB{ 
+            width:70%;
+            margin: 12% auto;
+            min-height: 25%;
+            margin-top: 5%;
+            border-style: solid;
+        }
+
+        .divC{ 
+            width:70%;
+            margin: 5% auto;
+            height: auto;
+            margin-top: 3%;
+            border-style: solid;
+        }
+        .a_c_h {
+        width: 50%;
+        margin: 0 auto;
+        } 
+
+        body{
+
+        }
+
+        .pt{
+            margin-bottom: 10%;
+        }
+
+    </style>
+
+
+
+
+    <div class="container" style="height: 80%;width: 100%;">
+        <div class="row" style="height: 100%;">
+            <div class="col-3 dp1 polygon6 "  >
+                <div class="pt">
+                    Phase1:Framing the project
+                </div>
+
+                <div class="divA">
+                    <a class="a_c_h" th:href="@{/uploads/DOC_PHASE1_ITAPE1}" id="bp1e1">General
+                            directions and shared expectations 
+                   </a>
+
+                    <a target="_blank" hidden id="p1e1" class="LL"
+                        href="/Projectscopingnote">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+                <div class="divA">
+                    <a class="a_c_h" th:href="@{/uploads/DOC_PHASE1_ITAPE2}" id="bp1e2" >Project
+                            organization
+                        </a>
+
+                    <a target="_blank" hidden id="p1e2" class="LL" 
+                        href="/Projectscopingnote">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+                <div class="divA">
+                    <a class="a_c_h" th:href="@{/uploads/DOC_PHASE1_ITAPE3}" id="bp1e3">
+                            Methodological
+                            framework for IT risk management
+                    </a>
+
+                    <a target="_blank" hidden id="p1e3" class="LL"
+                        href="/methodologicalReference">
+                        <div class="LCircle">D</div>
+                    </a>
+
+                </div>
+
+            </div>
+         
+            <div class="col-8">
+                <div class="row" style="height: 65%;">
+                    <div class="col dp2 polygon6" >
+                            <div class="pt">
+                                Phase2:Data collection and synthesis
+                            </div>
+
+                            <div class="divA">
+                                <a th:href="@{/uploads/DOC_PHASE2_ITAPE1}" id="bp2"> 
+                                    Collect and synthesize data on IT  risks
+                                </a>
+            
+                                <a target="_blank" hidden id="p2" class="LL"  href="/LivrablePhase2">
+                                    <div class="LCircle">D</div>
+                                </a>
+            
+                            </div>
+                    </div>
+                    <div class="col dp3 polygon6"  >
+                        <div class="pt">
+                            Phase 3: Developement of IT risk management framework
+                        </div>
+
+                        <div class="divB">
+
+                            <a th:href="@{/uploads/DOC_PHASE3_ITAPE1}" id="bp3e1" 
+                                > Analyse and map IT
+                                    risks
+                            </a>
+        
+                            <a target="_blank" hidden id="p3e1" class="LL"
+                             href="/RiskMapping">
+                                <div class="LCircle">D</div>
+                            </a>
+                        </div>
+        
+        
+        
+                        <div class="divB">
+                            <a th:href="@{/uploads/DOC_PHASE3_ITAPE2}"id="bp3e2"
+                               > Complete the risk
+                                    profile
+                                </a>
+        
+                            <a target="_blank" hidden id="p3e2" class="LL" 
+                     
+                                href="/Livrable_phase3">
+                                <div class="LCircle">D</div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col dp5 polygon6"  >
+                        <div class="pt">
+                            Phase5:Monitoring and  Surveillance
+                        </div>
+
+                        <div class="divC">
+                            <a th:href="@{/uploads/DOC_PHASE5_ITAPE1}"  id="bp5e1" > Responding
+                                    to
+                                    incidents</a>
+        
+        
+                            <a target="_blank" hidden id="p5e1" class="LL" 
+                                href="/Livrable_phase5_etape1">
+                                <div class="LCircle">D</div>
+                            </a>
+                        </div>
+        
+                        <div class="divC">
+        
+                            <a th:href="@{/uploads/DOC_PHASE5_ITAPE2}" id="bp5e2">Define a
+                                    portfolio of
+                                    actions related to risk management</a>
+        
+                            <a target="_blank" hidden id="p5e2" class="LL"
+                          
+                                href="/Livrable_phase5_etape2">
+                                <div class="LCircle">D</div>
+                            </a>
+        
+                        </div>
+        
+                        <div class="divC">
+                            <a th:href="@{/uploads/DOC_PHASE5_ITAPE2}"  id="bp5e3"
+                                    > Monitor
+                                    risk
+                                    management </a>
+        
+                            <a target="_blank" hidden id="p5e3" class="LL" 
+                                href="/Livrable_phase5_etape2">
+                                <div class="LCircle">D</div>
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+                <div class="row" style="height: 35%;">
+                    <div class="col dp4"  >
+                        PHASE 4
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

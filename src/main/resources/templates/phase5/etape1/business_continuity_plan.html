@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+    <head th:insert="fragments/head.html :: head" ></head>  
+
+
+<body id="page-top">
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <main class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                    <strong>
+                        Please define the Business Continuity Plan :
+                    </strong>
+                </h2>
+<br>
+            </div>
+
+            </div>
+
+            <div id="idForm"  class="col-lg-8 mx-auto">
+            
+                
+                    <div class="form-group">
+                        <label for="title"> Title</label>
+                        <input type="text" class="form-control" disabled id="title" value="DEFINE THE CONTEXT AND OBJECTIVES OF THE ORGANIZATION.">
+                        <input type="text" hidden class="form-control" disabled id="key" value="contexte">
+                      </div>    
+                      
+                      <div class="form-group">
+                        <label for="description"> Description</label>
+                        <textarea type="text" class="form-control" id="description">
+                            </textarea>
+                            
+                      </div>    
+                      <button  id="saveb" onclick="addNewSO()" type="" class="btn btn-yh btn-xl js-scroll-trigger">Add</button>
+                   
+                    </div>
+        </div>
+
+    </main>
+
+    <hr>
+
+    <div id="SO" class="row">
+
+
+    </div>
+
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${entries}]]*/ 'default';
+
+    console.log(entries);
+</script>
+
+
+<script >
+    i = 0;
+    var oslist = {
+                    
+        "contexte" :"vide",
+        "formaliser" :"vide",
+        "gerreRisque" :"vide",
+        "scenarios" :"vide",
+        "formaliserProcedures" :"vide",
+        "strategieContinuite" :"vide",
+        "criseCommunication" :"vide",
+        "planContinuite" :"vide",
+        "capacitePlan" :"vide",
+        "exercices" :"vide"
+        };
+        
+    var ListOfTitles = {
+        "contexte" : " DEFINE THE CONTEXT AND OBJECTIVES OF THE ORGANIZATION.",
+        "formaliser" : "IDENTIFY AND FORMALIZE.",
+        "gerreRisque" : " IDENTIFY AND MANAGE PRIORITY RISKS.",
+        "scenarios" : "CHOOSE SCENARIOS TO TAKE INTO ACCOUNT.",
+        "formaliserProcedures" : "FORMALIZE THE MEANS AND PROCEDURES.",
+        "strategieContinuite" : "DEFINE THE CONTINUITY STRATEGY.",
+        "criseCommunication" : " SPECIFY CRISIS MANAGEMENT AND COMMUNICATION PROCEDURES.",
+        "planContinuite" : " DRAFTING THE CONTINUITY PLAN AND ASSOCIATED DOCUMENTATION.",
+        "capacitePlan" : " ENSURE PLAN IMPLEMENTATION CAPACITY.",
+        "exercices" : "DEVELOPING THE PLAN: EXERCISES AND FEEDBACK."
+        };
+        var ListDescsFT = {
+            "contexte" : false,
+            "formaliser" : false,
+            "gerreRisque" : false,
+            "scenarios" : false,
+            "formaliserProcedures" : false,
+            "strategieContinuite" : false,
+            "criseCommunication" : false,
+            "planContinuite" : false,
+            "capacitePlan" : false,
+            "exercices" : false
+        };
+
+
+
+    
+    function getKeyByValue(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+    }
+
+    function addNewSO(e = null){
+        if (e == null) {
+            title = document.getElementById('title').value;
+            description = document.getElementById('description').value;
+            key = document.getElementById('key').value;
+            
+           document.getElementById('description').value =""
+        
+            if (description.trim() === "") {
+                alert("a field empty!");
+                return;
+            }
+        }
+        else{
+            title = e['title'];
+            description = e['description'];
+            key = e['key'];
+        }
+        description = description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+
+         divSO = document.getElementById('SO')
+         console.log(key,title, description);
+         
+
+         //console.log(card);
+         divSO.innerHTML = divSO.innerHTML + card(key,title, description);
+        console.log(title);
+        console.log(description);
+        console.log(divSO.innerHTML);
+
+
+        // console.log("old key  :" , key ,"  is " , ListDescsFT[key]);
+        ListDescsFT[key] = true;
+        // console.log(ListDescsFT);
+        newKey = getKeyByValue(ListDescsFT,false);
+
+        if (typeof newKey === 'undefined') {
+          document.getElementById("saveb").disabled = true
+          document.getElementById("idForm").hidden = true
+            
+        }else{
+            document.getElementById('key').value = newKey
+            console.log("new key  :" , getKeyByValue(ListDescsFT,false) ,"  is " ,ListDescsFT[key]);
+            document.getElementById('title').value = ListOfTitles[newKey];
+            console.log("the new title :" , ListOfTitles[newKey]);
+
+        }
+
+        
+
+    }
+
+    function card(id ,  title , description){
+        oslist[id] = description
+
+        i++
+        return `
+   <div id = "${id}" class="col-sm-6">
+    <div   class="card">
+      <div class="card-body">
+        <h5 class="card-title">${title}</h5>
+        <p class="card-text">${description}</p>
+        <button onclick = 'deleteSO("${id}")'  class="btn btn-yh">delete</button>
+        -
+        <button onclick ="editSO('${id}' ,'${title}' , '${description}')"  class="btn btn-yh">edit</button>
+      </div>
+    </div>
+  </div>
+
+        `
+        
+    }
+
+    function initAll() {
+        if (entries == null) {
+            return;
+        }
+
+        // keys = Object.keys(entries);
+        keys = Object.keys(oslist);
+        for (var i = 0; i < keys.length; i++) {
+            if ((entries[keys[i]] == "") || (entries[keys[i]] == null) || (entries[keys[i]] == "vide"))  {
+                continue;
+            }
+
+            e = {
+            'title' : ListOfTitles[keys[i]],
+            'description' : entries[keys[i]],
+            'key' : keys[i]
+            }
+
+            addNewSO(e);
+
+
+        }
+
+
+    }
+    initAll();
+
+    function deleteSO(id){
+        // get elements
+        newKey = getKeyByValue(ListDescsFT,false);
+
+        var child = document.getElementById(id);
+        var parent = document.getElementById("SO");
+
+        // Delete child
+        parent.removeChild(child);
+        delete oslist[id]
+        ListDescsFT[id] = false
+
+        console.log("getKeyByValue in delete function : " + newKey);
+        if (typeof newKey === 'undefined') {
+            document.getElementById("saveb").disabled = false
+            document.getElementById("idForm").hidden = false
+            document.getElementById('key').value = id
+            document.getElementById('title').value = ListOfTitles[id];
+            
+        }
+
+
+    }
+
+    function editSO(id , title , description){
+          deleteSO(id);
+          description = description.replace(/<br\s*\/?>/gi,' \n');
+          document.getElementById('title').value = title
+          document.getElementById('description').value = description
+          document.getElementById('key').value = id;
+
+    }
+
+    function collect(){
+        // data = {
+        //     "object" : oslist["object" ],
+        //     "perimetre" : oslist["perimetre"  ], 
+        //     "regleDeGestion" : oslist["regleDeGestion" ],
+        //     "principauxIntervenants" : oslist["principauxIntervenants"  ], 
+        //     "logigrammeDuProcessus" : oslist["logigrammeDuProcessus"  ], 
+        //     "descriptionDuprocessus" : oslist["DescriptionDuprocessus" ],
+        //     "reportingPeriodique " : oslist["reportingPeriodique " ],
+        //     "gestionDesIncidents " : oslist["gestionDesIncidents " ],
+        //     "suiviDesKRI " : oslist["suiviDesKRI "]
+
+        // }
+        for (let i in ListDescsFT ) {
+            if (!ListDescsFT[i]) {
+                ae();
+               return -1;  
+            }
+        }
+        data = oslist;
+
+        console.log(JSON.stringify(data));
+        fetch("", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'}, 
+        body: JSON.stringify(data)
+        }).then(res => {
+        console.log("Request complete! response:", res);
+
+      nt(res);
+
+        });
+    }
+
+
+</script>
+
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+
+
+
+</html>

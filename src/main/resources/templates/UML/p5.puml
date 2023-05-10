@@ -1,0 +1,60 @@
+@startuml
+
+
+class Organization {
+     -String name
+}
+class RiskMapping {
+    ......
+}
+
+class BusinessContinuityPlan {
+    - String contexte 
+    - String formaliser 
+    - String gerreRisque 
+    - String scenarios 
+    - String formaliserProcedures 
+    - String strategieContinuite 
+    - String criseCommunication 
+    - String planContinuite 
+    - String capacitePlan 
+    - String exercices 
+}
+
+
+class KriMeasures {
+    - String mesure1
+    - String cible1
+    - String ecart1
+    - String mesure2
+    - String cible2
+    - String ecart2
+    - String mesure3
+    - String cible3
+    - String ecart3
+    - String mesure4
+    - String cible4
+    - String ecart4
+    - String explicationsDesEcarts
+    - String mesuresCorrectives
+}
+class ObjectifProgression {
+    - String objectif
+    - String risque
+    - String cible
+    - String realisation
+    - String analyseEcart
+}
+
+class ProblemDescription {
+    -  String description 
+}
+
+Organization "1" -- "1..*" ObjectifProgression
+ProblemDescription "1" -- "1" Organization
+BusinessContinuityPlan "1" -- "1" Organization
+RiskMapping "1" -- "1..*" KriMeasures
+
+Organization "1" -- "1..*" RiskMapping
+
+@enduml

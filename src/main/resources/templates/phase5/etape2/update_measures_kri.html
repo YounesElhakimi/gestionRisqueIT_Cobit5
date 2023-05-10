@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<style>
+    textarea {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <p id="titleOfPage" class="headTxt">
+                    Please update measures of KRI
+            
+                </p>
+    
+            </div>
+    
+        </div>
+    </div>
+
+
+    
+
+    <style>
+        .w-kri{
+            width: 200px;
+        }
+    </style>
+           
+
+    <div class="divtable">
+        <table class="fl-table "  id="table_0" border="2px" cellspacing="0" cellpadding="" style="display: block;overflow-x: auto;width:100%;">
+        
+
+    </table>
+
+    </div>
+
+    <br>
+    <br>
+
+ 
+
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    var entries = /*[[${kriMeasuresDTOList}]]*/ 'default';
+
+    console.log(entries);
+</script>
+
+
+<script>
+  function addEventForExposition(tr , i) {
+
+
+    document.getElementById(tr+'_mesure'+i).addEventListener('change', function () {
+     mesure = parseInt(document.getElementById(tr+'_mesure'+i).value);
+      cible = parseInt( document.getElementById(tr+'_cible'+i).value);
+      document.getElementById(tr+'_ecart'+i).value = cible - mesure;
+    
+   });
+
+   document.getElementById(tr+'_cible'+i).addEventListener('change', function () {
+     mesure = parseInt(document.getElementById(tr+'_mesure'+i).value);
+      cible = parseInt( document.getElementById(tr+'_cible'+i).value);
+      document.getElementById(tr+'_ecart'+i).value = cible - mesure;
+    
+   });
+
+ 
+    }
+
+    function initTable() {
+
+        var html = `<tr>
+            <thead style="background-color:#B0C4DE;">
+
+            <th class="w-kri"> KRI</th>
+            <th > Measure 1</th>
+            <th > Target 1</th>
+            <th > Gap 1</th>
+            <th > Measure 2</th>
+            <th > Target 2</th>
+            <th > Gap 2</th>
+            <th > Measure 3</th>
+            <th > Target 3</th>
+            <th > Gap 3</th>
+            <th > Measure 4</th>
+            <th > Target 4</th>
+            <th > Gap 4</th>
+            	
+            <th > Explanations of the gaps</th>
+            <th > Corrective measures</th>
+            </thead>
+        </tr>`;
+        for (let j = 0; j < entries.length; j++) {
+
+            html +=
+                `
+       
+             <input type="text" hidden disabled id="table_0_tr_${j}_id" value="${entries[j]["id"]}" >
+            <input type="text" hidden disabled id="table_0_tr_${j}_rmId" value="${entries[j]["rmId"]}" >
+            <tr>
+        
+            <td> <input id = "table_0_tr_${j}_KRI" type="text" disabled   value="${entries[j]['kri']}"   > </td>
+         
+            <td> <input type="number" value="${entries[j]['mesure1']}" id = "table_0_tr_${j}_mesure1"> </td>
+            <td> <input type="number" value="${entries[j]['cible1']}" id = "table_0_tr_${j}_cible1"> </td>
+            <td> <input type="number" disabled value="${entries[j]['ecart1']}" id = "table_0_tr_${j}_ecart1"> </td>
+           
+            <td> <input type="number" value="${entries[j]['mesure2']}" id = "table_0_tr_${j}_mesure2"> </td>
+            <td> <input type="number" value="${entries[j]['cible2']}" id = "table_0_tr_${j}_cible2"> </td>
+            <td> <input type="number" disabled value="${entries[j]['ecart2']}" id = "table_0_tr_${j}_ecart2"> </td>
+           
+            <td> <input type="number" value="${entries[j]['mesure3']}" id = "table_0_tr_${j}_mesure3"> </td>
+            <td> <input type="number" value="${entries[j]['cible3']}" id = "table_0_tr_${j}_cible3"> </td>
+            <td> <input type="number" disabled value="${entries[j]['ecart3']}" id = "table_0_tr_${j}_ecart3"> </td>
+         
+            <td> <input type="number" value="${entries[j]['mesure4']}" id = "table_0_tr_${j}_mesure4"> </td>
+            <td> <input type="number" value="${entries[j]['cible4']}" id = "table_0_tr_${j}_cible4"> </td>
+            <td> <input type="number" disabled value="${entries[j]['ecart4']}" id = "table_0_tr_${j}_ecart4"> </td>
+        
+            <td> <textarea     id = "table_0_tr_${j}_explicationsDesEcarts"> ${entries[j]['explicationsDesEcarts']} </textarea></td>
+            <td> <textarea     id = "table_0_tr_${j}_mesuresCorrectives"> ${entries[j]['mesuresCorrectives']} </textarea> </td>    
+      
+        </tr>
+        `
+        };
+
+        document.getElementById('table_0').innerHTML = html;
+
+
+        for (let j = 0; j < entries.length; j++) {
+            for (let i = 1; i <= 4; i++) {
+                console.log("id : " + `table_0_tr_${j}_mesure${i}`);
+                console.log("id : " + `table_0_tr_${j}_cible${i}`);
+                addEventForExposition(`table_0_tr_${j}` ,i);
+
+
+                
+            }
+            
+        }
+
+    }
+
+</script>
+
+<script>
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 0; idtr < entries.length; idtr++) {
+            t_index = "table_0_tr_" + idtr;
+            id = document.getElementById(t_index + "_id").value.trim();
+            rmId = document.getElementById(t_index + "_rmId").value.trim();
+            kri = document.getElementById(t_index + "_KRI").value.trim();
+            
+            
+            mesure1 = document.getElementById(t_index + "_mesure1").value.trim();
+            cible1 = document.getElementById(t_index + "_cible1").value.trim();
+            ecart1 = document.getElementById(t_index + "_ecart1").value.trim();
+            mesure2 = document.getElementById(t_index + "_mesure2").value.trim();
+            cible2 = document.getElementById(t_index + "_cible2").value.trim();
+            ecart2 = document.getElementById(t_index + "_ecart2").value.trim();
+            mesure3 = document.getElementById(t_index + "_mesure3").value.trim();
+            cible3 = document.getElementById(t_index + "_cible3").value.trim();
+            ecart3 = document.getElementById(t_index + "_ecart3").value.trim();
+            mesure4 = document.getElementById(t_index + "_mesure4").value.trim();
+            cible4 = document.getElementById(t_index + "_cible4").value.trim();
+            ecart4 = document.getElementById(t_index + "_ecart4").value.trim();
+            explicationsDesEcarts = document.getElementById(t_index + "_explicationsDesEcarts").value.trim();
+            mesuresCorrectives = document.getElementById(t_index + "_mesuresCorrectives").value.trim();
+                                    
+
+            // console.log("kri   : " , kri);
+
+
+            data.push({
+                'id': parseInt(id),
+                'rmId': parseInt(rmId),
+                'kri': kri,
+                'mesure1' : mesure1,
+                'cible1' : cible1,
+                'ecart1' : ecart1,
+                'mesure2' : mesure2,
+                'cible2' : cible2,
+                'ecart2' : ecart2,
+                'mesure3' : mesure3,
+                'cible3' : cible3,
+                'ecart3' : ecart3,
+                'mesure4' : mesure4,
+                'cible4' : cible4,
+                'ecart4' : ecart4,
+                'explicationsDesEcarts' : explicationsDesEcarts,
+                'mesuresCorrectives' : mesuresCorrectives
+                                
+            }
+            );
+
+
+
+
+        }
+
+        console.log(JSON.stringify(data));
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+
+            nt(res);
+
+        });
+
+
+    }
+
+    if (entries.length > 0) {
+        initTable();
+    }
+
+</script>
+
+
+</html>

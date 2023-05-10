@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head th:insert="fragments/head.html :: head"></head>
+
+<body id="page-top">
+
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <div>
+        <p class="headTxt">
+            Please specify the communication plan:
+    
+        </p>
+    </div>
+    <br>
+    <style>
+
+    </style>
+    <div class="divtable">
+
+        <table  id="table_0"  class="table table-striped" >
+            <tr id="table_0_tr_0">
+                <th > Communication action</th>
+                <th > Objective</th>
+                <th > Target</th>
+                <th > Action responsible</th>
+                <th > Deadline</th>
+                <th style="min-width: 50px;" > <i class="fas fa-trash-alt"></i> </th>
+
+            </tr>
+            <tr id="table_0_tr_1">
+                <td> <textarea name="" id="table_0_tr_1_action"></textarea></td>
+                <td> <textarea name="" id="table_0_tr_1_objectif"></textarea></td>
+                <td> <textarea name="" id="table_0_tr_1_cible"></textarea></td>
+                <td> <textarea name="" id="table_0_tr_1_responsable"></textarea></td>
+                <td> <input type="date" id="table_0_tr_1_echeance"></td>
+
+                <td>
+                    <Button class="btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_1')"><i class="fas fa-trash-alt"></i></Button>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="row">
+            <div class="col">
+            <div class="float-right">
+                <button onclick="addligne('table_0')" type=""  class="btn btn-info add-new" style="font-size:15px;" ><i class="fa fa-plus"></i>add a Communication action</button>
+            </div>
+        </div>
+        <br>
+<br>
+<br>
+    </main>
+
+
+
+<br>
+<br>
+<br>
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+<script type="text/javascript" th:inline="javascript">
+    var nbrL = 1
+    var entries = /*[[${communicationPlans}]]*/ 'default';
+
+    console.log(entries);
+</script>
+<script>
+    function initligne(index, e) {
+
+        var html = `
+        <tr id="table_0_tr_${index}">
+                <td> <textarea name="" id="table_0_tr_${index}_action">${e['action']}</textarea></td>
+                <td> <textarea name="" id="table_0_tr_${index}_objectif">${e['objectif']}</textarea></td>
+                <td> <textarea name="" id="table_0_tr_${index}_cible">${e['cible']}</textarea></td>
+                <td> <textarea name="" id="table_0_tr_${index}_responsable">${e['responsable']}</textarea></td>
+                <td> <input type="date" name="" id="table_0_tr_${index}_echeance"value="${e['echeance']}"></td>
+
+                <td>
+                    <Button class="btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_${index}')"><i class="fas fa-trash-alt"></i></Button>
+                </td>
+            </tr>
+     `
+        return html;
+    }
+    function initTable() {
+        if (entries.length <= 0) {
+            return;
+        }
+        nbrL = entries.length;
+
+
+        var rhtml = `
+        <tr id="table_0_tr_0">
+                <th > Communication action</th>
+                <th > Objective</th>
+                <th > Target</th>
+                <th > Action responsible</th>
+                <th > Deadline</th>
+                <th style="min-width: 50px;" > <i class="fas fa-trash-alt"></i> </th>
+            </tr>
+`;
+
+        for (let index = 1; index <= entries.length; index++) {
+            const e = entries[index - 1];
+            rhtml += initligne(index, e);
+
+        }
+
+        document.getElementById('table_0').innerHTML = rhtml;
+    }
+    initTable();
+</script>
+
+<script>
+
+
+    function addligne(table_id) {
+        var id = parseInt(table_id.split('_')[1]);
+        console.log(id);
+        nbrL = nbrL + 1;
+
+        var table = document.getElementById(table_id);
+        var html = `
+                    <tr id="${table_id}_tr_${nbrL}"> 
+                        <td> <textarea name="" id="${table_id}_tr_${nbrL}_action" ></textarea></td>  
+                <td> <textarea name="" id="${table_id}_tr_${nbrL}_objectif" ></textarea></td>  
+                <td> <textarea name="" id="${table_id}_tr_${nbrL}_cible" ></textarea></td>  
+                <td> <textarea name="" id="${table_id}_tr_${nbrL}_responsable" ></textarea></td>  
+                <td> <input type="date" name="" id="${table_id}_tr_${nbrL}_echeance" ></td>  
+                <td>
+                    <Button class="btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_${nbrL}')"><i class="fas fa-trash-alt"></i></Button>
+                </td>
+                </tr>
+                   `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+
+    }
+</script>
+
+
+<script>
+    function deleteTr(idtr) {
+        document.getElementById(idtr).hidden = true;
+        //  document.getElementById(idtr).style.display = "none";
+        document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+    }
+
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 1; idtr <= nbrL; idtr++) {
+            try {
+                isdel1 = document.getElementById(`table_0_tr_${idtr}`).getAttribute("deletetr");
+
+            } catch (error) {
+                isdel1 = 'false';
+            }
+
+            if (isdel1 == "true") {
+                continue;
+            }
+
+            action = document.getElementById(`table_0_tr_${idtr}_action`).value.trim();
+            objectif = document.getElementById(`table_0_tr_${idtr}_objectif`).value.trim();
+            cible = document.getElementById(`table_0_tr_${idtr}_cible`).value.trim();
+            responsable = document.getElementById(`table_0_tr_${idtr}_responsable`).value.trim();
+            echeance = document.getElementById(`table_0_tr_${idtr}_echeance`).value.trim();
+            
+            if (action === "" && objectif === "" && cible === "" && responsable === "" && echeance === "" ) {
+                
+                continue;
+            }else  if (action === "" || objectif === "" || cible === "" || responsable === "" || echeance === "" ) {
+                ae();
+                return;
+            }
+
+            data.push({
+                'action': action,
+                'objectif': objectif,
+                'cible': cible,
+                'responsable': responsable,
+                'echeance': echeance,
+
+            });
+
+
+        }
+
+
+        console.log(JSON.stringify(data));
+        var sizeL = Object.keys(data).length;
+        if (sizeL === 0) {
+            ae("Please add at least one  IT risk events ");
+            return -1;
+        }
+
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+            nt(res);
+        });
+
+    }
+
+   
+</script>
+
+
+</html>

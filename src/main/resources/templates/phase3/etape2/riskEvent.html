@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<body id="page-top">
+
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+        <p id="titleOfPage" class="headTxt">
+            Please specify the IT risk events that have materialised:
+        </p>
+            </div>
+    
+        </div>
+    </div>
+
+
+    <style>
+    
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border:solid 1px;
+            border-collapse: collapse;
+            width: 50%;
+            max-width: 100%;
+            white-space: nowrap;
+            background-color: white;
+        
+        }
+        
+        .fl-table td, .fl-table th {
+            text-align: center;
+            padding: 8px;
+               border:solid 1px;
+        }
+        
+        .fl-table td {
+            border-right: 1px solid #f8f8f8;
+            font-size: 12px;
+               border:solid 1px;
+        }
+        
+        .fl-table thead th {
+            
+            color: rgb(0, 0, 0);
+            background: #00416A;
+               border:solid 1px;
+               min-width: 250px;
+        }
+        
+        
+        .fl-table thead th:nth-child(odd) {
+            color:rgb(0, 0, 0);
+            background:#B0C4DE;
+               border:solid 1px;
+        }
+        
+        .fl-table tr:nth-child(even) {
+            background: #F8F8F8;
+            border:solid 1px;
+        }
+        
+        /* Responsive */
+        
+        @media (max-width: 767px) {
+            .fl-table {
+                display: block;
+                width: 100%;
+            }
+            .table-wrapper:before{
+                content: "Scroll horizontally >";
+                display: block;
+                text-align: right;
+                font-size: 11px;
+                color: white;
+                padding: 0 0 10px;
+            }
+            .fl-table thead, .fl-table tbody, .fl-table thead th {
+                display: block;
+            }
+            .fl-table thead th:last-child{
+                border-bottom: solid 1px;
+            }
+            .fl-table thead {
+                float: left;
+            }
+            .fl-table tbody {
+                width: auto;
+                position: relative;
+                overflow-x: auto;
+            }
+            .fl-table td, .fl-table th {
+                padding: 20px .625em .625em .625em;
+                height: 60px;
+                vertical-align: middle;
+                box-sizing: border-box;
+                overflow-x: hidden;
+                overflow-y: auto;
+                width: 120px;
+                font-size: 13px;
+                text-overflow: ellipsis;
+            }
+            .fl-table thead th {
+                text-align: left;
+                border-bottom: 1px solid #f7f7f9;
+            }
+            .fl-table tbody tr {
+                display: table-cell;
+            }
+            .fl-table tbody tr:nth-child(odd) {
+                background: none;
+            }
+            .fl-table tr:nth-child(even) {
+                background: transparent;
+            }
+            .fl-table tr td:nth-child(odd) {
+                background: #F8F8F8;
+                border-right: 1px solid #E6E4E4;
+            }
+            .fl-table tr td:nth-child(even) {
+                border-right: 1px solid #E6E4E4;
+            }
+            .fl-table tbody td {
+                display: block;
+                text-align: center;
+            }
+        }
+        .table-wrapper{
+            margin: 10px 70px 70px;
+            box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+        }
+        tbody:nth-child(2n) {
+                    background-color: #dee2e6;
+                }
+        
+        .delete-btn{
+            display: block;
+        }
+
+        .delettd{
+            min-width: 50px;
+        }
+
+        
+        </style>
+
+    <div class="divtable">
+        <table class="fl-table "  id="table_0" border="2px" cellspacing="0" cellpadding="" style="display: block;overflow-x: auto;width:100%;">
+            <tr id="table_0_tr_0">
+                <thead style="background-color:#B0C4DE;">
+
+                <th class="th_bc_aq"> Description of incident</th>
+                <th class="th_bc_aq"> Date of incident	</th>
+                <th class="th_bc_aq"> Root causes</th>
+                <th class="th_bc_aq"> Estimated impact</th>
+                <th class="th_bc_aq">Quantified Impact (MAD)</th>
+                <th class="th_bc_aq"> Corresponding risk</th>
+                <th class="th_bc_aq"> Action plan implemented in response to the incident</th>
+                <th class="th_bc_aq"> % progress of the action plan</th>
+                <th style="min-width: 50px;" class="th_bc_aq"> <i class="fas fa-trash-alt"></i> </th>
+
+            </thead>
+            </tr>
+            <tr id="table_0_tr_1">
+                <td> <textarea name="" id="table_0_tr_1_description"></textarea></td>
+                <td> <input type="date" name="" id="table_0_tr_1_date"></td>
+                <td> <textarea name="" id="table_0_tr_1_cause"></textarea></td>
+                <td> 
+                    <select id="table_0_tr_1_impacte">
+                        <option value="Very low/not significant">Very low/not significant</option>
+                        <option value="Low/Minor">Low/Minor</option>
+                        <option value="Medium/Moderate">Medium/Moderate</option>
+                        <option value="High/Significant">High/Significant</option>
+                        <option value="Very high/Very significant">Very high/Very significant</option>
+                        <option value="Extremely high/ Extremely significant">Extremely high/ Extremely significant</option>
+                    </select>
+                </td>
+                <td> <input type="number"  step="100" name="" id="table_0_tr_1_impacteMAD"></td>
+                <td> <input name="" id="table_0_tr_1_risque" list="raList"></td>
+                <td> <textarea name="" id="table_0_tr_1_actionPlan"></textarea></td>
+                <td> <input class="avancementc" type="number"  min="0" max="100"  name="" id="table_0_tr_1_avancement"></td>
+
+                <td>
+                    <Button class=" btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_1')"> <i class="fas fa-trash-alt"></i> </Button>
+                </td>
+            </tr>
+
+        </table>
+        <div class="row">
+            <div class="col">
+            <div class="float-right">
+                <button  onclick="addligne('table_0')" class="btn btn-info add-new" style="font-size:15px;margin: 10px 35px;" ><i class="fa fa-plus"></i>add a Ligne</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <br>
+    <button onclick="collect()" type="" class="btn btn-primary btn-xl js-scroll-trigger">save </button>
+
+    <br>
+    <button onclick="next()" type="" class="btn btn-primary btn-xl js-scroll-trigger">next </button>
+ -->
+
+   
+
+    <datalist id="raList">
+        <option>risque 1</option>
+        <option>risque 2</option>
+      
+    </datalist>
+
+<br><br><br>
+
+      <div th:insert="fragments\previousnext.html :: div"></div>
+</body>
+
+<script>
+    if (window.location.pathname  == '/update_data_about_IT_incidents') {
+        document.getElementById("titleOfPage").innerText = `
+        Please update data about IT incidents (if applicable : new incidents or % of acheivement or …):
+
+        `;
+    }
+</script>
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+<script type="text/javascript" th:inline="javascript">
+    var nbrL = 1
+    var entries = /*[[${riskEventList}]]*/ 'default';
+    var raList = /*[[${raList}]]*/ 'default';
+
+    console.log(entries);
+</script>
+
+<script>
+
+    function listOfRisques() {
+        if (raList.length == 0) {
+            return ;
+        }
+
+        html = ``;
+        for (let i = 0; i < raList.length; i++) {
+            const e = raList[i];
+            html += `  <option>${e['risque']}</option>`;
+            
+        }
+
+        html += ``;
+
+       listhtml =document.getElementById('raList');
+       listhtml.innerHTML = html;
+
+    }
+
+    listOfRisques();
+
+ 
+
+    function deleteTr(idtr) {
+        document.getElementById(idtr).hidden = true;
+        // document.getElementById(idtr).style.display = "none";
+        document.getElementById(idtr).setAttribute("deleteTr", "true");
+    }
+
+    function initligne(index, e) {
+
+        var html = `
+        <tr id="table_0_tr_${index}"> 
+                <td> <textarea name="" id="table_0_tr_${index}_description" >${e['description']}</textarea></td>  
+                <td> <input type="date" name="" id="table_0_tr_${index}_date" value="${e['date']}"></td>  
+                <td> <textarea name="" id="table_0_tr_${index}_cause" > ${e['cause']}</textarea></td>  
+                <td> 
+                    <select id="table_0_tr_${index}_impacte" >
+                        <option id="table_0_tr_${index}_impacte_VL" value="Very low/not significant">Very low/not significant</option>
+                        <option id="table_0_tr_${index}_impacte_L" value="Low/Minor">Low/Minor</option>
+                        <option id="table_0_tr_${index}_impacte_M" value="Medium/Moderate">Medium/Moderate</option>
+                        <option id="table_0_tr_${index}_impacte_H" value="High/Significant">High/Significant</option>
+                        <option id="table_0_tr_${index}_impacte_VH" value="Very high/Very significant">Very high/Very significant</option>
+                        <option id="table_0_tr_${index}_impacte_E" value="Extremely high/ Extremely significant">Extremely high/ Extremely significant</option>
+                    </select>
+                </td>  
+                <td> <input type="number"  step="100" value="${e['impacteMAD']}" name="" id="table_0_tr_${index}_impacteMAD" >  </td>  
+                <td> <input name="" id="table_0_tr_${index}_risque" value="${e['risque']}" list="raList" ></td>  
+                <td> <textarea name="" id="table_0_tr_${index}_actionPlan" >${e['actionPlan']}</textarea></td>  
+                <td> <input class="avancementc"  type="number"name="" min="0" max="100" id="table_0_tr_${index}_avancement" value="${e['avancement']}" ></td>  
+
+                <td >
+                    <Button class=" btn btn-info  delete-btn" onclick="deleteTr('table_0_tr_${index}')"> <i class="fas fa-trash-alt"></i> </Button>
+                </td>
+            </tr>
+             `
+        return html;
+    }
+    function initTable() {
+        if (entries.length <= 0) {
+            return;
+        }
+        nbrL = entries.length;
+
+
+        var rhtml = `
+        <tr id="table_0_tr_0">
+             <thead style="background-color:#B0C4DE;">
+
+                <th class="th_bc_aq"> Description of incident</th>
+                <th class="th_bc_aq"> Incident date	</th>
+                <th class="th_bc_aq"> Root causes</th>
+                <th class="th_bc_aq"> Estimated impact</th>
+                <th class="th_bc_aq">Quantified Impact (MAD)</th>
+                <th class="th_bc_aq"> Corresponding risk</th>
+                <th class="th_bc_aq"> Action plan implemented in response to the incident</th>
+                <th class="th_bc_aq"> % progress of the action plan</th>
+                <th style="min-width: 50px;" class="th_bc_aq"> <i class="fas fa-trash-alt"></i> </th>
+
+            </thead>
+            </tr>
+        `;
+
+        for (let index = 1; index <= entries.length; index++) {
+            const e = entries[index - 1];
+            rhtml += initligne(index, e);
+
+        }
+
+        document.getElementById('table_0').innerHTML = rhtml;
+
+        for (let index = 1; index <= entries.length; index++) {
+            const e = entries[index - 1];
+            document.getElementById(`table_0_tr_${index}_impacte`).value = e['impacte']
+        }
+
+    }
+    initTable();
+</script>
+
+<script>
+
+
+
+    function addligne(table_id) {
+        var id = parseInt(table_id.split('_')[1]);
+        console.log(id);
+        nbrL = nbrL + 1;
+
+        var table = document.getElementById(table_id);
+        var html = `
+                    <tr id="${table_id}_tr_${nbrL}"> 
+                <td> <textarea name="" id="${table_id}_tr_${nbrL}_description" ></textarea></td>  
+                <td> <input type="date" name="" id="${table_id}_tr_${nbrL}_date"></td>  
+                <td> <textarea name="" id="${table_id}_tr_${nbrL}_cause" ></textarea></td>  
+                <td>
+                    <select id="${table_id}_tr_${nbrL}_impacte"">
+                        <option value="Very low/not significant">Very low/not significant</option>
+                        <option value="Low/Minor">Low/Minor</option>
+                        <option value="Medium/Moderate">Medium/Moderate</option>
+                        <option value="High/Significant">High/Significant</option>
+                        <option value="Very high/Very significant">Very high/Very significant</option>
+                        <option value="Extremely high/ Extremely significant">Extremely high/ Extremely significant</option>
+                    </select>    
+                </td>  
+                <td> <input type="number"  step="100"  name="" id="${table_id}_tr_${nbrL}_impacteMAD" ></td>  
+                <td> <input name="" id="${table_id}_tr_${nbrL}_risque" list="raList"></td>  
+                <td> <textarea name="" id="${table_id}_tr_${nbrL}_actionPlan" ></textarea></td>  
+                <td> <input class="avancementc"  type="number"  min="0" max="100" name="" id="${table_id}_tr_${nbrL}_avancement" ></td>  
+          
+                <td >
+                    <Button class=" btn btn-info  delete-btn" onclick="deleteTr('${table_id}_tr_${nbrL}')"> <i class="fas fa-trash-alt"></i> </Button>
+                </td>
+                </tr>
+                   `
+        // table.innerHTML = table.innerHTML +  html;
+
+        table.insertAdjacentHTML("beforeend",
+            html);
+            initEvL();
+    }
+</script>
+
+
+<script>
+    function deleteTr(idtr) {
+        document.getElementById(idtr).hidden = true;
+        //  document.getElementById(idtr).style.display = "none";
+        document.getElementById(idtr).setAttribute("deleteTr", "true");
+
+    }
+
+    function collect() {
+
+
+        var data = new Array();
+        for (let idtr = 1; idtr <= nbrL; idtr++) {
+            try {
+                isdel1 = document.getElementById(`table_0_tr_${idtr}`).getAttribute("deletetr");
+
+            } catch (error) {
+                isdel1 = 'false';
+            }
+
+            if (isdel1 == "true") {
+                continue;
+            }
+
+            description = document.getElementById(`table_0_tr_${idtr}_description`).value.trim();
+            date = document.getElementById(`table_0_tr_${idtr}_date`).value.trim();
+            cause = document.getElementById(`table_0_tr_${idtr}_cause`).value.trim();
+            impacte = document.getElementById(`table_0_tr_${idtr}_impacte`).value.trim();
+            impacteMAD = document.getElementById(`table_0_tr_${idtr}_impacteMAD`).value.trim();
+            risque = document.getElementById(`table_0_tr_${idtr}_risque`).value.trim();
+            actionPlan = document.getElementById(`table_0_tr_${idtr}_actionPlan`).value.trim();
+            avancement = document.getElementById(`table_0_tr_${idtr}_avancement`).value.trim();
+
+            if (description === "" || date === "" || cause ===""  || impacte ===""  || impacteMAD ===""  || risque ===""  || actionPlan ==="" || avancement ==="" ) {
+                            ae();
+                            return;
+             }
+            data.push({
+                'description': description,
+                'date': date,
+                'cause': cause,
+                'impacte': impacte,
+                'impacteMAD': impacteMAD,
+                'risque': risque,
+                'actionPlan': actionPlan,
+                'avancement': avancement
+
+            });
+
+
+        }
+
+
+        console.log(JSON.stringify(data));
+
+
+        var sizeL = Object.keys(data).length;
+        if (sizeL === 0) {
+            ae("Please add at least one  IT risk events ");
+            return -1;
+        }
+
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+            nt(res);
+        });
+
+
+    }
+
+</script>
+
+<script>
+   function initEvL(params) {
+    $(function () {
+        $(".avancementc").keydown(function () {
+            // Save old value.
+            if (!$(this).val() || (parseInt($(this).val()) <= 100 && parseInt($(this).val()) >= 0))
+                $(this).data("old", $(this).val());
+        });
+        $(".avancementc").keyup(function () {
+            // Check correct, else revert back to old value.
+            if (!$(this).val() || (parseInt($(this).val()) <= 100 && parseInt($(this).val()) >= 0))
+                ;
+            else
+                $(this).val($(this).data("old"));
+        });
+    });
+   }
+
+   initEvL();
+</script>
+</html>

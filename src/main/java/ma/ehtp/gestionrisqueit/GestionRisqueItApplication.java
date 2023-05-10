@@ -1,6 +1,6 @@
 package ma.ehtp.gestionrisqueit;
 
-import ma.ehtp.gestionrisqueit.services.FilesStorageService;
+import ma.ehtp.gestionrisqueit.phase0.services.FilesStorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +18,7 @@ public class GestionRisqueItApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        storageService.deleteAll();
+       // storageService.deleteAll();
         storageService.init();
     }
 }

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+<style>
+     .Critical {
+                background-color: red;
+            }
+
+            .Major {
+                background-color: orange;
+            }
+
+            .Moderate {
+                background-color: yellow;
+
+            }
+
+            .Minor {
+                background-color: green;
+
+            }
+</style>
+
+<body id="page-top" >
+
+  <body id="page-top">
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    <main class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="text-uppercase">
+                        <strong>
+                            Risk  Mapping 
+                                               </strong>
+                    </h2>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+
+
+                <div class="form-group">
+
+
+                    <button id ="taggelHiddenBtn" onclick="taggelHidden()" class="btn btn-yh btn-xl js-scroll-trigger">
+                        display 
+                    </button>
+
+     
+
+                    <button onclick="Export2Excel('exportContent')" class="btn btn-yh btn-xl js-scroll-trigger">
+                        Download  
+                    </button>
+                    
+
+                 
+                </div>
+            </div>
+
+            
+
+    </main>
+
+
+
+
+    <br>
+
+    <style>
+        #exportContent{
+          
+        }
+    </style>
+  <style>
+    body{
+        font-size: 12px;
+    }
+    th {
+    
+       color: rgb(0, 0, 0);
+        background: #00416A;
+       border:solid 1px;
+       min-width: 120px;
+       max-width: 120px;
+  }
+
+  .thShort{
+    min-width: 70px;
+       max-width: 70px;
+  }
+
+  .headtable{ 
+    background-color:white;
+  }
+</style>
+    <div  id="exportContent" hidden class="divtable"  style="display: block;overflow-x: auto;width:100%;">
+
+      <div th:insert="fragments/headTable.html :: div"></div>
+
+  <table class="fl-table"  id="table_0" border="2px" cellspacing="0" cellpadding="">
+            
+        </table>
+    </div>
+    
+<br><br><br>
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+
+    <script>
+        function taggelHidden() {
+            div = document.getElementById('exportContent'); 
+            btn =  document.getElementById('taggelHiddenBtn'); 
+
+            if (div.hidden) {
+                div.hidden = false;
+                btn.textContent = "Hide";
+            }else{
+                div.hidden = true;
+                btn.textContent = " Display";
+
+            }
+        }
+    </script>
+
+<script type="text/javascript" th:inline="javascript">
+     var entries = /*[[${riskMappingList}]]*/ 'default';
+
+
+       function getNum(str) {
+       if (str.search(/\d/i) == -1) {
+           return 0;
+       }
+       else{
+
+           return parseInt(str[str.search(/\d/i)]);
+       }
+
+   }
+   
+   function getOpt(tr) {
+       optionList  = ["Accept" , "Avoid" ,"Mitigate" ,"Transfer"];
+       nbrOpt = -1;
+       lnameOpt = "Vide";
+       for (let i = 0; i < optionList.length; i++) {
+           const o = optionList[i];
+           coutTr = tr+"_option"+o+"Cout";
+           beneficeTr = tr+"_benefice"+o+"Cout";
+           
+           Cout = document.getElementById(coutTr).value;
+           Benefice = document.getElementById(beneficeTr).value;
+
+           thisNbrOpt = getNum(Cout) * getNum(Benefice)
+           if (thisNbrOpt == nbrOpt) {
+               lnameOpt += " , " + o;
+           }
+           if (thisNbrOpt > nbrOpt) {
+               lnameOpt = o;
+               nbrOpt = thisNbrOpt;
+
+           }
+
+           console.log("option "+o+"  nbr :"+thisNbrOpt);
+       }
+
+       console.log("optimale "+lnameOpt+"  nbr :"+nbrOpt);
+       return lnameOpt;
+   }
+
+   var nbrL = -1;
+
+   function initligne(index , e) {
+    listOfOptions = {
+    "optionAcceptCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "optionAvoidCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "optionMitigateCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "optionTransferCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "beneficeAcceptCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "beneficeAvoidCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "beneficeMitigateCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""},
+    "beneficeTransferCout" : {"F" : "" , "M" : "" , "E" : "" , "N" :""}
+    }
+   
+     lisop =  Object.keys(listOfOptions);
+     for (let i = 0; i < lisop.length; i++) {
+        const o = lisop[i];
+
+         console.log("e :" ,e);
+         console.log("e[o] :" ,e[o]);
+
+        var str =e[o];
+        var matches = str.match(/\b(\w)/g);
+        var key = matches[0];
+        listOfOptions[o][key] = 'selected="selected"'
+        
+     }
+        
+        var html = `
+        <tbody id="table_0_tr_${index}">
+    <tr>
+ 
+ <td class="headcol"  rowspan="4" id="" >
+     ${e['macroProcessus']}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['processus']}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['category']}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['risque']}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['kri']}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['facteur'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['consequences'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+    </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['controlActivities'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+    </td>
+
+  <td class=""  rowspan="4" id="" > 
+    ${e['efficacite']}
+ </td> 
+
+
+
+
+  <td class=""  rowspan="4" id="" > 
+    ${e['frequence']}
+      </td> 
+  <td class=""  rowspan="4" id="" > 
+    ${e['impact']}
+     </td> 
+  <td class=""  rowspan="4" id="" > 
+    ${e['exposition']}
+      </td> 
+
+  <td class=" ${e['criticalityLevel']}"  rowspan="4" class="criticalityLevel" id="table_0_tr_${index}_criticalityLevel" > ${e['criticalityLevel']} </td> 
+      
+  <td class="" > Accept </td> 
+  <td class="" >
+    ${e['optionAcceptCout']}
+  </td>
+
+  <td class="" >
+    ${e['beneficeAcceptCout']}
+  </td>
+
+  
+ 
+  <td class="${e['optionOptimaleCal']}"  rowspan="4"  id="table_0_tr_${index}_optionOptimale_c">
+    ${e['optionOptimaleCal']}
+  </td>
+
+  <td class=""  rowspan="4" id="" >
+     ${e['optionOptimale'].replace(/(?:\r\n|\r|\n)/g, '<br>')}
+
+     </td> 
+  <td class=""  rowspan="4" id="" >
+    ${e['besoins'].replace(/(?:\r\n|\r|\n)/g, '<br>')} 
+ </td> 
+  <td class=""  rowspan="4" id="" > 
+    ${e['avacncement']}
+    </td> 
+
+
+</tr>
+
+
+<tr>
+  <td class=""   > Avoid </td> 
+  <td class="" >
+    ${e['optionAvoidCout']}
+  </td>
+
+  <td class="" >
+    ${e['beneficeAvoidCout']}
+  </td>
+ 
+</tr>
+<tr>
+  <td class=""   > Mitigate </td> 
+  <td class="" >
+    ${e['optionMitigateCout']}
+  </td>
+
+  <td class="" >
+    ${e['beneficeMitigateCout']}
+  </td>
+  
+</tr>
+<tr>
+  <td class=""   > Transfer </td> 
+  <td class="" >
+    ${e['optionTransferCout']}
+  </td>
+
+  <td class="" >
+    ${e['beneficeTransferCout']}
+  </td>
+ 
+</tr>
+
+</tbody>
+             `
+      
+      
+             return html;
+    }
+
+    function initTable() {
+        if (entries.length <= 0) {
+            addligne('table_0');
+            return;
+        }
+        nbrL = entries.length -1;
+
+
+        var rhtml = `
+       
+
+        <thead style="background-color:#B0C4DE;">
+         
+            <tr>
+            <th class="headcol"> Macro-processus   </th>
+            <th class=""> Processus </th>
+            <th class=""> Risk category </th>
+            <th class=""> Risk </th>
+            <th class=""> kRI </th>
+
+            <th class=""> Risk factors </th>
+            <th class=""> Consequences </th>
+            <th class=""> Control activities </th>
+            <th class="thShort"> Effectiveness of controls </th>
+            <th class="thShort"> Frequency / Probability </th>
+
+            <th class="thShort"> Impact </th>
+            <th class="thShort"> Exposure </th>
+            <th class="thShort"> Level of criticality</th>
+            <th class=""> Potential risk response options </th>
+            <th class=""> Cost of potential risk response option </th>
+
+            <th class=""> Benefit of the potential risk response option</th>
+            <th class="thShort">optimal option</th>
+            <th class="">Risk Response Plan</th>
+            <th class="">Needs for the implementation of risk response plans </th>
+            <th class="thShort"> progress of risk response plans</th> 
+          
+        </tr>
+        
+        </thead>
+        `;
+
+        for (let index = 0; index < entries.length; index++) {
+        const e = entries[index];
+        rhtml += initligne(index ,e);  
+
+    }
+
+     document.getElementById('table_0').innerHTML = rhtml;
+
+ 
+    }
+  
+    initTable();
+</script>
+
+</body>
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+
+<script>
+      function collect() {
+            next();
+        }
+</script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    function Export2Excel(id="exportContent" ,name="sample-file.pdf" , f='A0' ) {
+        let t =  document.querySelector(`#${id} table`)
+        t.style = '';
+
+    let ff = [ t.width , t.height ]
+        console.log("f : ",ff);
+if (name.split(".")[name.split(".").length - 1] != ".pdf") {
+    name += ".pdf";
+}
+let element = document.getElementById(id);
+let ish =  element.hidden === true
+if (  ish ) {
+    element.hidden = false;
+
+}
+console.log(element);
+var opt = {
+    filename: name,
+    image: { type: 'jpeg', quality: 0.98 },
+    jsPDF: { unit: 'in', format: f },
+    html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+    margin: 0.51,
+
+};
+
+html2pdf().from(element).set(opt).save().then(()=>{
+    console.log("saved ");
+    if (ish) {
+        element.hidden = true;
+
+    }
+});
+
+
+} -->
+
+</script>
+
+
+
+
+<script th:src="@{js/Export2Word.js}"></script>
+
+
+
+</html>

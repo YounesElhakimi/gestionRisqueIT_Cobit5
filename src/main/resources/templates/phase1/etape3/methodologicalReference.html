@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:insert="fragments/head.html :: head" ></head>  
+
+
+<body id="page-top">
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+
+        <br>
+    
+    <main class="text-center text-Black d-flex masthead" >
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 >
+                        <strong>
+                            Methodological reference
+                          </strong>
+                    </h2>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 mx-auto">
+            
+                
+                    <div class="form-group">
+                        <a id ="taggelHiddenBtn" onclick="taggelHidden()" type="" class="btn btn-yh btn-xl js-scroll-trigger">
+                            Display 
+                        </a>
+
+
+                        <style>
+                            .div_d-i{
+                                display: inline;
+                            }
+
+                        </style>
+                        <div class="col-lg-8 mx-auto div_d-i">
+                            <div class="div_d-i" th:if="'level4' == ${level}">
+                                <a id="btnL4"  class="btn btn-yh btn-xl js-scroll-trigger" 
+                                      th:href="@{xlsx/2- Phase 1_Référentiel méthodologique_template_V2  l4.xlsx}">
+                                      Download 
+                                  </a>
+                            </div>
+            
+                            <div class="div_d-i" th:if="'level5' == ${level}">
+                                <a id="btnL5"  class="btn btn-yh btn-xl js-scroll-trigger" th:href="@{xlsx/2- Phase 1_Référentiel méthodologique_template_V2  l5.xlsx}">
+                                    Download  
+                                  </a>
+                             
+                            </div>
+            
+                            <div class="div_d-i" th:if="'level6' == ${level}">
+                           
+                          <a id="btnL6"  class="btn btn-yh btn-xl js-scroll-trigger" th:href="@{xlsx/2- Phase 1_Référentiel méthodologique_template_V2  l6.xlsx}">
+                            Download  
+                          </a>
+                            </div>
+                        </div>
+
+                        
+                        
+
+                        
+
+
+                        
+                                               
+                </div>
+        </div>
+
+
+
+    </main>
+
+    
+
+    <br>
+
+    <style>
+        img{
+            width: 100%;
+            height: auto;
+        }
+
+    </style>
+
+ <div class="container">
+    <div class="row">
+        <div hidden id = "exportContent" class="col">
+            <div th:if="'level4' == ${level}">
+               
+                <div th:insert="fragments/level4.html :: div"></div>
+               
+            </div>
+    
+            <div th:if="'level5' == ${level}">
+               
+                <div th:insert="fragments/level5.html :: div"></div>
+               
+            </div>
+    
+            <div th:if="'level6' == ${level}">
+               
+                <div th:insert="fragments/level6.html :: div"></div>
+               
+            </div>
+        </div>
+    <div th:insert="fragments\previousnext.html :: div"></div>
+    
+    </div>
+ </div>
+
+<br><br>
+
+<script>
+    function taggelHidden() {
+        div = document.getElementById('exportContent'); 
+        btn =  document.getElementById('taggelHiddenBtn'); 
+
+        if (div.hidden) {
+            div.hidden = false;
+            btn.textContent = "Hide";
+        }else{
+            div.hidden = true;
+            btn.textContent = "Display";
+
+        }
+    }
+
+
+    function collect() {
+            next();
+        }
+</script>
+
+</body>
+
+
+</html>

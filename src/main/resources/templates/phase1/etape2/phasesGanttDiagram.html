@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/head.html :: head"></head>
+
+<body>
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+
+    <br>
+
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h2 class="text-uppercase"><strong>
+                        specify the time limit for each phase:
+                    </strong></h2>
+
+            </div>
+
+        </div>
+
+        <br>
+    
+    <style>
+        .cntr {
+            align-items: center;
+        }
+
+        .fl-table {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+
+    <div class="cntr">
+        <table class="fl-table" border=2px action="#" th:action="@{/phasesGanttDiagram}" th:object="${Gantt}"
+            method="post">
+            <input type="hidden" th:field="*{id}" />
+            <thead>
+                <tr>
+                    <th style="background-color:#B0C4DE;">Phase</th>
+                    <th style="background-color:#B0C4DE;">Start Date</th>
+                    <th style="background-color:#B0C4DE;">End Date</th>
+
+                <tr>
+            </thead>
+            <tr>
+                <th style="background-color:#00416A;color:white;">Phase1</th>
+                <td><input type="date" id="startDatePhase1" th:field="*{startDatePhase1}" /></td>
+                <td><input type="date" id="endDatePhase1" th:field="*{endDatePhase1}" /> </td>
+            </tr>
+            <tr>
+                <th style="background-color:#00416A;color:white;">Phase2</th>
+                <td> <input type="date" id="startDatePhase2" th:field="*{startDatePhase2}" /></td>
+                <td><input type="date" id="endDatePhase2" th:field="*{endDatePhase2}" /> </td>
+            <tr>
+                <th style="background-color:#00416A;color:white;">Phase3</th>
+                <td><input type="date" id="startDatePhase3" th:field="*{startDatePhase3}" /> </td>
+                <td><input type="date" id="endDatePhase3" th:field="*{endDatePhase3}" /> </td>
+            <tr>
+                <th style="background-color:#00416A;color:white;">Phase4</th>
+                <td><input type="date" id="startDatePhase4" th:field="*{startDatePhase4}" /> </td>
+                <td> <input type="date" id="endDatePhase4" th:field="*{endDatePhase4}" /></td>
+            <tr>
+                <th style="background-color:#00416A;color:white;">Phase5</th>
+                <td> <input type="date" id="startDatePhase5" th:field="*{startDatePhase5}" /></td>
+                <td> <input type="date" id="endDatePhase5" th:field="*{endDatePhase5}" /></td>
+            <tr>
+
+        </table>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!--   <a href="/GanttDiagram" class="original-button" style="position:relative;left:490px;top:-100px;"> Gantt Diagram</a>
+-->
+</div>
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+
+
+<script>
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+    function addDays(date, days) {
+        var result = new Date(date);
+        console.log('date object of : ',date,' is :', result);
+        result.setDate(result.getDate() + days);
+        return formatDate(result);
+    }
+    function collect() {
+        id = document.getElementById("id").value.trim();
+        endDatePhase1_c = document.getElementById('endDatePhase1').value;
+        endDatePhase2_c = document.getElementById('endDatePhase2').value;
+        endDatePhase3_c = document.getElementById('endDatePhase3').value;
+        endDatePhase4_c = document.getElementById('endDatePhase4').value;
+        endDatePhase5_c = document.getElementById('endDatePhase5').value;
+
+        startDatePhase1_c = document.getElementById('startDatePhase1').value;
+        startDatePhase2_c = document.getElementById('startDatePhase2').value;
+        startDatePhase3_c = document.getElementById('startDatePhase3').value;
+        startDatePhase4_c = document.getElementById('startDatePhase4').value;
+        startDatePhase5_c = document.getElementById('startDatePhase5').value;
+
+        if ( endDatePhase1_c === '' ||    endDatePhase2_c === '' ||    endDatePhase3_c === '' ||    endDatePhase4_c === '' ||    endDatePhase5_c === '' ||   startDatePhase1_c === '' ||  startDatePhase2_c === '' ||  startDatePhase3_c === '' ||  startDatePhase4_c === '' ||  startDatePhase5_c === '' ) {
+            
+            ae("Please complete  all fields");
+            return;
+        }
+                                                         
+        data = {
+            'id': id,
+            'startDatePhase1': startDatePhase1_c,
+            'startDatePhase2': startDatePhase2_c,
+            'startDatePhase3': startDatePhase3_c,
+            'startDatePhase4': startDatePhase4_c,
+            'startDatePhase5': startDatePhase5_c,
+            'endDatePhase1': endDatePhase1_c,
+            'endDatePhase2': endDatePhase2_c,
+            'endDatePhase3': endDatePhase3_c,
+            'endDatePhase4': endDatePhase4_c,
+            'endDatePhase5': endDatePhase5_c
+        }
+
+        console.log(data);
+        fetch("", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => {
+            console.log("Request complete! response:", res);
+            nt(res);
+
+        });
+    }
+</script>
+
+
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+</body>
+
+<script>
+    const endDatePhase1 = document.getElementById('endDatePhase1');
+    const endDatePhase2 = document.getElementById('endDatePhase2');
+    const endDatePhase3 = document.getElementById('endDatePhase3');
+    const endDatePhase4 = document.getElementById('endDatePhase4');
+    const endDatePhase5 = document.getElementById('endDatePhase5');
+
+    const startDatePhase1 = document.getElementById('startDatePhase1');
+    const startDatePhase2 = document.getElementById('startDatePhase2');
+    const startDatePhase3 = document.getElementById('startDatePhase3');
+    const startDatePhase4 = document.getElementById('startDatePhase4');
+    const startDatePhase5 = document.getElementById('startDatePhase5');
+
+    endDatePhase1.addEventListener('change', function () {
+        if ((Date.parse(endDatePhase1.value) > Date.parse(startDatePhase1.value)) || (startDatePhase1.value == '')) {
+            startDatePhase2.value = addDays(endDatePhase1.value,1);
+            startDatePhase4.value = addDays(endDatePhase1.value,1);
+        } else {
+
+            ae("Please The start date of Phase 1 must be before the end date of Phase 1");
+            endDatePhase1.value = '';
+            startDatePhase2.value = endDatePhase1.value.addDays(1);
+            startDatePhase4.value = endDatePhase1.value.addDays(1);
+        }
+
+
+    });
+
+    startDatePhase2.addEventListener('change', function () {
+        endDatePhase1.value = addDays(startDatePhase2.value,-1);
+        startDatePhase4.value = startDatePhase2.value;
+    });
+
+    startDatePhase4.addEventListener('change', function () {
+        endDatePhase1.value = addDays(startDatePhase4.value,-1);
+        startDatePhase2.value = startDatePhase4.value;
+    });
+
+    endDatePhase2.addEventListener('change', function () {
+        if ((Date.parse(endDatePhase2.value) > Date.parse(startDatePhase2.value)) || (startDatePhase2.value == '')) {
+            startDatePhase3.value = addDays(endDatePhase2.value,1);
+        } else {
+
+            ae("Please The start date of Phase 2 must be before the end date of Phase 2");
+            endDatePhase2.value = '';
+            startDatePhase3.value = endDatePhase2.value;
+
+        }
+    });
+
+    startDatePhase3.addEventListener('change', function () {
+        endDatePhase2.value = addDays(startDatePhase3.value,-1);
+    });
+
+
+    endDatePhase3.addEventListener('change', function () {
+        if ((Date.parse(endDatePhase3.value) > Date.parse(startDatePhase3.value)) || (startDatePhase3.value == '')) {
+            startDatePhase5.value = addDays(endDatePhase3.value,1);
+        } else {
+
+            ae("Please The start date of Phase 3 must be before the end date of Phase 3");
+            endDatePhase3.value = '';
+            startDatePhase5.value = endDatePhase3.value;
+
+        }
+    });
+
+    startDatePhase5.addEventListener('change', function () {
+        endDatePhase3.value = addDays(startDatePhase5.value,-1);
+    });
+
+
+    endDatePhase4.addEventListener('change', function () {
+        if ((Date.parse(endDatePhase4.value) > Date.parse(startDatePhase4.value)) || (startDatePhase4.value == '')) {
+            endDatePhase5.value = endDatePhase4.value;
+        } else {
+
+            ae("Please The start date of Phase 4 must be before the end date of Phase 4");
+
+            endDatePhase4.value = '';
+            endDatePhase5.value = endDatePhase4.value;
+
+        }
+    });
+
+    endDatePhase5.addEventListener('change', function () {
+        if ((Date.parse(endDatePhase5.value) > Date.parse(startDatePhase5.value)) || (startDatePhase5.value == '')) {
+            endDatePhase4.value = endDatePhase5.value;
+        } else {
+
+            ae("Please The start date of Phase 5 must be before the end date of Phase 5");
+
+            endDatePhase5.value = '';
+            endDatePhase4.value = endDatePhase5.value;
+
+        }
+    });
+
+
+
+</script>
+
+</html>

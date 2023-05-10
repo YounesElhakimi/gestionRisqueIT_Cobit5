@@ -1,0 +1,58 @@
+@startuml
+
+
+class Organization {
+     -String name
+}
+
+class Concurrent {
+    - String name ;
+    - List<ConcurrentRisk> concurrentRiskList;
+    }
+ class ConcurrentRisk {
+    - String risk;
+    -  String mitigationPlans;
+
+    }
+
+class ITRiskElement {
+
+    - String evenement;
+    - String categorie;
+    - String frequence;
+    - String facteur;
+    - String impact;
+    }
+
+class ITRiskElementSource {
+    - String source;
+    - List<ITRiskElement>  itRiskElementList;
+}
+
+class MajorFact {
+    - String title;
+    -  String description;
+    -  Boolean isInternal;
+}
+
+
+
+class MethodologyToHandleRisk {
+    -  String description;
+}
+
+
+class PotentialRisksOfTheCompany {
+    - String incident;
+    -  String mitigationPlans;
+}
+
+MethodologyToHandleRisk "1" -- "1" Organization
+PotentialRisksOfTheCompany "1..*" -- "1" Organization
+MajorFact "1..*" -- "1" Organization
+Organization "1" -- "1..*" ITRiskElementSource
+ITRiskElementSource "1" -- "1..*" ITRiskElement
+Organization "1" -- "1..*" Concurrent
+Concurrent "1" -- "1..*" ConcurrentRisk
+
+@enduml

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<body id="page-top" >
+
+    <div class="div_nav">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+    <br>
+
+    
+    <main class="text-center text-Black d-flex masthead">
+        <div class="container my-auto">
+         
+            <div class="col-lg-8 mx-auto">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <h2 class="text-uppercase" >
+                                <strong style="    margin-left: 20px;">
+                                    Incident database                                </strong>
+                            </h2>
+                          
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                  <button id ="taggelHiddenBtn2" onclick="taggelHidden('exportContent2' , 'taggelHiddenBtn2')" class="btn btn-yh btn-xl js-scroll-trigger">
+                                display 
+                            </button>
+    
+                            </div>
+                          
+                            <div class="col">
+                                  <button onclick="Export2Excel('exportContent2' ,`6- Phase 3_Base d'incidents IT_Template.xlsx` , 'a1')" class="btn btn-yh btn-xl js-scroll-trigger">
+                                    Download  
+                            </button>
+                            </div>
+        
+                          
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                            <h2 class="text-uppercase" style="    margin-left: 32px;">
+                                <strong>
+                                    Process mapping                                </strong>
+                            </h2>
+                          
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                  <button id ="taggelHiddenBtn" onclick="taggelHidden()" class="btn btn-yh btn-xl js-scroll-trigger">
+                                display 
+                            </button>
+        
+                            </div>
+                          
+                            <div class="col">
+                                 <button onclick="Export2Excel('exportContent' , `5- Phase 3_Cartographie des services et infrastructures IT_Template.xlsx`,'a1')" class="btn btn-yh btn-xl js-scroll-trigger">
+                                    Download  
+                            </button>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            
+
+    </main>
+
+
+
+    <br>
+
+    <style>
+        #exportContent{
+          
+        }
+
+    </style>
+     <div class="divtable">
+
+    
+
+    <div id="exportContent2" hidden>
+      <div th:insert="fragments/headTable.html :: div"></div>
+
+        <table id="table_1" border="2px" cellspacing="0" cellpadding="" class="table  ">
+            
+        </table>
+
+        <br>
+        <br>
+    </div>
+
+    
+    
+
+    <div id="exportContent" hidden>
+      <div th:insert="fragments/headTable.html :: div"></div>
+
+        <table id="table_0" border="2px" cellspacing="0" cellpadding="" class="table  ">
+            
+        </table>
+    </div>
+</div>
+
+<br><br>
+<br><br>
+
+
+    <div th:insert="fragments\previousnext.html :: div"></div>
+
+
+    <script>
+        function taggelHidden(id = 'exportContent' , btn ='taggelHiddenBtn') {
+            div = document.getElementById(id); 
+            btn =  document.getElementById(btn); 
+
+            if (div.hidden) {
+                div.hidden = false;
+                btn.textContent = "Hide";
+            }else{
+                div.hidden = true;
+                btn.textContent = " Display";
+
+            }
+        }
+    </script>
+
+
+
+
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+    var riskEventList = /*[[${riskEventList}]]*/ 'default';
+    
+
+    function initligne(index, e) {
+
+var html = `
+<tr id="table_0_tr_${index}"> 
+        <td>
+            ${e['description']}
+            </td>  
+        <td> 
+            ${e['date']}
+            </td>  
+        <td>
+            ${e['cause']}
+            </td>  
+        <td>
+            ${e['impacte']}
+            </td>  
+        <td> 
+            ${e['impacteMAD']}
+              </td>  
+        <td> 
+            ${e['risque']}
+        </td>  
+        <td>
+            ${e['actionPlan']}
+            </td>  
+        <td> 
+            ${e['avancement']}
+            </td>  
+
+    </tr>
+     `
+return html;
+}
+function initTableRiskE() {
+if (riskEventList.length <= 0) {
+    return;
+}
+nbrL = riskEventList.length;
+
+
+var rhtml = `
+<tr id="table_0_tr_0">
+
+
+<th > Description of incident</th>
+<th > Incident date	</th>
+<th > Root causes</th>
+<th > Estimated impact</th>
+<th >Estimated impact in figures (MAD)</th>
+<th > Corresponding risk</th>
+<th > Action plan implemented in response to the incident</th>
+<th > % progress of the action plan</th>
+
+    </tr>
+`;
+
+for (let index = 1; index <= riskEventList.length; index++) {
+    const e = riskEventList[index - 1];
+    rhtml += initligne(index, e);
+
+}
+
+document.getElementById('table_1').innerHTML = rhtml;
+}
+initTableRiskE();
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    var riskMappingList = /*[[${riskMappingList}]]*/ 'default';
+           function initTable() {
+            console.log(riskMappingList.length);
+            if (riskMappingList.length == 0) {
+                return;
+            }
+            var html = `<tr>
+            <th >Activity </th>
+            <th >Macro Process</th>
+            <th  >Process </th>
+            <th  >Sub-Process</th>
+            <th  >IT Applications</th>
+            <th  >IT Process</th>
+            <th  >IT infrastructure</th>
+            <th  >Critical sub-process(Yes / No)</th>
+    
+            </tr>`;
+            for (let j = 0; j < riskMappingList.length; j++) {
+                let mr = riskMappingList[j];
+                let splist = mr['sousProcessusList'];
+                let nbrOfSP = splist.length
+            
+                let e = splist[0];
+
+                html +=
+                    `
+            <tbody id="table_0_div_${j}">
+            <tr id="table_0_div_${j}_tr">
+            <td id="table_0_div_${j}_tr_td_1" rowspan="${nbrOfSP}">
+                ${mr["activite"]}
+                </td>
+            <td id="table_0_div_${j}_tr_td_2" rowspan="${nbrOfSP}"> 
+                ${mr["macroProcessus"]}
+                 </td>
+            <td id="table_0_div_${j}_tr_td_3" rowspan="${nbrOfSP}"> 
+                ${mr["processus"]}
+                 </td>
+            
+            <td>
+                ${e["sousProcessus"]}
+                </td>
+            <td class = "tdNotDis">
+                ${e["applicationsIT"]}
+                </td>
+            <td class = "tdNotDis">
+                ${e["processusIT"]}
+                </td>
+            <td class = "tdNotDis">
+                ${e["infrastructuresIT"]}
+                </td>
+            <td class = "tdNotDis">
+                ${e["critique"]}
+                </td>
+        
+
+         
+        </tr>
+            `
+
+
+                for (let i = 1; i < nbrOfSP; i++) {
+                    let e = splist[i];
+
+                    html += `
+                    <tr id="table_0_div_${j}_tr_${i}">
+
+                    <td>
+                        ${e["sousProcessus"]}
+                        </td>
+                    <td class = "tdNotDis">
+                        ${e["applicationsIT"]}
+                        </td>
+                    <td class = "tdNotDis">
+                        ${e["processusIT"]}
+                        </td>
+                    <td class = "tdNotDis">
+                        ${e["infrastructuresIT"]}
+                        </td>
+                    <td class = "tdNotDis">
+                        ${e["critique"]}
+                        </td>
+               
+                    </tr>
+                 `
+
+
+                }
+
+                html += `
+           
+            </tbody>
+            `
+
+            }
+
+
+
+            document.getElementById('table_0').innerHTML = html;
+
+
+
+        }
+
+        initTable();
+  
+</script>
+
+
+
+<script>
+    
+    function collect() {
+            next();
+        }
+</script>
+
+
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+<script th:src="@{js/Export2Word.js}"></script>
+
+
+
+</html>

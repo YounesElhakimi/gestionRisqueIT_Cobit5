@@ -1,0 +1,69 @@
+@startuml
+class Organization {}
+class FileInfo {}
+class Gantt {}
+class ImplementationInfo {}
+class MajorRisks {}
+class StrategicOrientations {}
+class Objective {}
+class Stakeholders {}
+class TeamProjectMember {}
+
+
+class Concurrent {}
+class ConcurrentRisk {}
+class ITRiskElement { }
+class ITRiskElementSource {}
+class MajorFact {}
+class MethodologyToHandleRisk {}
+class PotentialRisksOfTheCompany {}
+
+
+class RiskEvent {}
+class SousProcessus {}
+class RiskMapping {}
+class CommunicationPlan {}
+
+class HistoriqueControlesAssuranceQualite {}
+class MechanismsDescription {}
+class MetricsOfRiskGovernance {}
+
+
+class BusinessContinuityPlan {}
+class KriMeasures {}
+class ObjectifProgression {}
+class ProblemDescription {}
+
+
+FileInfo "1..*" -- "1" Organization
+MajorRisks "1..*" -- "1" Organization
+StrategicOrientations "1..*" -- "1" Organization
+Stakeholders "1..*" -- "1" Organization
+TeamProjectMember "1..*" -- "1" Organization
+ Objective "1" -- "1" Organization
+ImplementationInfo "1" -- "1" Organization
+Gantt "1" -- "1" Organization
+
+MethodologyToHandleRisk "1" -- "1" Organization
+Organization "1" -- "1..*" PotentialRisksOfTheCompany
+Organization "1" -- "1..*" MajorFact
+ITRiskElementSource "1..*" -- "1" Organization
+ITRiskElementSource "1" -- "1..*" ITRiskElement
+Concurrent "1..*" -- "1" Organization
+Concurrent "1" -- "1..*" ConcurrentRisk
+
+Organization "1" -- "1..*" RiskEvent
+RiskMapping "1" -- "1..*" SousProcessus
+Organization "1" -- "1..*" RiskMapping
+
+FileInfo "1" -- "1" Organization : "photo du Logilogramme"
+Organization "1" -- "1..*" CommunicationPlan
+Organization "1" -- "1" MechanismsDescription
+RiskMapping "1" -- "1..*" HistoriqueControlesAssuranceQualite
+RiskMapping "1" -- "1..*" MetricsOfRiskGovernance
+
+Organization "1" -- "1..*" ObjectifProgression
+Organization "1" -- "1" ProblemDescription
+Organization "1" -- "1" BusinessContinuityPlan
+RiskMapping "1" -- "1..*" KriMeasures
+@enduml

@@ -1,0 +1,623 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+ 
+<head th:insert="fragments/head.html :: head" ></head>  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<body>
+    
+    <div>
+      
+        <style>
+        .ihexagon {
+          width: 200px;
+          height: 40px;
+          position: relative;
+          background-color: #B0C4DE;
+          margin-left: 20px;
+          padding-left: calc(0.25em*5);
+          padding-right: calc(0.25em*5);
+          padding-top: calc(0.25em*2);
+          padding-bottom: calc(0.25em*3);
+          text-align: center;
+          vertical-align: middle;
+          color: white;
+          font-size: large;
+        }
+        
+        .ihexagon:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border-left: 20px solid white;
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+        }
+        .ihexagon:before {
+          content: "";
+          position: absolute;
+          right: -20px;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border-left: 20px solid #B0C4DE;
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+        
+        
+        }
+        
+        
+        .selectedPhase {
+          width: 200px;
+          height: 40px;
+          position: relative;
+          background-color: #00416A;
+          margin-left: 20px;
+          font-weight: bolder ;
+        
+            padding-left: calc(0.25em*5);
+            padding-right: calc(0.25em*5);
+            padding-top: calc(0.25em*2);
+            padding-bottom: calc(0.25em*3);
+            text-align: center;
+            vertical-align: middle;
+        
+            color: white;
+            font-size: larger;
+        }
+        .selectedPhase:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border-left: 20px solid white;
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+        }
+        .selectedPhase:before {
+          content: "";
+          position: absolute;
+          right: -20px;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border-left: 20px solid #00416A;
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+        
+        
+        }
+        
+        .bar{
+            background-color:  #00416A; width: 100%; height: 40px;
+            margin-top: 5px;
+            margin-left: 0 !important;
+            height:170%;
+            line-height: 170%;
+            color: white;
+            font-weight: bold ;
+            padding-left: 15% ;
+        }
+        
+        .headerCobit5 h1{
+            font-size: 27px;
+          font-weight: 600;
+          background-image: linear-gradient(45deg, #060509, #553c9a);
+          color: transparent;
+          background-clip: text;
+          -webkit-background-clip: text;
+          margin-top: 55px;
+        }
+        
+        .headerCobit5 {
+            line-height : 100%;
+        }
+        
+        .sticky {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          margin-left: 0;
+        }
+        
+        #cbarrow{
+          z-index: 1;
+        }
+        </style>
+        
+        
+        <div class="container">
+            <div class="row">
+              <div class="col-2">
+                <div class="logo" >
+                    <a href=".">
+                        <img class="sp-default-logo" alt="ECOLE HASSANIA DES TRAVAUX PUBLICS" src="data:image/png;base64,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">
+                    </a>
+                </div>
+            </div>
+                <div class="col-10 headerCobit5">
+                    <h1 >
+                        Roadmap for the implementation of an IT risk management system based on COBIT 5 
+                    </h1>
+        
+                </div>
+                
+            </div>
+        <br>
+            <div class="row">
+                <div id="rph" class="ihexagon col">Home</div>
+                <div id="rp1" class="ihexagon col">Phase 1</div>
+                <div id="rp2" class="selectedPhase col">Phase 2</div>
+                <div id="rp3" class="ihexagon col">Phase 3</div>
+                <div id="rp4" class="ihexagon col">Phase 4</div>
+                <div id="rp5" class="ihexagon col">Phase 5</div>
+            </div>
+        </div>
+        
+        <div id="cbarrow" class="row ">
+            <div id="cbar" class="col bar " >
+                Phase 2  ->  Step 2.1 Collect and synthesize data on IT risks 
+            </div>
+        </div>
+        
+        <script>
+            // When the user scrolls the page, execute myFunction
+        window.onscroll = function() {myFunction()};
+        
+        // Get the navbar
+        var navbar = document.getElementById("cbarrow");
+        
+        // Get the offset position of the navbar
+        var sticky = navbar.offsetTop;
+        
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+          if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+          } else {
+            navbar.classList.remove("sticky");
+          }
+        }
+        </script>
+        
+        <script>
+            phase0 = [
+               "",
+              "/ExOrg",
+              "/newOrg",
+            ]
+        
+            phase1=[
+             "/uploads/DOC_PHASE1_ITAPE1",
+              "/strategicOrientations",
+              "/majorrisks",
+              "/description",
+        
+              "/uploads/DOC_PHASE1_ITAPE2",
+              "/team_project",
+              "/stakeholders",
+              "/phasesGanttDiagram",
+              "/GanttDiagram",
+              "/Projectscopingnote",
+        
+              "/uploads/DOC_PHASE1_ITAPE3",
+              "/levelofdetails",
+              "/levelofdetailsSaved",
+              "/methodologicalReference",
+        
+            ]
+        
+            phase2 = [
+            "/uploads/DOC_PHASE2_ITAPE1",
+              "/methodologyToHandleRisk",
+              "/internalMajorFact",
+              "/externalMajorFact",
+              "/concurrentsMajorRisks",
+              "/potentialRisksOfTheCompany",
+              "/ITRiskElement",
+              "/LivrablePhase2",
+            ]
+        
+            phase3 = [
+            "/uploads/DOC_PHASE3_ITAPE1",
+              "/Cartographie_des_risques",
+              "/RiskMapping",
+        
+              "/uploads/DOC_PHASE3_ITAPE2",
+              "/complete_the_process_mapping",
+              "/complete_the_sous_processes_mapping",
+              "/riskEvent",
+              "/Livrable_phase3",
+        
+            ]
+            
+            phase4 = [
+            "/uploads/DOC_PHASE4_ITAPE1",
+              "/communication_plan",
+              "/mechanisms_description",
+              "/logigramme",
+              "/kri_board",
+              "/Livrable_phase4_etape1",
+        
+              "/uploads/DOC_PHASE4_ITAPE2",
+              "/uploads/DOC_PHASE4_AUDITS_CONTROLS",
+              "/controles_assurance_qualite",
+              "/Livrable_phase4_etape2",
+                ]
+            
+            phase5 = [
+            "/uploads/DOC_PHASE5_ITAPE1",
+              "/business_continuity_plan",
+              "/update_data_about_IT_incidents",
+              "/update_controles_assurance_qualite",
+              "/Livrable_phase5_etape1",
+        
+              "/uploads/DOC_PHASE5_ITAPE2",
+              "/update_risk_mapping",
+              "/update_measures_kri",
+              "/objectif_progression",
+              "/problem_description",
+              "/Livrable_phase5_etape2",
+                ]
+        
+           var  listofBarLinks = {
+              "/ExOrg" : "aa",
+              "/allsteps" : "aa",
+              "/newOrg" : "aa",
+        
+              //phase1
+              
+             "/uploads/DOC_PHASE1_ITAPE1" : "Step 1.1 General directions and shared expectations",
+              "/strategicOrientations" : "Step 1.1 General directions and shared expectations",
+              "/majorrisks" : "Step 1.1 General directions and shared expectations",
+              "/description" : "Step 1.1 General directions and shared expectations",
+              
+        
+              "/uploads/DOC_PHASE1_ITAPE2" : "Step 1.2 Project organization",
+              "/team_project" : "Step 1.2 Project organization",
+              "/stakeholders" : "Step 1.2 Project organization",
+              "/phasesGanttDiagram" : "Step 1.2 Project organization",
+              "/GanttDiagram" : "Step 1.2 Project organization",
+              "/Projectscopingnote" : "Step 1.2 Project organization",
+              
+        
+              "/uploads/DOC_PHASE1_ITAPE3" : "Step 1.3 Methodological framework for IT risk management",
+              "/levelofdetails" : "Step 1.3 Methodological framework for IT risk management",
+              "/levelofdetailsSaved" : "Step 1.3 Methodological framework for IT risk management",
+              "/methodologicalReference" : "Step 1.3 Methodological framework for IT risk management",
+              
+        
+        
+              //phase2
+              "/uploads/DOC_PHASE2_ITAPE1" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/methodologyToHandleRisk" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/internalMajorFact" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/externalMajorFact" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/concurrentsMajorRisks" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/potentialRisksOfTheCompany" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/ITRiskElement" : " Step 2.1 Collect and synthesize data on IT risks",
+              "/LivrablePhase2" : " Step 2.1 Collect and synthesize data on IT risks",
+              
+        
+              //phase3
+              "/uploads/DOC_PHASE3_ITAPE1" : " Step 3.1 Analyse and map IT risks",
+              "/Cartographie_des_risques" : " Step 3.1 Analyse and map IT risks",
+              "/RiskMapping" : " Step 3.1 Analyse and map IT risks",
+              
+        
+              "/uploads/DOC_PHASE3_ITAPE2" : " Step 3.1 Complete the risk profil",
+              "/complete_the_process_mapping" : " Step 3.1 Complete the risk profil",
+              "/complete_the_sous_processes_mapping" : " Step 3.1 Complete the risk profil",
+              "/riskEvent" : " Step 3.1 Complete the risk profil",
+              "/Livrable_phase3" : " Step 3.1 Complete the risk profil",
+              
+        
+              "/uploads/DOC_PHASE4_ITAPE1" : " Step 4.1 Ensure risk culture awareness",
+              "/communication_plan" : " Step 4.1 Ensure risk culture awareness",
+              "/mechanisms_description" : " Step 4.1 Ensure risk culture awareness",
+              "/logigramme" : " Step 4.1 Ensure risk culture awareness",
+              "/kri_board" : " Step 4.1 Ensure risk culture awareness",
+              "/Livrable_phase4_etape1" : " Step 4.1 Ensure risk culture awareness",
+              
+        
+        
+              "/uploads/DOC_PHASE4_ITAPE2" : "Step 4.2 Communicate and provide risk information",
+              "/uploads/DOC_PHASE4_AUDITS_CONTROLS": "Step 4.2 Communicate and provide risk information",
+              "/controles_assurance_qualite": "Step 4.2 Communicate and provide risk information",
+              "/Livrable_phase4_etape2": "Step 4.2 Communicate and provide risk information",
+              
+        
+              "/uploads/DOC_PHASE5_ITAPE1": " Step 5.1 Responding to incidents",
+              "/business_continuity_plan": " Step 5.1 Responding to incidents",
+              "/update_data_about_IT_incidents": " Step 5.1 Responding to incidents",
+              "/update_controles_assurance_qualite": " Step 5.1 Responding to incidents",
+              "/Livrable_phase5_etape1": " Step 5.1 Responding to incidents",
+              
+        
+              "/uploads/DOC_PHASE5_ITAPE2": " Step 5.2 Define a portfolio of actions related to risk management / Step 5.3  Monitor risk management",
+              "/update_risk_mapping": " Step 5.2 Define a portfolio of actions related to risk management / Step 5.3  Monitor risk management",
+              "/update_measures_kri": " Step 5.2 Define a portfolio of actions related to risk management / Step 5.3  Monitor risk management",
+              "/objectif_progression": " Step 5.2 Define a portfolio of actions related to risk management / Step 5.3  Monitor risk management",
+              "/problem_description": " Step 5.2 Define a portfolio of actions related to risk management / Step 5.3  Monitor risk management",
+              "/Livrable_phase5_etape2": " Step 5.2 Define a portfolio of actions related to risk management / Step 5.3  Monitor risk management",
+            }
+        var pathbar = window.location.pathname
+        var rph = document.getElementById("rph");
+        var rp1 = document.getElementById("rp1");
+        var rp2 = document.getElementById("rp2");
+        var rp3 = document.getElementById("rp3");
+        var rp4 = document.getElementById("rp4");
+        var rp5 = document.getElementById("rp5");
+        
+        var newCbarV = "";
+            if ( phase0.indexOf(pathbar) != -1) {
+            rph.className = "ihexagon col"
+            rp1.className = "ihexagon col"
+            rp2.className = "ihexagon col"
+            rp3.className = "ihexagon col"
+            rp4.className = "ihexagon col"
+            rp5.className = "ihexagon col"
+        
+            if (pathbar === "/ExOrg") {
+                newCbarV = "New Organization"
+            }else if (pathbar === "/ExOrg") {
+                newCbarV = "Existing Organization"
+                
+            }
+            
+        
+        
+        }
+        else if ( phase1.indexOf(pathbar) != -1) {
+            rph.className = "ihexagon col"
+            rp1.className = "selectedPhase col"
+            rp2.className = "ihexagon col"
+            rp3.className = "ihexagon col"
+            rp4.className = "ihexagon col"
+            rp5.className = "ihexagon col"
+        
+            newCbarV = "Phase 1 -> " + listofBarLinks[pathbar];
+        }
+        else if ( phase2.indexOf(pathbar) != -1) {
+            rph.className = "ihexagon col"
+            rp1.className = "ihexagon col"
+            rp2.className = "selectedPhase col"
+            rp3.className = "ihexagon col"
+            rp4.className = "ihexagon col"
+            rp5.className = "ihexagon col"
+            newCbarV = "Phase 2 -> " + listofBarLinks[pathbar];
+        
+        }
+        else if ( phase3.indexOf(pathbar) != -1) {
+            rph.className = "ihexagon col"
+            rp1.className = "ihexagon col"
+            rp2.className = "ihexagon col"
+            rp3.className = "selectedPhase col"
+            rp4.className = "ihexagon col"
+            rp5.className = "ihexagon col"
+            newCbarV = "Phase 3 -> " + listofBarLinks[pathbar];
+        
+        }
+        else if ( phase4.indexOf(pathbar) != -1) {
+            rph.className = "ihexagon col"
+            rp1.className = "ihexagon col"
+            rp2.className = "ihexagon col"
+            rp3.className = "ihexagon col"
+            rp4.className = "selectedPhase col"
+            rp5.className = "ihexagon col"
+            newCbarV = "Phase 4 -> " + listofBarLinks[pathbar];
+        
+        }
+        else if ( phase5.indexOf(pathbar) != -1) {
+            rph.className = "ihexagon col"
+            rp1.className = "ihexagon col"
+            rp2.className = "ihexagon col"
+            rp3.className = "ihexagon col"
+            rp4.className = "ihexagon col"
+            rp5.className = "selectedPhase col"
+            newCbarV = "Phase 5 -> " + listofBarLinks[pathbar];
+        
+        }
+        
+        else if ( pathbar === "/allsteps") {
+            
+            rph.className = "selectedPhase col"
+            rp1.className = "ihexagon col"
+            rp2.className = "ihexagon col"
+            rp3.className = "ihexagon col"
+            rp4.className = "ihexagon col"
+            rp5.className = "ihexagon col"
+            newCbarV = "Home ";
+        
+        }else{
+            rph.className = "ihexagon col"
+            rp1.className = "ihexagon col"
+            rp2.className = "ihexagon col"
+            rp3.className = "ihexagon col"
+            rp4.className = "ihexagon col"
+            rp5.className = "ihexagon col"
+            newCbarV = "404 Error ";
+        
+        }
+        console.log("newCbarV : ",newCbarV);
+        document.getElementById("cbar").innerHTML = newCbarV;
+        </script>
+        
+        
+        
+     </div>
+
+     <br>
+
+        <main class="text-center text-Black d-flex masthead" >
+            <div class="container my-auto">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <h2 class="text-uppercase">
+    
+                        <strong  th:text="${title}">
+                            
+                        </strong>
+                    </h2>
+                    <h2 >
+                        <span th:text="${title2}"></span>
+                    </h2>
+                    </div>
+    
+                </div>
+    
+    
+    
+        </main>
+    
+    
+<style>
+    .uploaddiv{
+        padding: 20px 100px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .fileTablediv{
+        padding: 20px 300px;
+    }
+
+    #fileTable tr td{
+        text-align: left;
+    }
+</style> 
+
+<div class="uploaddiv">
+    <label for="fileUploader" class="btn btn-info">Upload  Documents</label>
+    <input class="form-control"  id="fileUploader" type="file" multiple="multiple" onchange="updateList()"  style="display:none">
+   
+</div>
+<hr>
+<div class="fileTablediv">
+    <div id="divFiles">
+    
+        <table id = 'fileTable'> </table>
+    </div>
+</div>    
+
+
+<div th:insert="fragments\previousnext.html :: div"></div>
+
+    
+    
+    
+    
+    
+    
+    
+<footer th:insert="fragments/footer.html :: footer" ></footer>  
+<script src="assets\js\jquery.min.js"></script>
+    
+
+   <script>
+        var id = 0;
+        var listEx = new Array();
+       var filelist = new Array();
+       var files = null 
+       var allFiles = new Array();
+
+       updateList = function () {
+           var input = document.getElementById('fileUploader');
+           var output = document.getElementById('fileTable');
+           files = input.files
+
+           var HTML = "";
+           for (var i = 0; i < files.length; ++i) {
+                
+               filelist[id]= files.item(i).name;
+               HTML += "<tr id ='"+id+"'><td>" + filelist[id] + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"btn btn-info  delete-btn\" onclick= \"remove('"+id+"')\" ><i class=\"fas fa-trash-alt\"></i></button></td></tr>";
+               allFiles[id] = files[i]
+               id++
+            }
+           output.innerHTML += HTML;
+           console.log(files);
+       }
+
+       function remove(id) {
+        
+        listEx.push(parseInt(id))
+        console.log(parseInt(id))
+        console.log(listEx);
+        var el = document.getElementById(id);
+        el.remove();
+        
+       }
+
+      
+
+       function isNotIn(item , list){
+        var r = true;
+        for (let index = 0; index < list.length; index++) {
+            if ( item === list[index]) {
+                r = false
+            } 
+        }
+        return r
+       }
+
+       
+
+       async function collect(){
+        var formdata = new FormData();
+        
+       for (let i = 0; i < allFiles.length; i++) {
+        if (isNotIn(i , listEx )) {
+            formdata.append("files", allFiles[i]);
+        }
+       }
+
+       
+
+       if (allFiles.length == 0) {
+        next();
+        return;
+       }
+
+       if (listEx.length === allFiles.length) {
+        next();
+        return;
+       }
+        var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+        };
+
+        console.log(formdata);
+
+        const raw_response = await fetch("upload", requestOptions)
+        .then(res => {
+        console.log("Request complete! response:", res);
+        nt(res);
+
+        })
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));    
+
+
+    }
+    
+
+        // let photo = document.getElementById("image-file").files[0];
+        // let formData = new FormData();
+
+        // formData.append("photo", photo);
+        // fetch('/upload/image', {method: "POST", body: formData});
+   </script>
+   
+   <div th:insert="fragments\previousnext.html :: div"></div>
+</body>
+</html>

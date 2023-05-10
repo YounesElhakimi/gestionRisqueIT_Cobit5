@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<style>
+    body{
+        width: 1280px;
+        overflow-x: auto;
+        min-width: 720px;
+    }
+</style>
+<head th:insert="fragments/head.html :: head"></head>
+
+
+<style>
+    body {
+        background-color: #dedede;
+     
+    }
+
+    .pointer {
+        display: inline-block;
+        font-size: 40px;
+        padding-left: calc(0.25em*5);
+        padding-right: calc(0.25em*5);
+        padding-top: calc(0.25em*2);
+        padding-bottom: calc(0.25em*2);
+        height: calc(0.25em*16);
+        position: relative;
+        background-color: #00416A;
+        max-width: calc(0.3em*44);
+        min-width: calc(0.3em*24);
+        -webkit-clip-path: polygon(calc(0.25em* 42 * 0.85) 0, calc(0.25em* 42) 50%, calc(0.25em* 42 * 0.85) 100%, 0% 100%, calc(0.25em* 32 * 0.15) 50%, 0% 0%);
+        clip-path: polygon(calc(0.25em* 42 * 0.85) 0, calc(0.25em* 42) 50%, calc(0.25em* 42 * 0.85) 100%, 0% 100%, calc(0.25em* 32 * 0.15) 50%, 0% 0%);
+    }
+
+    .pointer .text-content {
+        display: inline-block;
+        position: relative;
+        top: calc(0.25em* -0.5);
+        left: calc(0.25em* 2.5);
+        min-width: calc(0.25em* 28);
+        min-height: calc(0.25em* 17);
+        margin-right: calc(0.25em* 4);
+        vertical-align: middle;
+        color: #ffffff;
+    }
+
+    .pointer .text-content p {
+        text-align: center;
+    }
+
+    label {
+        font-size: 13px;
+        position: relative;
+        top: -10px;
+        left: -30px;
+        font-style: bold;
+
+
+
+    }
+
+    button {
+        background-color: #B0C4DE;
+    }
+
+    button:focus {
+        background: olive;
+    }
+
+    a {
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;
+        text-decoration: none;
+    }
+
+    .divA {
+        display: block;
+        font-size: 15px;
+        top: -10px;
+        font: 17px Arial, sans-serif, Helvetica, Verdana;
+        line-height: 1.5;
+        position: relative;
+
+    }
+
+    .LCircle {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        padding: 8px;
+        display: inline;
+        background: rgb(248, 103, 19);
+        border: 2px solid #666;
+        color: #666;
+        text-align: center;
+
+        font: 20px Arial, sans-serif !important;
+
+    }
+
+    .LL {
+        text-decoration: none;
+        position: absolute;
+
+    }
+
+    .divB {
+        display: block;
+        font-size: 10px;
+        position: relative;
+        top: -10px;
+        font: 17px Arial, sans-serif, Helvetica, Verdana;
+        line-height: 1.5;
+    }
+
+    .divC {
+        display: block;
+        font-size: 15px;
+        position: relative;
+        top: -5px;
+        font: 17px Arial, sans-serif, Helvetica, Verdana;
+        line-height: 1;
+    }
+
+    .divD {
+        display: block;
+        font-size: 15px;
+        position: relative;
+        top: -20px;
+        font: 17px Arial, sans-serif, Helvetica, Verdana;
+        line-height: 1.5;
+    }
+</style>
+
+
+<body>
+
+
+
+    <div style="background-color: white;">
+        <div th:insert="fragments/ban.html :: div"></div>
+    </div>
+
+    <br>
+
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h2 class="text-uppercase" style="font-size: 22px;"><strong>
+                        Please find below the steps you need to follow to implement an IT risk managment for your
+                        company:
+                    </strong></h2>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div style="margin-top: -62px;">
+        <div class="pointer" style="font-size: 30px;height:450px;position:relative;left:10px;top:80px;">
+            <div class="text-content">
+                <label style="position:relative;top:-13px;left:5px;">Phase1:Framing the project</label>
+
+                <div class="divA">
+                    <a th:href="@{/uploads/DOC_PHASE1_ITAPE1}"><button id="bp1e1"
+                            style="width:200px;height: 100px;margin-top: 50px;position:relative;top:-40px;">General
+                            directions and shared expectations </button></a>
+
+                    <a target="_blank" hidden id="p1e1" class="LL" style="top: 6px;right: 6px;"
+                        href="/Projectscopingnote">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+                <div class="divA">
+                    <a th:href="@{/uploads/DOC_PHASE1_ITAPE2}"><button id="bp1e2"
+                            style="width:200px;height: 100px;margin-top: 35px;position:relative;top:-70px;">Project
+                            organization</button></a>
+
+                    <a target="_blank" hidden id="p1e2" class="LL" style="top: -34px;right: 6px;"
+                        href="/Projectscopingnote">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+                <div class="divA">
+                    <a th:href="@{/uploads/DOC_PHASE1_ITAPE3}"><button id="bp1e3"
+                            style="width:200px;height: 100px;margin-top: -70px;position:relative;top:-50px;">
+                            Methodological
+                            framework for IT risk management</button></a>
+
+                    <a target="_blank" hidden id="p1e3" class="LL" style="top: -60px;right: 6px;"
+                        href="/methodologicalReference">
+                        <div class="LCircle">D</div>
+                    </a>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="pointer" style="font-size: 30px;height: 250px;position: relative;top:-55px;left:17px;">
+            <div class="text-content">
+                <label style="position:relative;top:2px;left:-30px;display:block;line-height:1.5;">Phase2:Data
+                    collection and synthesis</label>
+
+                <div class="divA">
+                    <a th:href="@{/uploads/DOC_PHASE2_ITAPE1}">
+                        <button id="bp2" style="width:200px;height: 100px;margin-top: 20px;"> Collect and synthesize
+                            data on IT
+                            risks</button></a>
+
+                    <a target="_blank" hidden id="p2" class="LL" style="top: 16px; right: 12px;" href="/LivrablePhase2">
+                        <div class="LCircle">D</div>
+                    </a>
+
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        <div class="pointer" style="font-size: 30px;height: 250px;position: relative;top:-15px;left:-35px;">
+            <div class="text-content">
+                <label style="position:relative;top:-2px;left:-20px;display:block;line-height:1.5;">Phase 3:
+                    Developement of
+                    IT risk<br>management framework</label>
+
+
+                <div class="divB">
+
+                    <a th:href="@{/uploads/DOC_PHASE3_ITAPE1}">
+                        <button id="bp3e1" style="width:150px;height: 70px;margin-top: 20px;"> Analyse and map IT
+                            risks</button></a>
+
+                    <a target="_blank" hidden id="p3e1" class="LL" style="top: 7px; right: 46px;" href="/RiskMapping">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+
+
+                <div class="divB">
+                    <a th:href="@{/uploads/DOC_PHASE3_ITAPE2}">
+                        <button id="bp3e2" style="width:150px;height: 70px;margin-top: 20px;"> Complete the risk
+                            profile</button></a>
+
+                    <a target="_blank" hidden id="p3e2" class="LL" style="top: 8px; right: 44px;"
+                        href="/Livrable_phase3">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="pointer" style="font-size: 30px;height: 250px;position: relative;top:-465px;left:926px;">
+            <div class="text-content">
+                <label style="position:relative;top:-5px;left:-40px;display:block;line-height:1.5;">Phase5:Monitoring
+                    and  Surveillance</label>
+
+
+                <div class="divC">
+                    <a th:href="@{/uploads/DOC_PHASE5_ITAPE1}"><button id="bp5e1"
+                            style="width:190px;height: 60px;margin-top: -15px;position:relative;top:20px;"> Responding
+                            to
+                            incidents</button></a>
+
+
+                    <a target="_blank" hidden id="p5e1" class="LL" style="top: -1px; right: 14px; "
+                        href="/Livrable_phase5_etape1">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+                <div class="divC">
+
+                    <a th:href="@{/uploads/DOC_PHASE5_ITAPE2}"><button id="bp5e2"
+                            style="width:190px;height: 132px;margin-top: 15px;position:relative;top:20px;">
+                         Define a  portfolio of   actions related to risk management and Monitor risk management
+                    </button></a>
+
+                    <a target="_blank" hidden id="p5e2" class="LL" style="top: 23px; right: 12px; "
+                        href="/Livrable_phase5_etape2">
+                        <div class="LCircle">D</div>
+                    </a>
+
+                </div>
+
+                <!--
+                <div class="divC">
+                    <a th:href="@{/uploads/DOC_PHASE5_ITAPE2}">
+                        <button id="bp5e3"
+                            style="width:190px;height: 60px;margin-top: 15px;position:relative;top:20px;">
+                            Monitor   risk  management</button></a>
+
+                    <a target="_blank" hidden id="p5e3" class="LL" style="top: 31px; right: 14px; "
+                        href="/Livrable_phase5_etape2">
+                        <div class="LCircle">D</div>
+                    </a>
+                </div>
+
+                -->
+
+
+            </div>
+        </div>
+        <div class="pointer" style="font-size: 80px;height: 190px;position: relative;top:-109px;left:-5px;max-width: calc(0.22em*52);
+  min-width: calc(0.12em*13);width: 71.5%;clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+  ">
+            <div class="text-content">
+                <label style="position:relative;top:-18px;left:28px;display:block;line-height:1.5;">Phase 4: Change
+                    management / Communication and awareness-raising</label>
+
+                <div class="divD">
+                    <a th:href="@{/uploads/DOC_PHASE4_ITAPE1}">
+                        <button id="bp4e1"
+                            style="width:200px;height: 100px;margin-top: -100px;position:relative;top:35px;"> Ensure
+                            risk
+                            culture awareness</button></a>
+
+                    <a target="_blank" hidden id="p4e1" class="LL" style="top: 6px;right:349px;"
+                        href="/Livrable_phase4_etape1">
+                        <div class="LCircle">D</div>
+                    </a>
+
+                </div>
+
+
+                <div class="divD">
+                    <a th:href="@{/uploads/DOC_PHASE4_ITAPE2}">
+                        <button id="bp4e2"
+                            style="width:200px;height: 100px;margin-top: -100px;position:relative;top:-40px;left:300px;">Communicate
+                            and provide risk information</button></a>
+
+                    <a target="_blank" hidden id="p4e2" class="LL" style="top: -71px; right: 49px;"
+                        href="/Livrable_phase4_etape2">
+                        <div class="LCircle">D</div>
+                    </a>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        var iiForAllsteps = /*[[${implementationInfo}]]*/ 'default';
+        document.getElementById("p1e1").hidden = !iiForAllsteps['p1e2'];
+        document.getElementById("p1e2").hidden = !iiForAllsteps['p1e2'];
+        document.getElementById("p1e3").hidden = !iiForAllsteps['p1e3'];
+        document.getElementById("p2").hidden = !iiForAllsteps['p2'];
+        document.getElementById("p3e1").hidden = !iiForAllsteps['p3e1'];
+        document.getElementById("p3e2").hidden = !iiForAllsteps['p3e2'];
+        document.getElementById("p4e1").hidden = !iiForAllsteps['p4e1'];
+        document.getElementById("p4e2").hidden = !iiForAllsteps['p4e2'];
+        document.getElementById("p5e1").hidden = !iiForAllsteps['p5e1'];
+        document.getElementById("p5e2").hidden = !iiForAllsteps['p5e2'];
+        document.getElementById("p5e3").hidden = !iiForAllsteps['p5e3'];
+
+        if (!iiForAllsteps['p1e1']) {
+            document.getElementById("bp1e1").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p1e2']) {
+            document.getElementById("bp1e2").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p1e3']) {
+            document.getElementById("bp1e3").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p2']) {
+            document.getElementById("bp2").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p3e1']) {
+            document.getElementById("bp3e1").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p3e2']) {
+            document.getElementById("bp3e2").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p4e1']) {
+            document.getElementById("bp4e1").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p4e2']) {
+            document.getElementById("bp4e2").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p5e1']) {
+            document.getElementById("bp5e1").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p5e2']) {
+            document.getElementById("bp5e2").style.backgroundColor = "green";
+        } else if (!iiForAllsteps['p5e3']) {
+            document.getElementById("bp5e3").style.backgroundColor = "green";
+        }
+
+
+
+
+        function collect() {
+            next();
+        }
+    </script>
+    <div th:insert="fragments\previousnext.html :: div"></div>
+</body>
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
+</html>

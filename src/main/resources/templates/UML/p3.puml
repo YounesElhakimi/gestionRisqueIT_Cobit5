@@ -1,0 +1,74 @@
+@startuml
+
+
+class Organization {
+     -String name
+}
+
+ class RiskEvent {
+    - String description 
+    - Date date 
+    - String cause 
+    - String impacte 
+    - String impacteMAD 
+    - String risque 
+    - String actionPlan 
+    - String avancement 
+}
+
+
+ class SousProcessus {
+    - String sousProcessus 
+    - String applicationsIT
+    - String processusIT
+    - String infrastructuresIT
+    - String critique
+}
+
+
+ class RiskMapping {
+    - String activite 
+    - String macroProcessus 
+    - String processus 
+    - String category 
+    - String risque 
+    - String kRI 
+    - String facteur 
+    - String consequences 
+    - String controlActivities 
+    - String efficacite 
+    - String nbIncidents 
+    - String frequence 
+    - String impact 
+    - String exposition 
+    - String criticalityLevel 
+    - String optionAcceptCout 
+    - String optionAvoidCout 
+    - String optionMitigateCout 
+    - String optionTransferCout 
+    - String beneficeAcceptCout 
+    - String beneficeAvoidCout 
+    - String beneficeMitigateCout 
+    - String beneficeTransferCout 
+    - String optionOptimaleCal 
+    - String optionOptimale 
+    - String besoins 
+    - String avacncement 
+    - Boolean isHidden 
+    - List<SousProcessus> sousProcessusList 
+    - MetricsOfRiskGovernance metricsOfRiskGovernance  
+    - KriMeasures kriMeasures 
+
+}
+
+
+
+Organization "1" -- "1..*" RiskEvent
+RiskMapping "1" -- "1..*" SousProcessus
+
+Organization "1" -- "1..*" RiskMapping
+ 
+
+
+
+@enduml
