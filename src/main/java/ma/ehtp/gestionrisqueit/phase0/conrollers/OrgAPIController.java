@@ -31,27 +31,15 @@ public class OrgAPIController {
 
 
         try {
-            U.ptxt("try load organization from   session");
+            U.ptxt("try load organization from   session 0");
             this.organization = (Organization) session.getAttribute("organization");
 
             if (this.organization != null) {
 
                 session.setAttribute("organization", this.organization);
-            }else {
-                U.ptxt("loaded  from session but it's null");
-                U.ptxt("try load organization from   Dtabase");
-
-                List<Organization> organizationList = organizationService.findAll() ;
-                this.organization = organizationList.get(organizationList.size() -1);
-                if (this.organization != null)
-                    session.setAttribute("organization" , this.organization );
-                else
-                    this.organization = organizationService.save(new Organization(null,"defaultOrg" ,null));
-
             }
-
         } catch (Exception exception) {
-            U.ptxt("Exception while trying to load organization from   session");
+            U.ptxt("Exception while trying to load organization from   session 0");
 
             List<Organization> organizationList = organizationService.findAll() ;
             this.organization = organizationList.get(organizationList.size() -1);
@@ -64,7 +52,7 @@ public class OrgAPIController {
 
 
 
-        U.ptxt("initOrg function : organization id = "+organization.getId() );
+        U.ptxt("initOrg function : organization 0 id = " );
 
     }
 
